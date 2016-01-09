@@ -10,14 +10,21 @@ namespace PaskalaRitenis.Controllers
     {
         public ActionResult Index()
         {
+<<<<<<< HEAD
             ViewBag.Message = "Modify this template to jump-start your ASP.NET MVC application.";
 
+=======
+>>>>>>> d1012c88a4b9935531d59ab8b3a62083eb4cc039
             return View();
         }
 
         public ActionResult About()
         {
+<<<<<<< HEAD
             ViewBag.Message = "Your app description page.";
+=======
+            ViewBag.Message = "Your application description page.";
+>>>>>>> d1012c88a4b9935531d59ab8b3a62083eb4cc039
 
             return View();
         }
@@ -29,4 +36,8 @@ namespace PaskalaRitenis.Controllers
             return View();
         }
     }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> d1012c88a4b9935531d59ab8b3a62083eb4cc039

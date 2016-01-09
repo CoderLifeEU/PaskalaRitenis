@@ -20,4 +20,8 @@ namespace PaskalaRitenis
             );
         }
     }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> d1012c88a4b9935531d59ab8b3a62083eb4cc039

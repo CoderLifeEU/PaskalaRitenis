@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ﻿html {
     background-color: #e2e2e2;
     margin: 0;
@@ -494,12 +495,34 @@ textarea {
 
 .error {
     color: #e80c4d;
+=======
+﻿body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+>>>>>>> d1012c88a4b9935531d59ab8b3a62083eb4cc039
 }
 
 /* styles for validation helpers */
 .field-validation-error {
+<<<<<<< HEAD
     color: #e80c4d;
     font-weight: bold;
+=======
+    color: #b94a48;
+>>>>>>> d1012c88a4b9935531d59ab8b3a62083eb4cc039
 }
 
 .field-validation-valid {
@@ -507,7 +530,11 @@ textarea {
 }
 
 input.input-validation-error {
+<<<<<<< HEAD
     border: 1px solid #e80c4d;
+=======
+    border: 1px solid #b94a48;
+>>>>>>> d1012c88a4b9935531d59ab8b3a62083eb4cc039
 }
 
 input[type="checkbox"].input-validation-error {
@@ -515,13 +542,18 @@ input[type="checkbox"].input-validation-error {
 }
 
 .validation-summary-errors {
+<<<<<<< HEAD
     color: #e80c4d;
     font-weight: bold;
     font-size: 1.1em;
+=======
+    color: #b94a48;
+>>>>>>> d1012c88a4b9935531d59ab8b3a62083eb4cc039
 }
 
 .validation-summary-valid {
     display: none;
+<<<<<<< HEAD
 }
 
 
@@ -754,3 +786,6 @@ tr.pager td {
             margin: 0;
         }
 }
+=======
+}
+>>>>>>> d1012c88a4b9935531d59ab8b3a62083eb4cc039
