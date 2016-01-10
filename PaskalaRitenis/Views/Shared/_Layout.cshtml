@@ -32,27 +32,14 @@
                             </ul>
                         </li>
                         <li><a href="contact.html">Atbalstītāji</a></li>
-                        <li><a href="contact.html">Kontakti</a></li>
+                        <li>@Html.ActionLink("Kontakti","Contact", "Home")</li>
                     </ul>
                 </div>
             </nav>
         </header>
         <div id="site_content">
-            <div id="sidebar_container">
-                <img class="paperclip" src="~/Content/images/paperclip.png" alt="paperclip">
-                <div class="sidebar">
-                    <h3>Latest News</h3>
-                    <h4>New Website Launched</h4>
-                    <h5>January 1st, 2012</h5>
-                    <p>2012 sees the redesign of our website. Take a look around and let us know what you think.<br>
-                        <a href="#">Read more</a></p>
-                </div>
-            </div>
-            <div class="content">
-                <img style="float: left; vertical-align: middle; margin: 0 10px 0 0;" src="~/Content/images/home.png" alt="home"><h1 style="margin: 15px 0 0 0;">Paskala ritenis</h1>
                 @RenderSection("featured", required: false)
                 @RenderBody()
-            </div>
         </div>
         <footer>
             <p><a href="#">©2016 Paskāla ritenis</a></p>
