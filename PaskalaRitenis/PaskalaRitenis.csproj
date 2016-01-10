@@ -195,6 +195,23 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\fonts\News Cycle SIL OFL Font License 1.1.txt" />
+    <Content Include="Content\images\another_page.png" />
+    <Content Include="Content\images\arrows-white.png" />
+    <Content Include="Content\images\back.jpg" />
+    <Content Include="Content\images\browser.png" />
+    <Content Include="Content\images\bullet.png" />
+    <Content Include="Content\images\contact.png" />
+    <Content Include="Content\images\examples.png" />
+    <Content Include="Content\images\graphic.jpg" />
+    <Content Include="Content\images\home.png" />
+    <Content Include="Content\images\page.png" />
+    <Content Include="Content\images\paperclip.png" />
+    <Content Include="Content\images\pr_logo.png" />
+    <Content Include="Content\js\jquery.easing-sooper.js" />
+    <Content Include="Content\js\jquery.js" />
+    <Content Include="Content\js\jquery.sooperfish.js" />
+    <Content Include="Content\js\modernizr-1.5.min.js" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
@@ -251,12 +268,19 @@
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
+    <Content Include="Content\fonts\NewsCycle-Regular.eot" />
+    <Content Include="Content\fonts\NewsCycle-Regular.ttf" />
+    <Content Include="Content\fonts\YanoneKaffeesatz-Regular.eot" />
+    <Content Include="Content\fonts\YanoneKaffeesatz-Regular.ttf" />
     <None Include="Scripts\jquery-1.8.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.8.2.js" />
     <Content Include="Scripts\jquery-1.8.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery-ui-1.8.24.js" />
     <Content Include="Scripts\jquery-ui-1.8.24.min.js" />
+    <Content Include="Scripts\jquery.easing-sooper.js" />
+    <Content Include="Scripts\jquery.js" />
+    <Content Include="Scripts\jquery.sooperfish.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
@@ -265,6 +289,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\knockout-2.2.0.debug.js" />
     <Content Include="Scripts\knockout-2.2.0.js" />
+    <Content Include="Scripts\modernizr-1.5.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -275,19 +300,6 @@
     </Content>
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\_references.js" />
-    <Content Include="Images\accent.png" />
-    <Content Include="Images\bullet.png" />
-    <Content Include="Images\heroAccent.png" />
-    <Content Include="Images\orderedList0.png" />
-    <Content Include="Images\orderedList1.png" />
-    <Content Include="Images\orderedList2.png" />
-    <Content Include="Images\orderedList3.png" />
-    <Content Include="Images\orderedList4.png" />
-    <Content Include="Images\orderedList5.png" />
-    <Content Include="Images\orderedList6.png" />
-    <Content Include="Images\orderedList7.png" />
-    <Content Include="Images\orderedList8.png" />
-    <Content Include="Images\orderedList9.png" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Account\_ChangePasswordPartial.cshtml" />
     <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
@@ -308,6 +320,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Images\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
