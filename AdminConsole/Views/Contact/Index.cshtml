@@ -1,0 +1,43 @@
+﻿@model IEnumerable<AdminConsole.Models.ContactsModel>
+
+@{
+    ViewBag.Title = "Kontakti";
+}
+
+<h2>Index</h2>
+
+<table>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Vieta)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Adrese)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ExtraInfo)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Vieta)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Adrese)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ExtraInfo)
+            </td>
+            <td>
+                <h2>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Id })
+                </h2>
+            </td>
+        </tr>
+    }
+
+</table>

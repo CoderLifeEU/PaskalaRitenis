@@ -8,12 +8,12 @@
     <h2>@ViewBag.Message</h2>
 </hgroup>
 <div id="map_canvas"></div>
-<div id="contactInfo">
+<div>
    @foreach (var item in Model)
     {
-       <p>@item.Vieta</p> <br />
-       <p>@item.Adrese</p> <br />
-       <p>@item.ExtraInfo</p> <br />
+       <p>@item.Vieta</p>
+       <p>@item.Adrese</p>
+       <p>@item.ExtraInfo</p>
     }
 </div>  
 @section scripts {

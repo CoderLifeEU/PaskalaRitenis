@@ -552,3 +552,11 @@ ul#nav li a:hover,ul#nav li a:focus {
     width: auto;  
     height: 480px;
 }
+
+#contactInfo p {
+    font-size: 18px;
+}
+
+#contactInfo {
+    margin-top:20px;
+}
