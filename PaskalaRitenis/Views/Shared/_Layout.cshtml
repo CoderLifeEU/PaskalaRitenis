@@ -6,14 +6,16 @@
     <meta name="description" content="website description" />
     <meta name="keywords" content="website keywords, website keywords" />
     <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
-    <script type="text/javascript" src="~/Scripts/jquery-1.8.2.min.js"></script>
 
-    <!-- modernizr enables HTML5 elements and feature detects -->
-    <script type="text/javascript" src="~/Content/js/modernizr-1.5.min.js"></script>
-   
-    <link href="~/Content/Site.css" rel="stylesheet" />
-    @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")
+    <script type="text/javascript" src="~/Scripts/jquery-1.8.2.min.js"></script>
+    <script type="text/javascript" src="~/Content/js/jquery.plugins/jquery.mousewheel-3.0.6.js"></script>
+    <script type="text/javascript" src="~/Content/js/jquery.plugins/jquery.fancybox.js?v=2.0.5"></script>
+    <script type="text/javascript" src="~/Content/js/jquery.plugins/jquery.picasagallery.js"></script>
+
+    <link rel="stylesheet" href="~/Content/Site.css" />
+    <link rel="stylesheet" href="~/Content/picassagallery/jquery.picasagallery.css" />
+    <link rel="stylesheet" href="~/Content/fancybox/jquery.fancybox.css?v=2.0.5" />
+    <link rel="stylesheet" href="~/Content/fancybox/jquery.fancybox-thumbs.css?v=2.0.5" />
 </head>
 <body>
     <div id="main">
@@ -48,7 +50,5 @@
             <p><a href="#">©2016 Paskāla ritenis</a></p>
         </footer>
     </div>
-    @Scripts.Render("~/bundles/jquery")
-    @RenderSection("scripts", required: false)
 </body>
 </html>
