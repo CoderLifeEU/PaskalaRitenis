@@ -207,6 +207,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\hugeitmicro.css" />
     <Content Include="Content\fancybox\blank.gif" />
     <Content Include="Content\fancybox\fancybox_buttons.png" />
     <Content Include="Content\fancybox\fancybox_loading.gif" />
@@ -227,6 +228,7 @@
     <Content Include="Content\images\page.png" />
     <Content Include="Content\images\paperclip.png" />
     <Content Include="Content\images\pr_logo.png" />
+    <Content Include="Content\js\hugeitmicro.js" />
     <Content Include="Content\js\jquery.easing-sooper.js" />
     <Content Include="Content\js\jquery.js" />
     <Content Include="Content\js\jquery.plugins\jquery.fancybox-buttons.js" />
@@ -356,7 +358,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Images\" />
+    <Folder Include="Images\supporters\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
