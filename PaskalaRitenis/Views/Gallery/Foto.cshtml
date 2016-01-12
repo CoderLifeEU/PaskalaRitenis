@@ -6,5 +6,22 @@
 <div class="picasagallery"></div>
 
 <script type="text/javascript">
-    $(document).ready(function () { $('.picasagallery').picasagallery({ username: 'alan.hamlett' }); });
+    $(document).ready(function () {
+
+        $('.picasagallery').picasagallery(
+            {
+                username: "PasRit",
+                hide_albums: ["LIO_26"],
+                link_to_picasa: false,
+                title: "Paskala Ritenis - Foto Galerija",
+                inline: false,
+                auto_open: false,
+                loaded: false, 
+                mouseWheel: false,
+                arrows: true,
+                closeClick: false,
+                closeBtn: true
+            }
+            );
+    });
 </script>
