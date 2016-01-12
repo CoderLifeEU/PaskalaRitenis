@@ -6,34 +6,22 @@ using System.Web.Mvc;
 
 namespace PaskalaRitenis.Controllers
 {
-    public class HomeController : Controller
+    public class GalleryController : Controller
     {
         public ActionResult Index()
         {
-
             return View();
         }
 
-        public ActionResult About()
+        public ActionResult Foto()
         {
-
             return View();
         }
 
-        public ActionResult Contact()
+        public ActionResult Video()
         {
-
             return View();
         }
-
-        public ActionResult Supporters()
-        {
-
-            return View();
-        }
-
-
-        
 
     }
 }
