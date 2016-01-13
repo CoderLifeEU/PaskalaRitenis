@@ -24,16 +24,39 @@
             <input type="button" onclick="insertNewForm()" value="Pievienot" class="button" />
         </div>
     </section>
-    <hr />
     <section id="dalibnieki">
+        <h3>Sastādīt formu:</h3>
+        Forma: <span id="formaLabel"></span>
+        <hr />
 
-        <i>dalībnieku rezultāti</i>@*//TBC//*@
 
+
+        <input type="button" onclick="pievienotKartu()" value="Pievienot kārtu" class="button" />
+        <input type="button" onclick="toggleNewForm()" value="Pievienot uzdevumu" class="button" />
+        <input type="button" onclick="toggleNewForm()" value="Pievienot formu" class="button" />
     </section>
 
     @*//SKRIPTI *********************************************************************************@
 
     <script type="text/javascript">
+
+        function editForm(formaId, nosaukums) {
+            formaLabel.textContent = nosaukums;
+
+        }
+
+        function pievienotKartu() {
+            kartasCount++;
+            $("#punktiCol").attr("colspan", kartasCount);
+             var def = ("#defaultKarta").parentNode;
+
+
+            //html += "<td colspan='1'><input style='width:70px' maxlength='15' /></td>";
+        }
+
+        var kartasCount = 1;
+
+        //////////////////////////////////
         var newYearVisibe = false;
         var newFormVisibe = false;
         var selectedYear = -1;
@@ -195,7 +218,7 @@
             .done(function (data) {
                 var tableHTML = "";
                 $.each(data, function (i, form) {
-                    tableHTML += "<tr><th>" + form.FormaNosaukums + "</th><td id='bindBtnRow' style='padding-left:10px'><input hidden id='bindBtn' type='button' value='Piesaistīt' onclick='bindForm(" + form.FormaID + ", &quot;" + form.FormaNosaukums + "&quot;)' class='button' /><input type='button' value='Rediģēt' onclick='editForm(" + form.FormaID + ", &quot;" + form.FormaNosaukums + "&quot;)' class='button' /><input type='button' value='Dzēst' onclick='deleteForm(" + form.FormaID + ")' class='button' /></td></tr>";
+                    tableHTML += "<tr><th>" + form.FormaNosaukums + "</th><td id='bindBtnRow' style='padding-left:10px'><input hidden id='bindBtn' type='button' value='Piesaistīt' onclick='bindForm(" + form.FormaID + ", &quot;" + form.FormaNosaukums + "&quot;)' class='button' /><input type='button' value='Rediģēt' onclick='editForm(" + form.FormaID + ", &quot;" + form.FormaNosaukums + "&quot;)' class='button' /><input type='button' value='Dzēst' onclick='deleteForm(" + form.FormaID + ", &quot;" + form.FormaNosaukums + "&quot;)' class='button' /></td></tr>";
                 });
                 $("#formTable").html(tableHTML);
                 hideNewForm();
@@ -239,7 +262,7 @@
         }
 
         function deleteForm(formID, nosaukums) {
-            if (confirm("Dzēšot formu, tiks nodzēsti arī visi tai piesaistītie rezultāti! Dzēst formu'" + nosaukums + "'?")) {
+            if (confirm("Dzēšot formu, tiks nodzēsti arī visi tai piesaistītie rezultāti! Dzēst formu '" + nosaukums + "'?")) {
                 $.ajax({
                     type: "POST",
                     url: "Rezultati/DeleteForm",

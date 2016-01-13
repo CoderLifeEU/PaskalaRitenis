@@ -23,21 +23,6 @@ namespace AdminConsole.Controllers
             return View();
         }
 
-        //public JsonResult Details(string _year)
-        //{
-        //    if (validateYear(_year))
-        //    {
-        //        var result = _repository.GetFormasByYear(int.Parse(_year));
-        //        return Json(result, JsonRequestBehavior.AllowGet);
-        //    }
-        //    else
-        //    {
-        //        var result = new JsonResult();
-        //        result.Data = "Gads nav derīgs";
-        //        return Json(result, JsonRequestBehavior.AllowGet);
-        //    }
-        //}
-
         public JsonResult GetYears()
         {   
             var result = _repository.GetYears();
@@ -83,7 +68,7 @@ namespace AdminConsole.Controllers
             try
             {
                 MvcHtmlString encoded = new MvcHtmlString(title);
-                _repository.InsertForm(new FormaModel() { FormaNosaukums = encoded.ToString(), FormaXML = "<tests/>" });
+                _repository.InsertForm(new FormaModel() { FormaNosaukums = encoded.ToString(), FormaXML = "" });
                 return "Saglabāts";
             }
             catch
