@@ -1,4 +1,12 @@
-﻿@{
-    ViewBag.Title = "Video";
+﻿@model IEnumerable<Repository.Models.VideoModel>
+@{
+    ViewBag.Title = "Video";    
 }
 
+<h1>Video Materiāli</h1>
+
+
+@foreach (var item in Model)
+{
+    <p>@Html.Raw(item.Player)</p>       
+}
