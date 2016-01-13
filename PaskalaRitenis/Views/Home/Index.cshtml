@@ -1,11 +1,39 @@
 ﻿@{
     ViewBag.Title = "Home Page";
 }
-@section featured {
-    <section class="featured">
-        <div class="content-wrapper">
-            <hgroup class="title">
-            </hgroup>
-        </div>
-    </section>
-}
+<section class="featured">
+    <div class="content-wrapper">
+        <h3>Ziņas</h3>
+    </div>
+    <div class="carouselTicker">
+        <ul class="carouselTicker__list">
+            <li class="carouselTicker__item">
+                <div>Ziņas</div>
+            </li>
+            <li class="carouselTicker__item"></li>
+            <li class="carouselTicker__item"></li>
+            <li class="carouselTicker__item"></li>
+            <li class="carouselTicker__item"></li>
+            <li class="carouselTicker__item"></li>
+            <li class="carouselTicker__item"></li>
+            <li class="carouselTicker__item"></li>
+            <li class="carouselTicker__item"></li>
+            <li class="carouselTicker__item"></li>
+            <li class="carouselTicker__item"></li>
+            <li class="carouselTicker__item"></li>
+            <li class="carouselTicker__item"></li>
+            <li class="carouselTicker__item"></li>
+        </ul>
+    </div>
+</section>
+<script type="text/javascript">
+    $(document).ready(function () {
+        jQuery('.carouselTicker').carouselTicker();
+    });
+
+    jQuery('.carouselTicker').carouselTicker({
+        speed: 5,
+        delay: 50,
+        reverse: true
+    });
+</script>

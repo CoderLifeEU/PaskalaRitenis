@@ -6,11 +6,19 @@
     <meta name="description" content="website description" />
     <meta name="keywords" content="website keywords, website keywords" />
     <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
-    <!-- modernizr enables HTML5 elements and feature detects -->
-    <script type="text/javascript" src="~/Content/js/modernizr-1.5.min.js"></script>
-    <link href="~/Content/Site.css" rel="stylesheet" />
-    @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")
+
+    <script type="text/javascript" src="~/Scripts/jquery-1.8.2.min.js"></script>
+    <script type="text/javascript" src="~/Content/js/jquery.plugins/jquery.mousewheel-3.0.6.js"></script>
+    <script type="text/javascript" src="~/Content/js/jquery.plugins/jquery.fancybox.js?v=2.0.5"></script>
+    <script type="text/javascript" src="~/Content/js/jquery.plugins/jquery.picasagallery.js"></script>
+    <script type="text/javascript" src="~/Content/js/jquery.carouselTicker.js"></script>
+    <script type="text/javascript" src="~/Content/js/jquery.plugins/jquery.hugeitmicro.min.js"></script>
+
+
+    <link rel="stylesheet" href="~/Content/Site.css" />
+    <link rel="stylesheet" href="~/Content/picassagallery/jquery.picasagallery.css" />
+    <link rel="stylesheet" href="~/Content/fancybox/jquery.fancybox.css?v=2.0.5" />
+    <link rel="stylesheet" href="~/Content/fancybox/jquery.fancybox-thumbs.css?v=2.0.5" />
 </head>
 <body>
     <div id="main">
@@ -27,11 +35,11 @@
                         <li><a href="#">Olimpiāžu arhīvs</a></li>
                         <li class="sf-parent"><a href="#">Galerija<span class="sf-arrow"></span></a>
                             <ul class="sf-content" style="left: auto; z-index: 1052; display: none; margin-top: 0px;">
-                                <li><a href="#">Foto</a></li>
-                                <li><a href="#">Video</a></li>
+                                <li>@Html.ActionLink("Foto","Foto","Gallery")</li>
+                                <li>@Html.ActionLink("Video","Video","Gallery")</li>
                             </ul>
                         </li>
-                        <li><a href="contact.html">Atbalstītāji</a></li>
+                        <li>@Html.ActionLink("Atbalstītāji","Index","Supporters")</li>
                         <li><a href="contact.html">Kontakti</a></li>
                     </ul>
                 </div>
@@ -57,8 +65,7 @@
         <footer>
             <p><a href="#">©2016 Paskāla ritenis</a></p>
         </footer>
+        @RenderSection("scripts", required: false)
     </div>
-    @Scripts.Render("~/bundles/jquery")
-    @RenderSection("scripts", required: false)
 </body>
 </html>

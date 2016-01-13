@@ -186,7 +186,9 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\GalleryController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\SupportersController.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -195,6 +197,14 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\hugeitmicro.css" />
+    <Content Include="Content\fancybox\blank.gif" />
+    <Content Include="Content\fancybox\fancybox_buttons.png" />
+    <Content Include="Content\fancybox\fancybox_loading.gif" />
+    <Content Include="Content\fancybox\fancybox_sprite.png" />
+    <Content Include="Content\fancybox\jquery.fancybox-buttons.css" />
+    <Content Include="Content\fancybox\jquery.fancybox-thumbs.css" />
+    <Content Include="Content\fancybox\jquery.fancybox.css" />
     <Content Include="Content\fonts\News Cycle SIL OFL Font License 1.1.txt" />
     <Content Include="Content\images\another_page.png" />
     <Content Include="Content\images\arrows-white.png" />
@@ -208,10 +218,18 @@
     <Content Include="Content\images\page.png" />
     <Content Include="Content\images\paperclip.png" />
     <Content Include="Content\images\pr_logo.png" />
+    <Content Include="Content\js\hugeitmicro.js" />
     <Content Include="Content\js\jquery.easing-sooper.js" />
     <Content Include="Content\js\jquery.js" />
+    <Content Include="Content\js\jquery.plugins\jquery.fancybox-buttons.js" />
+    <Content Include="Content\js\jquery.plugins\jquery.fancybox-thumbs.js" />
+    <Content Include="Content\js\jquery.plugins\jquery.fancybox.js" />
+    <Content Include="Content\js\jquery.plugins\jquery.mousewheel-3.0.6.js" />
+    <Content Include="Content\js\jquery.plugins\jquery.picasagallery.js" />
     <Content Include="Content\js\jquery.sooperfish.js" />
     <Content Include="Content\js\modernizr-1.5.min.js" />
+    <Content Include="Content\picassagallery\chain-icon.gif" />
+    <Content Include="Content\picassagallery\jquery.picasagallery.css" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
@@ -317,10 +335,14 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Web.config" />
+    <Content Include="Views\Gallery\Index.cshtml" />
+    <Content Include="Views\Gallery\Foto.cshtml" />
+    <Content Include="Views\Gallery\Video.cshtml" />
+    <Content Include="Views\Supporters\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Images\" />
+    <Folder Include="Images\supporters\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
