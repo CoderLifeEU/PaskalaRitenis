@@ -223,17 +223,7 @@
     <Content Include="Content\fancybox\jquery.fancybox-thumbs.css" />
     <Content Include="Content\fancybox\jquery.fancybox.css" />
     <Content Include="Content\fonts\News Cycle SIL OFL Font License 1.1.txt" />
-    <Content Include="Content\images\another_page.png" />
-    <Content Include="Content\images\arrows-white.png" />
     <Content Include="Content\images\back.jpg" />
-    <Content Include="Content\images\browser.png" />
-    <Content Include="Content\images\bullet.png" />
-    <Content Include="Content\images\contact.png" />
-    <Content Include="Content\images\examples.png" />
-    <Content Include="Content\images\graphic.jpg" />
-    <Content Include="Content\images\home.png" />
-    <Content Include="Content\images\page.png" />
-    <Content Include="Content\images\paperclip.png" />
     <Content Include="Content\images\pr_logo.png" />
     <Content Include="Content\js\hugeitmicro.js" />
     <Content Include="Content\js\jquery.easing-sooper.js" />
