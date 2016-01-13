@@ -192,12 +192,16 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\NewsController.cs" />
     <Compile Include="Controllers\SupportersController.cs" />
+    <Compile Include="Controllers\RegistrController.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\SerializeUtil.cs" />
     <Compile Include="Models\AccountModels.cs" />
+    <Compile Include="Models\RegistrationModel.cs" />
+    <Compile Include="Models\StudentRegModel.cs" />
+    <Compile Include="Models\TeacherRegModel.cs" />
     <Compile Include="Models\INewsRepository.cs" />
     <Compile Include="Models\News.designer.cs">
       <AutoGen>True</AutoGen>
@@ -232,6 +236,8 @@
     <Content Include="Content\fancybox\jquery.fancybox-thumbs.css" />
     <Content Include="Content\fancybox\jquery.fancybox.css" />
     <Content Include="Content\fonts\News Cycle SIL OFL Font License 1.1.txt" />
+    <Content Include="Content\images\another_page.png" />
+    <Content Include="Content\images\arrows-white.png" />
     <Content Include="Content\images\back.jpg" />
     <Content Include="Content\images\pr_logo.png" />
     <Content Include="Content\js\hugeitmicro.js" />
@@ -335,7 +341,9 @@
     <Content Include="Scripts\knockout-2.2.0.js" />
     <Content Include="Scripts\modernizr-1.5.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -361,6 +369,8 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Web.config" />
+    <Content Include="Views\Registr\StudentRegistr.cshtml" />
+    <Content Include="Views\Registr\TeacherRegistr.cshtml" />
     <Content Include="Views\Gallery\Index.cshtml" />
     <Content Include="Views\Contact\Index.cshtml" />
     <Content Include="Views\Gallery\Foto.cshtml" />

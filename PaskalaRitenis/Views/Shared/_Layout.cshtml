@@ -30,6 +30,12 @@
                 <div id="menu_container">
                     <ul class="sf-menu" id="nav">
                         <li>@Html.ActionLink("Sākumlapa", "Index", "Home")</li>
+                        <li class="sf-parent"><a href="#">Reģistrācija<span class="sf-arrow"></span></a>
+                            <ul class="sf-content" style="left: auto; z-index: 1052; display: none; margin-top: 0px;">
+                                <li>@Html.ActionLink("Studentiem", "StudentRegistr", "Registr")</li>
+                                <li>@Html.ActionLink("Skolotajiem", "TeacherRegistr", "Registr")</li>
+                            </ul>
+                        </li>
                         <li><a href="#">Rezultāti 2015</a></li>
                         <li><a href="#">Olimpiādes programma 2015</a></li>
                         <li><a href="#">Olimpiāžu arhīvs</a></li>
