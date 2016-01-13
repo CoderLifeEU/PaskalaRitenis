@@ -1,4 +1,5 @@
-﻿@{
+﻿@model IEnumerable<PaskalaRitenis.Models.NewsModel>
+@{
     ViewBag.Title = "Home Page";
 }
 <section class="featured">
@@ -7,22 +8,12 @@
     </div>
     <div class="carouselTicker">
         <ul class="carouselTicker__list">
-            <li class="carouselTicker__item">
-                <div>Ziņas</div>
-            </li>
-            <li class="carouselTicker__item"></li>
-            <li class="carouselTicker__item"></li>
-            <li class="carouselTicker__item"></li>
-            <li class="carouselTicker__item"></li>
-            <li class="carouselTicker__item"></li>
-            <li class="carouselTicker__item"></li>
-            <li class="carouselTicker__item"></li>
-            <li class="carouselTicker__item"></li>
-            <li class="carouselTicker__item"></li>
-            <li class="carouselTicker__item"></li>
-            <li class="carouselTicker__item"></li>
-            <li class="carouselTicker__item"></li>
-            <li class="carouselTicker__item"></li>
+            @foreach (var item in Model)
+            { 
+                <li class="carouselTicker__item">
+                    @Html.DisplayFor(modelItem => item.Info)
+                </li>
+            }
         </ul>
     </div>
 </section>

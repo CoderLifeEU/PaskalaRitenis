@@ -7,14 +7,15 @@ using System.Web.Mvc;
 
 namespace PaskalaRitenis.Controllers
 {
-    public class HomeController : Controller
+    public class NewsController : Controller
     {
+
         private INewsRepository _repository;
-        public HomeController()
+        public NewsController()
             : this(new NewsRepository())
         {
         }
-        public HomeController(INewsRepository repository)
+        public NewsController(INewsRepository repository)
         {
             _repository = repository;
         }
@@ -24,27 +25,6 @@ namespace PaskalaRitenis.Controllers
             var news = _repository.GetNews();
             return View(news);
         }
-
-        public ActionResult About()
-        {
-
-            return View();
-        }
-
-        public ActionResult Contact()
-        {
-
-            return View();
-        }
-
-        public ActionResult Supporters()
-        {
-
-            return View();
-        }
-
-
-        
 
     }
 }
