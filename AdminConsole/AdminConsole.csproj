@@ -189,12 +189,20 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ContactController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\NewsController.cs" />
+    <Compile Include="Controllers\RezultatiController.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountModels.cs" />
+    <Compile Include="Models\AllRezultatiModels.cs" />
+    <Compile Include="Models\IRezultatiRepository.cs" />
+    <Compile Include="Models\Rezultati.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Rezultati.dbml</DependentUpon>
+    </Compile>
+    <Compile Include="Models\RezultatiRepository.cs" />
     <Compile Include="Models\Contacts.designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -203,17 +211,10 @@
     <Compile Include="Models\ContactsModel.cs" />
     <Compile Include="Models\ContactsRepository.cs" />
     <Compile Include="Models\IContactsRepository.cs" />
-    <Compile Include="Models\INewsRepository.cs" />
-    <Compile Include="Models\News.designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>News.dbml</DependentUpon>
-    </Compile>
-    <Compile Include="Models\NewsModel.cs" />
-    <Compile Include="Models\NewsRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\Rezultati.css" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
@@ -271,13 +272,10 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Models\Contacts.dbml">
+    <Content Include="Models\Rezultati.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>
+      <LastGenOutput>Rezultati.designer.cs</LastGenOutput>
       <LastGenOutput>Contacts.designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </Content>
-    <Content Include="Models\News.dbml">
-      <Generator>MSLinqToSQLGenerator</Generator>
-      <LastGenOutput>News.designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </Content>
     <None Include="Scripts\jquery-1.8.2.intellisense.js" />
@@ -295,7 +293,9 @@
     <Content Include="Scripts\knockout-2.2.0.debug.js" />
     <Content Include="Scripts\knockout-2.2.0.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -334,12 +334,9 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Web.config" />
+    <Content Include="Views\Rezultati\Index.cshtml" />
     <Content Include="Views\Contact\Index.cshtml" />
     <Content Include="Views\Contact\Edit.cshtml" />
-    <Content Include="Views\News\Create.cshtml" />
-    <Content Include="Views\News\Index.cshtml" />
-    <Content Include="Views\News\Edit.cshtml" />
-    <Content Include="Views\News\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -351,13 +348,10 @@
     <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Models\Rezultati.dbml.layout">
+      <DependentUpon>Rezultati.dbml</DependentUpon>
     <None Include="Models\Contacts.dbml.layout">
       <DependentUpon>Contacts.dbml</DependentUpon>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Models\News.dbml.layout">
-      <DependentUpon>News.dbml</DependentUpon>
     </None>
   </ItemGroup>
   <PropertyGroup>
