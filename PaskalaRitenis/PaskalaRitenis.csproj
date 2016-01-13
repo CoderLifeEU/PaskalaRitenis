@@ -393,16 +393,15 @@
     <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
   </ItemGroup>
   <ItemGroup>
-<<<<<<< Temporary merge branch 1
     <None Include="Models\News.dbml.layout">
       <DependentUpon>News.dbml</DependentUpon>
     </None>
-=======
+</ItemGroup>
+<ItemGroup>
     <ProjectReference Include="..\Repository\Repository.csproj">
       <Project>{c9113842-924a-4587-8990-cc0f7989b6d0}</Project>
       <Name>Repository</Name>
     </ProjectReference>
->>>>>>> Temporary merge branch 2
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
