@@ -189,7 +189,6 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\RezultatiController.cs" />
-    <Compile Include="Controllers\NewsController.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -203,14 +202,11 @@
       <DependentUpon>Rezultati.dbml</DependentUpon>
     </Compile>
     <Compile Include="Models\RezultatiRepository.cs" />
-    <Compile Include="Models\INewsRepository.cs" />
-    <Compile Include="Models\News.designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>News.dbml</DependentUpon>
+      <DependentUpon>Rezultati.dbml</DependentUpon>
     </Compile>
-    <Compile Include="Models\NewsModel.cs" />
-    <Compile Include="Models\NewsRepository.cs" />
+    <Compile Include="Models\RezultatiRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -272,13 +268,9 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Models\Rezultati.dbml">
+    <Content Include="Models\Rezultati.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>
       <LastGenOutput>Rezultati.designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </Content>
-    <Content Include="Models\News.dbml">
-      <Generator>MSLinqToSQLGenerator</Generator>
-      <LastGenOutput>News.designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </Content>
     <None Include="Scripts\jquery-1.8.2.intellisense.js" />
@@ -338,10 +330,6 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Web.config" />
     <Content Include="Views\Rezultati\Index.cshtml" />
-    <Content Include="Views\News\Create.cshtml" />
-    <Content Include="Views\News\Index.cshtml" />
-    <Content Include="Views\News\Edit.cshtml" />
-    <Content Include="Views\News\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -355,11 +343,6 @@
   <ItemGroup>
     <None Include="Models\Rezultati.dbml.layout">
       <DependentUpon>Rezultati.dbml</DependentUpon>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Models\News.dbml.layout">
-      <DependentUpon>News.dbml</DependentUpon>
     </None>
   </ItemGroup>
   <PropertyGroup>
