@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using PaskalaRitenis.Models;
+using PaskalaRitenis.Helpers;
 
 namespace PaskalaRitenis.Controllers
 {
@@ -11,7 +13,9 @@ namespace PaskalaRitenis.Controllers
 
         public ActionResult Index()
         {
-            return View();
+            var supporters = SerializeUtils.DeserializeFromXML<SupportersModel>(Server.MapPath(Url.Content("~/Content/Supporters.xml"))).Supporters;
+
+            return View(supporters);
         }
 
     }
