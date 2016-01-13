@@ -209,6 +209,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\js\jquery.carouselTicker.js" />
+    <Content Include="Content\js\jquery.plugins\jquery.hugeitmicro.min.js" />
     <Content Include="Content\Supporters.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
