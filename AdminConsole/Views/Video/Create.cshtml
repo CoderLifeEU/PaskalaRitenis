@@ -1,0 +1,39 @@
+﻿@model Repository.Models.VideoModel
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create</h2> 
+@using (Html.BeginForm()) {
+    @Html.ValidationSummary(true) 
+    <fieldset>
+        <legend>VdeoModel</legend> 
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Gads)
+        </div>
+        <div class="editor-field">
+            @Html.TextAreaFor(model => model.Gads)
+            @Html.ValidationMessageFor(model => model.Gads)
+        </div> 
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Player)
+        </div>
+        <div class="editor-field">
+            @Html.TextAreaFor(model => model.Player)
+            @Html.ValidationMessageFor(model => model.Player)
+        </div> 
+
+        <p>
+            <input type="submit" value="Create" />
+        </p>
+    </fieldset>
+} 
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+

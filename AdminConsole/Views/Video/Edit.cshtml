@@ -1,0 +1,46 @@
+﻿@model Repository.Models.VideoModel
+
+@{
+    ViewBag.Title = "Edit Video";
+}
+
+<h2>Edit Video</h2>
+
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>VideoModel</legend>
+
+        @Html.HiddenFor(model => model.Id)
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Gads)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Gads)
+            @Html.ValidationMessageFor(model => model.Gads)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Player)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Player)
+            @Html.ValidationMessageFor(model => model.Player)
+        </div>
+
+        <p>
+            <input type="submit" value="Save" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
