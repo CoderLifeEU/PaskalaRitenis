@@ -7,7 +7,7 @@
     <h1>@ViewBag.Title</h1>
     <h2>@ViewBag.Message</h2>
 </hgroup>
-<div id="map_canvas"></div>
+<div id="map_canvas"></div></br></br>
 <div>
    @foreach (var item in Model)
     {
@@ -16,38 +16,38 @@
        <p>@item.ExtraInfo</p>
     }
 </div>  
-@section scripts {
     <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>  
-    <section class="scripts">
-        <script type="text/javascript">
-            $(document).ready(function () {
-                initialize();
-            });
-            function initialize() {
-                var mapOptions = {
-                    center: new google.maps.LatLng(55.8701563, 26.509675),
-                    zoom: 17,
-                    mapTypeId: google.maps.MapTypeId.ROADMAP
-                };
-                var map = new google.maps.Map(document.getElementById("map_canvas"),
-                  mapOptions);
-                // create a marker  
-                var latlng = new google.maps.LatLng(55.870215, 26.507481);
-                var marker = new google.maps.Marker({
-                    position: latlng,
-                    map: map
-                });
 
-                var markerInfo = new google.maps.InfoWindow({
-                    content: "Parādes iela 1"
-                });
-                google.maps.event.addListener(marker, "mouseover", function (e) {
-                    markerInfo.open(map, this);
-                });
-                google.maps.event.addListener(marker, "mouseout", function (e) {
-                    markerInfo.close(map, this);
-                });
-            }
-        </script>  
-    </section>
-}  
+    <script type="text/javascript">
+            
+        function initialize() {
+            var mapOptions = {
+                center: new google.maps.LatLng(55.8701563, 26.509675),
+                zoom: 17,
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+            };
+            var map = new google.maps.Map(document.getElementById("map_canvas"),
+                mapOptions);
+            // create a marker  
+            var latlng = new google.maps.LatLng(55.870215, 26.507481);
+            var marker = new google.maps.Marker({
+                position: latlng,
+                map: map
+            });
+
+            var markerInfo = new google.maps.InfoWindow({
+                content: "Parādes iela 1"
+            });
+            google.maps.event.addListener(marker, "mouseover", function (e) {
+                markerInfo.open(map, this);
+            });
+            google.maps.event.addListener(marker, "mouseout", function (e) {
+                markerInfo.close(map, this);
+            });
+        }
+
+        $(document).ready(function () {
+            initialize();
+        });
+   </script>  
+
