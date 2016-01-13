@@ -1,4 +1,5 @@
-﻿@{
+﻿@model IEnumerable<PaskalaRitenis.Models.Contact.ContactsModel>
+@{
     ViewBag.Title = "Contact";
 }
 
@@ -6,6 +7,15 @@
     <h1>@ViewBag.Title.</h1>
     <h2>@ViewBag.Message</h2>
 </hgroup>
+<div id="map_canvas"></div>  
+<div id="contactInfo">
+   @foreach (var item in Model)
+    {
+       <p>@item.Vieta</p> <br />
+       <p>@item.Adrese</p> <br />
+       <p>@item.ExtraInfo</p> <br />
+    }
+</div>  
 
 <section class="contact">
     <header>

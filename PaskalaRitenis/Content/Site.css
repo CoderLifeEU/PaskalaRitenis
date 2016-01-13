@@ -613,3 +613,10 @@ ul#nav li a:hover,ul#nav li a:focus {
 
 .carouselTicker__item img {
     vertical-align: top;
+#contactInfo p {
+    font-size: 18px;
+}
+
+#contactInfo {
+    margin-top:20px;
+}
