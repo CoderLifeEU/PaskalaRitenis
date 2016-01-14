@@ -52,8 +52,8 @@ namespace PaskalaRitenis.Controllers
             using (SqlConnection con = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["DataSourceConnectionString"].ConnectionString))
             {
                 con.Open();
-                string command = @"INSERT INTO Registration (RegType, RegCode, Vards, Uzvards, Pilseta, Telefons, Email, Skolotajs, SkolasTips, SkolasNosaukums, SkolasKlase, Kopnite) 
-                                     VALUES ('" + model.RegType.ToString() + "', 'TTEST01','" + model.Name + "', '" + model.Surname + "', '" + model.City + "', '" + model.Phone + "', '" + model.Email + "', '" + model.Advicer + "', '" + schoolType + "', '" + school + "', '" + schoolClass + "', '" + placeReq + "')";
+                string command = @"INSERT INTO Registration (Created, RegType, RegCode, Vards, Uzvards, Pilseta, Telefons, Email, Skolotajs, SkolasTips, SkolasNosaukums, SkolasKlase, Kopnite) 
+                                     VALUES ('" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "' ,'" + model.RegType.ToString() + "', '" + SpecialCode() + "','" + model.Name + "', '" + model.Surname + "', '" + model.City + "', '" + model.Phone + "', '" + model.Email + "', '" + model.Advicer + "', '" + schoolType + "', '" + school + "', '" + schoolClass + "', '" + placeReq + "')";
 
                 using (SqlCommand query = new SqlCommand(command, con))
                 {
@@ -101,8 +101,8 @@ namespace PaskalaRitenis.Controllers
             using(SqlConnection con = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["DataSourceConnectionString"].ConnectionString))
             {
                 con.Open();
-                string command = @"INSERT INTO Registration (RegType, RegCode, Vards, Uzvards, Pilseta, Telefons, Email, SkolasTips, SkolasNosaukums,Kopnite) 
-                                     VALUES ('" + model.RegType.ToString() + "', 'TTEST01','" + model.Name + "', '" + model.Surname + "', '" + model.City + "', '" + model.Phone + "', '" + model.Email + "', '" + schoolType + "', '" + school + "', '"+ placeReq +"')";
+                string command = @"INSERT INTO Registration (Created, RegType, RegCode, Vards, Uzvards, Pilseta, Telefons, Email, SkolasTips, SkolasNosaukums,Kopnite) 
+                                     VALUES ('" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "' ,'" + model.RegType.ToString() + "', '" + SpecialCode() + "','" + model.Name + "', '" + model.Surname + "', '" + model.City + "', '" + model.Phone + "', '" + model.Email + "', '" + schoolType + "', '" + school + "', '" + placeReq + "')";
 
                 using(SqlCommand query = new SqlCommand(command, con))
                 {
@@ -209,6 +209,14 @@ namespace PaskalaRitenis.Controllers
             }
 
             return list;
+        }
+
+        private string SpecialCode()
+        {
+            const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+            var random = new Random();
+            return new string(Enumerable.Repeat(chars, 8)
+              .Select(s => s[random.Next(s.Length)]).ToArray());
         }
     }
 }
