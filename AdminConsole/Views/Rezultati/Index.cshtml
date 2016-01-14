@@ -15,10 +15,6 @@
             Publicēt rezultātus <input type="checkbox" id="publishResultsCbx"/><br />
             <input type="button" onclick="insertYear()" value="Pievienot" class="button" />
             <hr />
-        <input type="button" onclick="toggleNewForm()" value="Pievienot formu" class="button" />
-        <div id="enterFormName" hidden>
-            Ievadiet nosaukumu: <input id="newFormInput" maxlength="50" />
-            <input type="button" onclick="insertNewForm()" value="Pievienot" class="button" />
         </div>
         @using (Html.BeginForm("Upload", "Rezultati"))
         {
