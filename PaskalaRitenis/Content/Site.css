@@ -4,12 +4,6 @@
     src: local("Yanone Kaffeesatz"), url('../Content/fonts/YanoneKaffeesatz-Regular.ttf');
 } 
 
-@font-face { 
-  font-family: News Cycle; 
-    src: url('../Content/fonts/NewsCycle-Regular.eot'); 
-    src: local("News Cycle"), url('../Content/fonts/NewsCycle-Regular.ttf'); 
-} 
-
 html { 
   height: 100%;
 }
@@ -66,7 +60,7 @@ h3 {
 h4, h6 { 
   color: #F68500;
   padding: 0 0 5px 0;
-  font: normal 150% 'Yanone kaffeesatz', arial, sans-serif;
+  font: normal 150%, arial, sans-serif;
 }
 
 h5, h6 { 
@@ -136,7 +130,7 @@ ol li {
 
 #main {
   margin: 50px auto;
-  width: 1000px;
+  width: 1070px;
   border-radius: 15px 15px 15px 15px;
   -moz-border-radius: 15px 15px 15px 15px;
   -webkit-border: 15px 15px 15px 15px;
@@ -158,7 +152,7 @@ header {
 }
 
 #logo h1, #logo h2 { 
-  font: normal 320% 'News Cycle', arial, sans-serif;
+  font: normal 320%, arial, sans-serif;
   border-bottom: 0;
   text-transform: none;
   margin: 0;
@@ -185,7 +179,7 @@ header {
 
 nav { 
   height: 44px;
-  width: 930px;
+  width: 1050px;
   margin: -34px auto 0 auto;
   -webkit-border-radius: .5em .5em .5em .5em ; 
   -moz-border-radius: .5em .5em .5em .5em ;
@@ -201,12 +195,12 @@ nav {
 } 
 
 #menu_container { 
-  width: 930px;
+  width: 1050px;
   margin: 0 auto 0 auto;
 }
 
 #site_content { 
-  width: 930px;
+  width: 1030px;
   overflow: hidden;
   margin: 0px auto 0 auto;
   padding: 15px 0 15px 0;
@@ -231,7 +225,7 @@ nav {
   
 .sidebar h3, .content h1 { 
   padding: 0 15px 20px 0;
-  font: 220% 'News Cycle', arial, sans-serif;
+  font: 220%, arial, sans-serif;
   margin: 0 1px;
   color: #444;
 }
@@ -239,7 +233,7 @@ nav {
 .sidebar h3 { 
   padding: 14px 15px 14px 15px;
   color: #444;
-  font: 190% 'News Cycle', arial, sans-serif;
+  font: 190%, arial, sans-serif;
   margin-left: 10px;
   text-shadow: 1px 1px #FFF;
 }
@@ -291,8 +285,8 @@ nav {
 }
 
 footer { 
-  width: 930px;
-  font: 170% 'Yanone Kaffeesatz', arial, sans-serif;
+  width: 1050px;
+  font: 170%, arial, sans-serif;
   text-shadow: 1px 1px #7E4D0E;
   height: 30px;
   padding: 5px 0 20px 0;
@@ -312,7 +306,8 @@ footer {
 
 footer p { 
   line-height: 1.7em;
-  padding: 0 0 10px 0;
+  padding: 8pt 0 10px 0;
+  font-weight: 700;
 }
 
 footer a { 
@@ -353,7 +348,7 @@ footer a:hover {
 }
   
 .form_settings .submit { 
-  font: 140% 'Yanone Kaffeesatz', arial, sans-serif; 
+  font: 140%, arial, sans-serif; 
   border: 0; 
   width: 99px; 
   margin: 0 0 0 212px; 
@@ -529,8 +524,10 @@ ul#nav ul {
 }
 
 ul#nav li a { 
-  padding:7px 20px 13px 20px;
-  font: 155% 'Yanone Kaffeesatz', arial, sans-serif;
+  padding:10px 24px 13px 20px;
+  font: arial, sans-serif;
+  font-size: 13px;
+  font-weight: 700;
   text-shadow: 1px 1px #7E4D0E;
   text-decoration: none;
   color: #FFF;
@@ -548,8 +545,6 @@ ul#nav li a:hover,ul#nav li a:focus {
     margin-right: auto;
     padding-top: 20px;
     padding-bottom: 20px;
-}
-
 }
 
 /**
@@ -571,11 +566,15 @@ ul#nav li a:hover,ul#nav li a:focus {
 .carouselTicker__item{
     margin: 0 0 0 5px;
     float: left;
-    border: 4px solid red;
+    border: 2px ridge red;
     width: 300px;
     height: 150px;
-    line-height: 60px;
+    line-height: 30px;
     text-align: center;
+    display: flex;
+    justify-content: center; /* align horizontal */
+    align-items: center;
+    font-weight:600;
 }
 
 .carouselTicker__loader{

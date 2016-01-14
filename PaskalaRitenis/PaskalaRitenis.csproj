@@ -190,13 +190,27 @@
     <Compile Include="Controllers\GalleryController.cs" />
     <Compile Include="Controllers\ContactController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\NewsController.cs" />
+    <Compile Include="Controllers\PrgFileController.cs" />
     <Compile Include="Controllers\SupportersController.cs" />
+    <Compile Include="Controllers\RegistrController.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\SerializeUtil.cs" />
     <Compile Include="Models\AccountModels.cs" />
+    <Compile Include="Models\RegistrationModel.cs" />
+    <Compile Include="Models\StudentRegModel.cs" />
+    <Compile Include="Models\TeacherRegModel.cs" />
+    <Compile Include="Models\INewsRepository.cs" />
+    <Compile Include="Models\News.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>News.dbml</DependentUpon>
+    </Compile>
+    <Compile Include="Models\NewsModel.cs" />
+    <Compile Include="Models\NewsRepository.cs" />
     <Compile Include="Models\SupportersModel.cs" />
     <Compile Include="Models\Contact\Contacts.designer.cs">
       <DependentUpon>Contacts.dbml</DependentUpon>
@@ -226,14 +240,6 @@
     <Content Include="Content\images\another_page.png" />
     <Content Include="Content\images\arrows-white.png" />
     <Content Include="Content\images\back.jpg" />
-    <Content Include="Content\images\browser.png" />
-    <Content Include="Content\images\bullet.png" />
-    <Content Include="Content\images\contact.png" />
-    <Content Include="Content\images\examples.png" />
-    <Content Include="Content\images\graphic.jpg" />
-    <Content Include="Content\images\home.png" />
-    <Content Include="Content\images\page.png" />
-    <Content Include="Content\images\paperclip.png" />
     <Content Include="Content\images\pr_logo.png" />
     <Content Include="Content\js\hugeitmicro.js" />
     <Content Include="Content\js\jquery.easing-sooper.js" />
@@ -312,6 +318,11 @@
       <LastGenOutput>Contacts.designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="Models\News.dbml">
+      <Generator>MSLinqToSQLGenerator</Generator>
+      <LastGenOutput>News.designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </Content>
     <None Include="Scripts\jquery-1.8.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.8.2.js" />
     <Content Include="Scripts\jquery-1.8.2.min.js" />
@@ -331,7 +342,9 @@
     <Content Include="Scripts\knockout-2.2.0.js" />
     <Content Include="Scripts\modernizr-1.5.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -357,11 +370,14 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Web.config" />
+    <Content Include="Views\Registr\StudentRegistr.cshtml" />
+    <Content Include="Views\Registr\TeacherRegistr.cshtml" />
     <Content Include="Views\Gallery\Index.cshtml" />
     <Content Include="Views\Contact\Index.cshtml" />
     <Content Include="Views\Gallery\Foto.cshtml" />
     <Content Include="Views\Gallery\Video.cshtml" />
     <Content Include="Views\Supporters\Index.cshtml" />
+    <Content Include="Views\PrgFile\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -377,6 +393,17 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Models\News.dbml.layout">
+      <DependentUpon>News.dbml</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Repository\Repository.csproj">
+      <Project>{c9113842-924a-4587-8990-cc0f7989b6d0}</Project>
+      <Name>Repository</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

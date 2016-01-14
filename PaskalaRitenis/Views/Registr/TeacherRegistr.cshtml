@@ -1,0 +1,107 @@
+﻿@model PaskalaRitenis.Models.TeacherRegModel
+
+@{
+    ViewBag.Title = "Skolotaju Registracija";
+}
+
+<h2>Skolotaju registracija</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary(true)
+    
+    <table>
+        <tr>
+            <th>Registracijas forma</th>
+        </tr>
+        <tr>
+            <td>@Html.LabelFor(m=> m.Name)</td>
+        </tr>
+        <tr>
+            <td>@Html.TextBoxFor(m => m.Name)</td>
+        </tr>
+        <tr>
+            <td>@Html.LabelFor(m=> m.Surname)</td>
+        </tr>
+        <tr>
+            <td>@Html.TextBoxFor(m => m.Surname)</td>
+        </tr>
+        <tr>
+            <td>@Html.LabelFor(m=> m.City)</td>
+        </tr>
+        <tr>
+            <td>@Html.TextBoxFor(m => m.City)</td>
+        </tr>
+        <tr>
+            <td>@Html.LabelFor(m=> m.StudyType)</td>
+        </tr>
+        <tr>
+            <td>@Html.DropDownListFor(m => m.SelectedStudyTypeId, new SelectList(Model.StudyType, "Value", "Text"))</td>
+        </tr>
+        <tr>
+            <td>@Html.LabelFor(m=> m.School)</td>
+        </tr>
+        <tr>
+            <td>@Html.DropDownListFor(m => m.SelectedSchoolId, new SelectList(Model.School, "Value", "Text"), "--Mācību iestāde--")<br />
+                @Html.TextBoxFor(m => m.SpecialSchool)
+            </td>
+        </tr>
+        <tr>
+            <td>@Html.LabelFor(m=> m.Phone)</td>
+        </tr>
+        <tr>
+            <td>@Html.TextBoxFor(m => m.Phone)</td>
+        </tr>
+        <tr>
+            <td>@Html.LabelFor(m=> m.Email)</td>
+        </tr>
+        <tr>
+            <td>@Html.TextBoxFor(m => m.Email)</td>
+        </tr>
+        <tr>
+            <td>@Html.LabelFor(m=> m.PlaceRequired)</td>
+        </tr>
+        <tr>
+            <td>@Html.DropDownListFor(m => m.PlaceRequiredId, new SelectList(Model.PlaceRequired, "Value", "Text"))</td>
+        </tr>
+        <tr>
+            <td>@Html.CheckBoxFor(m=> m.Sequrity)
+                @Html.LabelFor(m=> m.Sequrity)
+            </td>
+        </tr>
+        <tr>
+            <td><input type="submit" value="Atsūtīt"/></td>
+        </tr>
+    </table>
+}
+
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+        });
+
+        $("#SelectedStudyTypeId").change(function () {
+
+            var items = "";
+
+            $.getJSON("@Url.Action("GetSchoolList","Registr")?val=" + $(this).val(), function (data) {
+                items += "<option value=''>--Mācību iestāde--</option>";
+              $.each(data, function (index, item) {
+                items += "<option value='" + item.Value + "'>" + item.Text + "</option>";
+              });
+              $("#SelectedSchoolId").html(items);
+            });
+        });
+
+        $("#SelectedSchoolId").change(function () {
+            var test = $(this).val();
+
+            if ($(this).val() < 1) {
+                $("#SpecialSchool").show();
+            }
+            else {
+                $("#SpecialSchool").hide();
+            }
+
+        });
+    </script>

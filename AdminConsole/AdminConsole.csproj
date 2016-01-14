@@ -190,7 +190,9 @@
     <Compile Include="Controllers\ContactController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\NewsController.cs" />
+    <Compile Include="Controllers\PrgFileController.cs" />
     <Compile Include="Controllers\RezultatiController.cs" />
+    <Compile Include="Controllers\VideoController.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -213,6 +215,7 @@
     </Compile>
     <Compile Include="Models\NewsModel.cs" />
     <Compile Include="Models\NewsRepository.cs" />
+    <Compile Include="Models\ProgFile.cs" />
     <Compile Include="Models\Rezultati.designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -359,6 +362,11 @@
     <Content Include="Views\Contact\Edit.cshtml" />
     <Content Include="Views\Contact\Index.cshtml" />
     <Content Include="Views\Rezultati\Upload.cshtml" />
+    <Content Include="Views\Video\Index.cshtml" />
+    <Content Include="Views\Video\Edit.cshtml" />
+    <Content Include="Views\Video\Create.cshtml" />
+    <Content Include="Views\Video\Delete.cshtml" />
+    <Content Include="Views\PrgFile\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -384,6 +392,12 @@
     <None Include="Models\Contacts.dbml.layout">
       <DependentUpon>Contacts.dbml</DependentUpon>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Repository\Repository.csproj">
+      <Project>{c9113842-924a-4587-8990-cc0f7989b6d0}</Project>
+      <Name>Repository</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
