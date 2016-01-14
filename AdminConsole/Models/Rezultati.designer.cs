@@ -30,18 +30,9 @@ namespace AdminConsole.Models
 		
     #region Extensibility Method Definitions
     partial void OnCreated();
-    partial void InsertGadi(Gadi instance);
-    partial void UpdateGadi(Gadi instance);
-    partial void DeleteGadi(Gadi instance);
-    partial void InsertFormuSaite(FormuSaite instance);
-    partial void UpdateFormuSaite(FormuSaite instance);
-    partial void DeleteFormuSaite(FormuSaite instance);
     partial void InsertRezultati(Rezultati instance);
     partial void UpdateRezultati(Rezultati instance);
     partial void DeleteRezultati(Rezultati instance);
-    partial void InsertRezultatuForma(RezultatuForma instance);
-    partial void UpdateRezultatuForma(RezultatuForma instance);
-    partial void DeleteRezultatuForma(RezultatuForma instance);
     #endregion
 		
 		public RezultatiDataContext() : 
@@ -74,231 +65,11 @@ namespace AdminConsole.Models
 			OnCreated();
 		}
 		
-		public System.Data.Linq.Table<Gadi> Gadis
-		{
-			get
-			{
-				return this.GetTable<Gadi>();
-			}
-		}
-		
-		public System.Data.Linq.Table<FormuSaite> FormuSaites
-		{
-			get
-			{
-				return this.GetTable<FormuSaite>();
-			}
-		}
-		
 		public System.Data.Linq.Table<Rezultati> Rezultatis
 		{
 			get
 			{
 				return this.GetTable<Rezultati>();
-			}
-		}
-		
-		public System.Data.Linq.Table<RezultatuForma> RezultatuFormas
-		{
-			get
-			{
-				return this.GetTable<RezultatuForma>();
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Gadi")]
-	public partial class Gadi : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _ID;
-		
-		private int _Gads;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnIDChanging(int value);
-    partial void OnIDChanged();
-    partial void OnGadsChanging(int value);
-    partial void OnGadsChanged();
-    #endregion
-		
-		public Gadi()
-		{
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int ID
-		{
-			get
-			{
-				return this._ID;
-			}
-			set
-			{
-				if ((this._ID != value))
-				{
-					this.OnIDChanging(value);
-					this.SendPropertyChanging();
-					this._ID = value;
-					this.SendPropertyChanged("ID");
-					this.OnIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Gads", DbType="Int NOT NULL")]
-		public int Gads
-		{
-			get
-			{
-				return this._Gads;
-			}
-			set
-			{
-				if ((this._Gads != value))
-				{
-					this.OnGadsChanging(value);
-					this.SendPropertyChanging();
-					this._Gads = value;
-					this.SendPropertyChanged("Gads");
-					this.OnGadsChanged();
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.FormuSaites")]
-	public partial class FormuSaite : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _ID;
-		
-		private int _Gads;
-		
-		private int _FormaID;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnIDChanging(int value);
-    partial void OnIDChanged();
-    partial void OnGadsChanging(int value);
-    partial void OnGadsChanged();
-    partial void OnFormaIDChanging(int value);
-    partial void OnFormaIDChanged();
-    #endregion
-		
-		public FormuSaite()
-		{
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int ID
-		{
-			get
-			{
-				return this._ID;
-			}
-			set
-			{
-				if ((this._ID != value))
-				{
-					this.OnIDChanging(value);
-					this.SendPropertyChanging();
-					this._ID = value;
-					this.SendPropertyChanged("ID");
-					this.OnIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Gads", DbType="Int NOT NULL")]
-		public int Gads
-		{
-			get
-			{
-				return this._Gads;
-			}
-			set
-			{
-				if ((this._Gads != value))
-				{
-					this.OnGadsChanging(value);
-					this.SendPropertyChanging();
-					this._Gads = value;
-					this.SendPropertyChanged("Gads");
-					this.OnGadsChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FormaID", DbType="Int NOT NULL")]
-		public int FormaID
-		{
-			get
-			{
-				return this._FormaID;
-			}
-			set
-			{
-				if ((this._FormaID != value))
-				{
-					this.OnFormaIDChanging(value);
-					this.SendPropertyChanging();
-					this._FormaID = value;
-					this.SendPropertyChanged("FormaID");
-					this.OnFormaIDChanged();
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
 		}
 	}
@@ -311,15 +82,13 @@ namespace AdminConsole.Models
 		
 		private int _ID;
 		
-		private int _RegistracijasID;
+		private int _Gads;
 		
-		private string _Rezultats;
+		private bool _Publicets;
 		
-		private System.Nullable<char> _VietaAtziniba;
+		private string _RezultatiLink;
 		
-		private System.Nullable<bool> _NeieradasDiskvalificets;
-		
-		private int _RezultatuSaite;
+		private bool _Arhivets;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -327,16 +96,14 @@ namespace AdminConsole.Models
     partial void OnCreated();
     partial void OnIDChanging(int value);
     partial void OnIDChanged();
-    partial void OnRegistracijasIDChanging(int value);
-    partial void OnRegistracijasIDChanged();
-    partial void OnRezultatsChanging(string value);
-    partial void OnRezultatsChanged();
-    partial void OnVietaAtzinibaChanging(System.Nullable<char> value);
-    partial void OnVietaAtzinibaChanged();
-    partial void OnNeieradasDiskvalificetsChanging(System.Nullable<bool> value);
-    partial void OnNeieradasDiskvalificetsChanged();
-    partial void OnRezultatuSaiteChanging(int value);
-    partial void OnRezultatuSaiteChanged();
+    partial void OnGadsChanging(int value);
+    partial void OnGadsChanged();
+    partial void OnPublicetsChanging(bool value);
+    partial void OnPublicetsChanged();
+    partial void OnRezultatiLinkChanging(string value);
+    partial void OnRezultatiLinkChanged();
+    partial void OnArhivetsChanging(bool value);
+    partial void OnArhivetsChanged();
     #endregion
 		
 		public Rezultati()
@@ -364,212 +131,82 @@ namespace AdminConsole.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RegistracijasID", DbType="Int NOT NULL")]
-		public int RegistracijasID
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Gads", DbType="Int NOT NULL")]
+		public int Gads
 		{
 			get
 			{
-				return this._RegistracijasID;
+				return this._Gads;
 			}
 			set
 			{
-				if ((this._RegistracijasID != value))
+				if ((this._Gads != value))
 				{
-					this.OnRegistracijasIDChanging(value);
+					this.OnGadsChanging(value);
 					this.SendPropertyChanging();
-					this._RegistracijasID = value;
-					this.SendPropertyChanged("RegistracijasID");
-					this.OnRegistracijasIDChanged();
+					this._Gads = value;
+					this.SendPropertyChanged("Gads");
+					this.OnGadsChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Rezultats", DbType="NVarChar(MAX)")]
-		public string Rezultats
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Publicets", DbType="Bit NOT NULL")]
+		public bool Publicets
 		{
 			get
 			{
-				return this._Rezultats;
+				return this._Publicets;
 			}
 			set
 			{
-				if ((this._Rezultats != value))
+				if ((this._Publicets != value))
 				{
-					this.OnRezultatsChanging(value);
+					this.OnPublicetsChanging(value);
 					this.SendPropertyChanging();
-					this._Rezultats = value;
-					this.SendPropertyChanged("Rezultats");
-					this.OnRezultatsChanged();
+					this._Publicets = value;
+					this.SendPropertyChanged("Publicets");
+					this.OnPublicetsChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_VietaAtziniba", DbType="NChar(1)")]
-		public System.Nullable<char> VietaAtziniba
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RezultatiLink", DbType="NVarChar(MAX) NOT NULL", CanBeNull=false)]
+		public string RezultatiLink
 		{
 			get
 			{
-				return this._VietaAtziniba;
+				return this._RezultatiLink;
 			}
 			set
 			{
-				if ((this._VietaAtziniba != value))
+				if ((this._RezultatiLink != value))
 				{
-					this.OnVietaAtzinibaChanging(value);
+					this.OnRezultatiLinkChanging(value);
 					this.SendPropertyChanging();
-					this._VietaAtziniba = value;
-					this.SendPropertyChanged("VietaAtziniba");
-					this.OnVietaAtzinibaChanged();
+					this._RezultatiLink = value;
+					this.SendPropertyChanged("RezultatiLink");
+					this.OnRezultatiLinkChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NeieradasDiskvalificets", DbType="Bit")]
-		public System.Nullable<bool> NeieradasDiskvalificets
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Arhivets", DbType="Bit NOT NULL")]
+		public bool Arhivets
 		{
 			get
 			{
-				return this._NeieradasDiskvalificets;
+				return this._Arhivets;
 			}
 			set
 			{
-				if ((this._NeieradasDiskvalificets != value))
+				if ((this._Arhivets != value))
 				{
-					this.OnNeieradasDiskvalificetsChanging(value);
+					this.OnArhivetsChanging(value);
 					this.SendPropertyChanging();
-					this._NeieradasDiskvalificets = value;
-					this.SendPropertyChanged("NeieradasDiskvalificets");
-					this.OnNeieradasDiskvalificetsChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RezultatuSaite", DbType="Int NOT NULL")]
-		public int RezultatuSaite
-		{
-			get
-			{
-				return this._RezultatuSaite;
-			}
-			set
-			{
-				if ((this._RezultatuSaite != value))
-				{
-					this.OnRezultatuSaiteChanging(value);
-					this.SendPropertyChanging();
-					this._RezultatuSaite = value;
-					this.SendPropertyChanged("RezultatuSaite");
-					this.OnRezultatuSaiteChanged();
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.RezultatuFormas")]
-	public partial class RezultatuForma : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _ID;
-		
-		private string _Forma;
-		
-		private string _Nosaukums;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnIDChanging(int value);
-    partial void OnIDChanged();
-    partial void OnFormaChanging(string value);
-    partial void OnFormaChanged();
-    partial void OnNosaukumsChanging(string value);
-    partial void OnNosaukumsChanged();
-    #endregion
-		
-		public RezultatuForma()
-		{
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int ID
-		{
-			get
-			{
-				return this._ID;
-			}
-			set
-			{
-				if ((this._ID != value))
-				{
-					this.OnIDChanging(value);
-					this.SendPropertyChanging();
-					this._ID = value;
-					this.SendPropertyChanged("ID");
-					this.OnIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Forma", DbType="NVarChar(MAX) NOT NULL", CanBeNull=false)]
-		public string Forma
-		{
-			get
-			{
-				return this._Forma;
-			}
-			set
-			{
-				if ((this._Forma != value))
-				{
-					this.OnFormaChanging(value);
-					this.SendPropertyChanging();
-					this._Forma = value;
-					this.SendPropertyChanged("Forma");
-					this.OnFormaChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Nosaukums", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
-		public string Nosaukums
-		{
-			get
-			{
-				return this._Nosaukums;
-			}
-			set
-			{
-				if ((this._Nosaukums != value))
-				{
-					this.OnNosaukumsChanging(value);
-					this.SendPropertyChanging();
-					this._Nosaukums = value;
-					this.SendPropertyChanged("Nosaukums");
-					this.OnNosaukumsChanged();
+					this._Arhivets = value;
+					this.SendPropertyChanged("Arhivets");
+					this.OnArhivetsChanged();
 				}
 			}
 		}

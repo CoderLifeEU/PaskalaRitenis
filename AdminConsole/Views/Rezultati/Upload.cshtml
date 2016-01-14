@@ -1,0 +1,46 @@
+﻿<script type="text/javascript" src="~/Scripts/jquery-1.8.2.js"></script>
+<link rel="stylesheet" type="text/css" href="~/Content/Rezultati.css">
+
+<hgroup class="title">
+    <h1>Olimpiāžu Rezultāti</h1>
+</hgroup>
+<h3>Rezultātu failu augšupielāde:</h3>
+@using (Html.BeginForm("Upload", "Rezultati", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <i>@ViewBag.Message</i>
+    <input type="file" name="file" accept=".pdf" id="file" class="fileBrowse" />
+    <input type="submit" value="Augšupielādēt" class="button" />
+    <hr />
+}
+
+<h3>Rezultātu failu dzēšana:</h3>
+<select id="pdfSelect"></select> <input type="button" onclick="deleteFile()" value="Dzēst" class="button" />
+<hr />
+
+@using (Html.BeginForm("Index", "Rezultati"))
+{
+    <input type="submit" value="Atpakaļ uz sarakstu" class="button" />
+}
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        getFiles();
+    });
+
+    function getFiles() {
+        $.ajax({
+            type: "GET",
+            url: "Rezultati/GetFiles",
+            dataType: "json",
+            cache: false
+        })
+        .done(function (data) {
+            var tableHTML = "";
+            $.each(data, function (i, fails) {
+                tableHTML += "<option value='" + fails.Path + "'>" + fails.Name + "</option>";
+            });
+            $("#pdfSelect").html(tableHTML);
+        })
+    }
+</script>

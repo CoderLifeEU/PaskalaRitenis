@@ -196,7 +196,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountModels.cs" />
-    <Compile Include="Models\AllRezultatiModels.cs" />
+    <Compile Include="Models\RezultatiModel.cs" />
     <Compile Include="Models\Contacts.designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -358,9 +358,11 @@
     <Content Include="Views\News\Index.cshtml" />
     <Content Include="Views\Contact\Edit.cshtml" />
     <Content Include="Views\Contact\Index.cshtml" />
+    <Content Include="Views\Rezultati\Upload.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="RezultatiPdf\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

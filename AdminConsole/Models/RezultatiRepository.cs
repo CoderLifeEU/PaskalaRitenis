@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Data.Objects;
+using System.IO;
 using System.Linq;
 
 namespace AdminConsole.Models
@@ -13,208 +14,103 @@ namespace AdminConsole.Models
             _dataContext = new RezultatiDataContext();
         }
 
-        public void InsertYear(int gads)
+        public string InsertYear(RezultatiModel gads)
         {
-            if (!YearExists(gads))
+            try
             {
-                var newGads = new Gadi()
+                var rezultats = new Rezultati()
                 {
-                    Gads = gads
+                    Gads = gads.Gads,
+                    Publicets = gads.Publicets,
+                    RezultatiLink = gads.RezultatiLink,
+                    Arhivets = false
                 };
-                _dataContext.Gadis.InsertOnSubmit(newGads);
+
+                _dataContext.Rezultatis.InsertOnSubmit(rezultats);
                 _dataContext.SubmitChanges();
+                return "Gads pievienots";
+            }
+            catch
+            {
+                return "Kļūda DB apstrādē";
             }
         }
 
-        public IEnumerable<FormaModel> GetFormas()
+        public IEnumerable<RezultatiModel> GetYears()
         {
-            IList<FormaModel> formList = new List<FormaModel>();
-            var query = from f in _dataContext.RezultatuFormas
+            IList<RezultatiModel> yearList = new List<RezultatiModel>();
+            var query = from f in _dataContext.Rezultatis
                         select f;
-            var formas = query.ToList();
-            foreach (var formData in formas)
+            var gadi = query.ToList();
+            foreach (var gadiData in gadi)
             {
-                formList.Add(new FormaModel()
+                yearList.Add(new RezultatiModel()
                 {
-                    FormaID = formData.ID,
-                    FormaXML = formData.Forma,
-                    FormaNosaukums = formData.Nosaukums
+                    RezultatsID = gadiData.ID,
+                    Gads = gadiData.Gads,
+                    RezultatiLink = gadiData.RezultatiLink,
+                    Publicets = gadiData.Publicets,
+                    Arhivets = gadiData.Arhivets
                 });
             }
-            return formList;
+            return yearList;
         }
 
-        public FormaModel GetFormaById(int id)
+        public string UpdateYear(RezultatiModel gads)
         {
-            if (FormExists(id))
+            try
             {
-                RezultatuForma forma;
-                var query = from f in _dataContext.RezultatuFormas
-                            where f.ID == id
-                            select f;
-                forma = query.FirstOrDefault();
-
-                return new FormaModel()
+                if (IDExists(gads.RezultatsID))
                 {
-                    FormaID = forma.ID,
-                    FormaNosaukums = forma.Nosaukums,
-                    FormaXML = forma.Forma
-                };
-            }
-            else return null;
-        }
-
-        public FormaModel GetAttachedForma(int year)
-        {
-            var query = from f in _dataContext.FormuSaites
-                        where f.Gads == year
-                        select f;
-            var link = query.FirstOrDefault();
-            if (link != null && link.FormaID > 0)
-            {
-                var query2 = from g in _dataContext.RezultatuFormas
-                            where g.ID == link.FormaID
-                            select g;
-                var forma = query2.FirstOrDefault();
-                FormaModel form = new FormaModel()
-                {
-                    FormaID = forma.ID,
-                    FormaNosaukums = forma.Nosaukums,
-                    FormaXML = forma.Forma
-                };
-                return form;
-            }
-            else return null;
-        }
-
-        public List<BindingModel> GetYears()
-        {
-            List<BindingModel> result = new List<BindingModel>();
-            List<int> yearList = new List<int>();
-            var query = from f in _dataContext.Gadis
-                        select f.Gads;
-            yearList = query.Distinct().ToList();
-            foreach(var year in yearList)
-            {
-                if (_dataContext.FormuSaites.Where(x => x.Gads == year).SingleOrDefault() != null)
-                {
-                    int formaID = _dataContext.FormuSaites.Where(x => x.Gads == year).SingleOrDefault().FormaID;
-                    result.Add(new BindingModel() { Gads = year, FormasNosaukums = _dataContext.RezultatuFormas.Where(x => x.ID == formaID).SingleOrDefault().Nosaukums });
-                }
-                else
-                {
-                    result.Add(new BindingModel() { Gads = year, FormasNosaukums = "" });
-                }
-            }
-
-            return result;
-        }
-
-        public void InsertForm(FormaModel forma)
-        {
-            if (!FormExists(forma.FormaNosaukums))
-            {
-                var newForma = new RezultatuForma()
-                {
-                    Nosaukums = forma.FormaNosaukums,
-                    Forma = forma.FormaXML
-                };
-                _dataContext.RezultatuFormas.InsertOnSubmit(newForma);
-                _dataContext.SubmitChanges();
-            }
-        }
-
-        public void DeleteForm(int formId)
-        {
-            if (FormExists(formId))
-            {
-                RezultatuForma forma = _dataContext.RezultatuFormas.Where(f => f.ID == formId).SingleOrDefault();
-                _dataContext.RezultatuFormas.DeleteOnSubmit(forma);
-
-                IList<FormuSaite> saite = _dataContext.FormuSaites.Where(f => f.FormaID == formId).ToList();
-                if (saite.Count > 0 && saite != null)
-                {
-                    foreach(var link in saite)
-                    {
-                        _dataContext.FormuSaites.DeleteOnSubmit(link);
-                    }
-                }
-
-                _dataContext.SubmitChanges();
-            }
-        }
-
-        public void DeleteYear(int year)
-        {
-            if (YearExists(year))
-            {
-                Gadi gads = _dataContext.Gadis.Where(f => f.Gads == year).SingleOrDefault();
-                _dataContext.Gadis.DeleteOnSubmit(gads);
-                
-                FormuSaite saite = _dataContext.FormuSaites.Where(f => f.Gads == year).SingleOrDefault();
-                if(saite!=null)_dataContext.FormuSaites.DeleteOnSubmit(saite);
-
-                _dataContext.SubmitChanges();
-            }
-        }
-
-        public void UpdateForm(FormaModel forma)
-        {
-            if (FormExists(forma.FormaNosaukums))
-            {
-                RezultatuForma form = _dataContext.RezultatuFormas.Where(f => f.ID == forma.FormaID).SingleOrDefault();
-                form.Nosaukums = forma.FormaNosaukums;
-                form.Forma = forma.FormaXML;
-                _dataContext.SubmitChanges();
-            }
-        }
-
-        public void BindForm(int formID, int year)
-        {
-            if (!BindingExists(formID, year) && FormExists(formID) && YearExists(year))
-            {
-                if (_dataContext.FormuSaites.Where(x => x.Gads == year).SingleOrDefault() == null)
-                {
-                    var saite = new FormuSaite()
-                    {
-                        FormaID = formID,
-                        Gads = year
-                    };
-                    _dataContext.FormuSaites.InsertOnSubmit(saite);
+                    Rezultati existingYear = _dataContext.Rezultatis.Where(f => f.ID == gads.RezultatsID).SingleOrDefault();
+                    existingYear.Publicets = gads.Publicets;
+                    existingYear.Arhivets = gads.Arhivets;
                     _dataContext.SubmitChanges();
-                }
-                else
-                {
-                    FormuSaite saite = _dataContext.FormuSaites.Where(f => f.Gads == year).SingleOrDefault();
-                    saite.FormaID = formID;
-                    _dataContext.SubmitChanges();
-                }
 
+                    return "Dati atjaunoti";
+                }
+                else return "Šāds gads neeksistē";
+            }
+            catch
+            {
+                return "Kļūda DB apstrādē";
             }
         }
 
-        public bool YearExists(int year)
+        public string DeleteYear(int id)
         {
-            if (_dataContext.Gadis.Where(x => x.Gads == year).SingleOrDefault() == null) return false;
-            else return true;
-
+            try
+            {
+                if (IDExists(id))
+                {
+                    Rezultati gads = _dataContext.Rezultatis.Where(f => f.ID == id).SingleOrDefault();
+                    _dataContext.Rezultatis.DeleteOnSubmit(gads);
+                    _dataContext.SubmitChanges();
+                    return "Gads nodzēsts";
+                }
+                else return "Šāds gads neeksistē";
+            }
+            catch
+            {
+                return "Kļūda DB apstrādē";
+            }
         }
 
-        public bool FormExists(string nosaukums)
+        private bool YearExists(int year)
         {
-            if (_dataContext.RezultatuFormas.Where(x => x.Nosaukums == nosaukums).SingleOrDefault() == null) return false;
+            if (_dataContext.Rezultatis.Where(x => x.Gads == year).SingleOrDefault() == null) return false;
             else return true;
         }
 
-        public bool FormExists(int formID)
+        private bool IDExists(int id)
         {
-            if (_dataContext.RezultatuFormas.Where(x => x.ID == formID).SingleOrDefault() == null) return false;
+            if (_dataContext.Rezultatis.Where(x => x.ID == id).SingleOrDefault() == null) return false;
             else return true;
         }
 
-        public bool BindingExists(int formID, int year)
+        private bool FileExists(string link)
         {
-            if (_dataContext.FormuSaites.Where(x => x.FormaID == formID && x.Gads == year).SingleOrDefault() == null) return false;
+            if (File.Exists(link)) return false;
             else return true;
         }
     }

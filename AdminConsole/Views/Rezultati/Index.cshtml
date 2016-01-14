@@ -5,75 +5,34 @@
     <h1>Olimpiāžu Rezultāti</h1>
 </hgroup>
     <section id="gadi">
-        <h3>Norises gads un forma:</h3>
+        <h3>Norises gads un rezultāti:</h3>
         <table id="yearTable"></table>
         <hr />
         <input type="button" onclick="toggleNewYear()" value="Pievienot gadu" class="button" />
         <div id="enterYear" hidden>
-            Ievadiet gadu: <input id="newYearInput" maxlength="4" />
-            <input type="button" onclick="insertNewYear()" value="Pievienot" class="button" />
-        </div>
-    </section>
-    <section id="formas">
-        <h3>Rezultātu formas:</h3>
-        <table id="formTable"></table>
-        <hr />
+            Ievadiet gadu: <input id="newYearInput" maxlength="4" /><br />
+            Izvēlieties rezultātu failu <select id="pdfSelect"></select><br />
+            Publicēt rezultātus <input type="checkbox" id="publishResultsCbx"/><br />
+            <input type="button" onclick="insertYear()" value="Pievienot" class="button" />
+            <hr />
         <input type="button" onclick="toggleNewForm()" value="Pievienot formu" class="button" />
         <div id="enterFormName" hidden>
             Ievadiet nosaukumu: <input id="newFormInput" maxlength="50" />
             <input type="button" onclick="insertNewForm()" value="Pievienot" class="button" />
         </div>
+        @using (Html.BeginForm("Upload", "Rezultati"))
+        {
+            <input type="submit" value="Augšupielādēt/Dzēst rezultātu failus" class="button" />
+        }
+        
     </section>
-    <section id="dalibnieki">
-        <h3>Sastādīt formu:</h3>
-        Forma: <span id="formaLabel"></span>
-        <hr />
-
-
-
-        <input type="button" onclick="pievienotKartu()" value="Pievienot kārtu" class="button" />
-        <input type="button" onclick="toggleNewForm()" value="Pievienot uzdevumu" class="button" />
-        <input type="button" onclick="toggleNewForm()" value="Pievienot formu" class="button" />
-    </section>
-
-    @*//SKRIPTI *********************************************************************************@
 
     <script type="text/javascript">
-
-        function editForm(formaId, nosaukums) {
-            formaLabel.textContent = nosaukums;
-
-        }
-
-        function pievienotKartu() {
-            kartasCount++;
-            $("#punktiCol").attr("colspan", kartasCount);
-             var def = ("#defaultKarta").parentNode;
-
-
-            //html += "<td colspan='1'><input style='width:70px' maxlength='15' /></td>";
-        }
-
-        var kartasCount = 1;
-
-        //////////////////////////////////
-        var newYearVisibe = false;
-        var newFormVisibe = false;
-        var selectedYear = -1;
-        var attachingInProgress = false;
-        var attachingBtn;
-        var attachingHandler = function () {
-            attachingBtn.val("Piesaistīt formu");
-            $("#bindBtnRow > #bindBtn").each(function (index) {
-                $(this).fadeOut();
-            });
-            selectedYear = -1;
-            attachingBtn.unbind("click", attachingHandler);
-        };
+        var newYearVisibe = false;        
         
         $(document).ready(function () {
-            getUniqueYears();
-            getForms();
+            getFiles();
+            getYears();
         });
 
         function toggleNewYear() {
@@ -93,36 +52,9 @@
             newYearVisibe = false;
         }
 
-        function yearSelected(year) {
-            $("#enterYear").fadeOut();
-            alert("Gads:" + year);
-        }
-
-        function toggleNewForm() {
-            if (newFormVisibe) hideNewForm();
-            else showNewForm();
-        }
-
-        function showNewForm() {
-            $("#newFormInput").val("");
-            $("#enterFormName").fadeIn();
-            newFormVisibe = true;
-        }
-
-        function hideNewForm() {
-            $("#enterFormName").fadeOut();
-            $("#newFormInput").val("");
-            newFormVisibe = false;
-        }
-
-        function formSelected(year) {
-            $("#enterFormName").fadeOut();
-            alert("Forma:" + year);
-        }
-
         //AJAX ***********************************************************************************
 
-        function getUniqueYears() {
+        function getYears() {
             $.ajax({
                 type: "GET",
                 url: "Rezultati/GetYears",
@@ -132,150 +64,90 @@
             .done(function (data) {
                 var tableHTML = "";
                 $.each(data, function (i, year) {
-                    var gadsFormaLabel = "";
-                    if (year.FormasNosaukums != "") gadsFormaLabel = " - " + year.FormasNosaukums;
-                    tableHTML += "<tr><th>" + year.Gads + gadsFormaLabel + "</th><td style='padding-left:10px'><input type='button' id='attach_" + year.Gads + "' value='Piesaistīt formu' onclick='getAttachedForma(" + year.Gads + ")' class='button' /><input type='button' id='deleteYearBtn' value='Dzēst' onclick='deleteYear(" + year.Gads + ")' class='button' /></td></tr>";
+                    var checked = "";
+                    var checkedArchive = "";
+                    if (year.Publicets) { checked = "checked"; }
+                    if (year.Arhivets) { checkedArchive = "checked"; }
+                    tableHTML += "<tr><th>" + year.Gads + "</th><td style='padding-left:10px'><label>Publicēt <input id='publishResultsCbx2_" + year.RezultatsID + "' type='checkbox' " + checked + " onchange='UpdateYear(&quot;" + year.RezultatsID + "&quot;)' /></label></td><td><label>Rādīt arhīvā <input id='archiveResultsCbx2_" + year.RezultatsID.toString() + "' type='checkbox' " + checkedArchive + " onchange='UpdateYear(&quot;" + year.RezultatsID + "&quot;)' /></label></td><td><input type='button' value='Dzēst' onclick='deleteYear(" + year.RezultatsID + ")' class='button' /></td><td><input type='button' class='button' onclick='previewPdf(&quot;" + year.RezultatiLink + "&quot;)' value='Skatīt failu'/></td></tr>";
                 });
                 $("#yearTable").html(tableHTML);
                 hideNewYear();
             })
         }
 
-        function insertNewYear() {
-            var inputData = $("#newYearInput").val();
-            $.ajax({
-                type: "POST",
-                url: "Rezultati/InsertNewYear",
-                dataType: "text",
-                contentType: "application/json; charset=utf-8",
-                data: "{'_year': '" + inputData + "' }"
-            })
-            .done(function () {
-                hideNewYear();
-                getUniqueYears();
-            })
-        }
-
-        function deleteYear(year) {
-            if (confirm("Dzēšot gadu, tiks nodzēstas arī visas tam piesaistītās formas! Dzēst " + year + "?")) {
-                $.ajax({
-                    type: "POST",
-                    url: "Rezultati/DeleteYear",
-                    dataType: "text",
-                    contentType: "application/json; charset=utf-8",
-                    data: "{'_year': '" + year + "' }"
-                })
-                .done(function () {
-                    hideNewYear();
-                    getUniqueYears();
-                })
-            }
-        }
-
-        function getAttachedForma(year) {
-            selectedYear = year;
-            if (!attachingInProgress) {
-                selectedYear = year;
-                hideNewYear();
-                hideNewForm();
-                $.ajax({
-                    type: "GET",
-                    url: "Rezultati/GetAttachedForma",
-                    cache: false,
-                    dataType: "text",
-                    contentType: "application/json; charset=utf-8",
-                    data: { _year: year },
-                })
-                .done(function (data) {
-                    initAttachment(year);
-                })
-            }
-            else {
-                attachingBtn.val("Piesaistīt formu");
-                attachingBtn.unbind("click", attachingHandler);
-                attachingInProgress = false;
-                initAttachment(year);
-            }
-        }
-
-        function initAttachment(year) {
-            $("#bindBtnRow > #bindBtn").each(function (index) {
-                $(this).fadeIn();
-            });
-            attachingInProgress = true;
-            attachingBtn = $("#attach_" + year);
-            attachingBtn.val("Atcelt");
-            attachingBtn.bind("click", attachingHandler);
-        }
-
-        function getForms() {
+        function getFiles() {
             $.ajax({
                 type: "GET",
-                url: "Rezultati/GetForms",
+                url: "Rezultati/GetFiles",
                 dataType: "json",
                 cache: false
             })
             .done(function (data) {
                 var tableHTML = "";
-                $.each(data, function (i, form) {
-                    tableHTML += "<tr><th>" + form.FormaNosaukums + "</th><td id='bindBtnRow' style='padding-left:10px'><input hidden id='bindBtn' type='button' value='Piesaistīt' onclick='bindForm(" + form.FormaID + ", &quot;" + form.FormaNosaukums + "&quot;)' class='button' /><input type='button' value='Rediģēt' onclick='editForm(" + form.FormaID + ", &quot;" + form.FormaNosaukums + "&quot;)' class='button' /><input type='button' value='Dzēst' onclick='deleteForm(" + form.FormaID + ", &quot;" + form.FormaNosaukums + "&quot;)' class='button' /></td></tr>";
+                $.each(data, function (i, fails) {
+                    tableHTML += "<option value='" + fails.Path + "'>" + fails.Name + "</option>";
                 });
-                $("#formTable").html(tableHTML);
-                hideNewForm();
+                $("#pdfSelect").html(tableHTML);
             })
         }
 
-        function insertNewForm() {
-            var inputData = $("#newFormInput").val();
+        function insertYear() {
+            var inputYear = $("#newYearInput").val();
+            var selectEl = $("#pdfSelect");
+            var fileLink = "@@" + selectEl[0].value;
+            var publish = $("#publishResultsCbx").is(":checked");
+
             $.ajax({
                 type: "POST",
-                url: "Rezultati/InsertNewForm",
+                url: "Rezultati/InsertYear",
                 dataType: "text",
                 contentType: "application/json; charset=utf-8",
-                data: "{'title': '" + inputData + "' }"
+                data: JSON.stringify({ year: inputYear, link: fileLink, publicet: publish })
+            })
+            .error(function (error) {
+                alert(error.responseText);
             })
             .done(function () {
-                hideNewForm();
-                getForms();
+                hideNewYear();
+                getYears();
             })
         }
 
-        function bindForm(formID, nosaukums) {
-            if (confirm("Piesaistot formu, tiks aizvietota pēdējā šim gadam piesaistītā forma un nodzēsti visi dati! Piesaistīt formu '" + nosaukums + "' " + selectedYear + ". gadam ?")) {
+        function deleteYear(id) {
+            if (confirm("Dzēst?")) {
                 $.ajax({
                     type: "POST",
-                    url: "Rezultati/BindForm",
+                    url: "Rezultati/DeleteYear",
                     dataType: "text",
                     contentType: "application/json; charset=utf-8",
-                    data: "{'formId': '" + formID + "', 'year': '" + selectedYear + "'}"
+                    data: "{'id': '" + id + "' }"
                 })
                 .done(function () {
-                    attachingBtn.val("Piesaistīt formu");
-                    $("#bindBtnRow > #bindBtn").each(function (index) {
-                        $(this).fadeOut();
-                    });
-                    attachingBtn.unbind("click", attachingHandler);
-                    attachingInProgress = false;
-                    getUniqueYears();
+                    hideNewYear();
+                    getYears();
                 })
             }
         }
 
-        function deleteForm(formID, nosaukums) {
-            if (confirm("Dzēšot formu, tiks nodzēsti arī visi tai piesaistītie rezultāti! Dzēst formu '" + nosaukums + "'?")) {
-                $.ajax({
-                    type: "POST",
-                    url: "Rezultati/DeleteForm",
-                    dataType: "text",
-                    contentType: "application/json; charset=utf-8",
-                    data: "{'formID': '" + formID + "' }"
-                })
-                .done(function () {
-                    getUniqueYears();
-                    getForms();
-                })
-            }
+        function UpdateYear(id) {
+            var publish = $("#publishResultsCbx2_" + id).is(":checked");
+            var archive = $("#archiveResultsCbx2_" + id).is(":checked");
+
+            $.ajax({
+                type: "POST",
+                url: "Rezultati/UpdateYear",
+                dataType: "text",
+                contentType: "application/json; charset=utf-8",
+                data: JSON.stringify({ ID: id, publicet: publish, arhivet: archive })
+            })
+            .done(function () {
+                hideNewYear();
+                getYears();
+            })
         }
 
+        function previewPdf(_path) {
+            //TODO: Get and preview PDF from _path
+        }
 
     </script>

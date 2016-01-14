@@ -28,13 +28,24 @@ table tr:nth-child(odd) {
     vertical-align:middle;
 }
 
-#newFormInput {
-    width: 200px;
-    height:14px;
+#gadi {
+    padding:10px 10px 10px 10px;
+    margin-bottom:10px;
+}
+
+.marginLeft{
+    margin-left:5px;
+}
+
+.cellBrd{
+    border:1px solid black;
     vertical-align:middle;
 }
 
-#gadi, #formas, #dalibnieki{
-    padding:10px 10px 10px 10px;
-    margin-bottom:10px;
+.fileBrowse{
+    background-color:  #efeeef !important;
+    color: #262626 !important;
+    padding:5px !important;
+    vertical-align:middle !important;
+    border:none;
 }

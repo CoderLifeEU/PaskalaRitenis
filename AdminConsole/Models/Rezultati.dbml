@@ -1,33 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="DataSource" Class="RezultatiDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
   <Connection Mode="WebSettings" ConnectionString="Data Source=159.148.144.30;User ID=PaskalaRitenisNewUser" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="DataSourceConnectionString" Provider="System.Data.SqlClient" />
-  <Table Name="dbo.Gadi" Member="Gadis">
-    <Type Name="Gadi">
-      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="Gads" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-    </Type>
-  </Table>
-  <Table Name="dbo.FormuSaites" Member="FormuSaites">
-    <Type Name="FormuSaite">
-      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="Gads" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="FormaID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-    </Type>
-  </Table>
   <Table Name="dbo.Rezultati" Member="Rezultatis">
     <Type Name="Rezultati">
       <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="RegistracijasID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="Rezultats" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
-      <Column Name="VietaAtziniba" Type="System.Char" DbType="NChar(1)" CanBeNull="true" />
-      <Column Name="NeieradasDiskvalificets" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
-      <Column Name="RezultatuSaite" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-    </Type>
-  </Table>
-  <Table Name="dbo.RezultatuFormas" Member="RezultatuFormas">
-    <Type Name="RezultatuForma">
-      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="Forma" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
-      <Column Name="Nosaukums" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Gads" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Publicets" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="RezultatiLink" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="Arhivets" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
     </Type>
   </Table>
 </Database>

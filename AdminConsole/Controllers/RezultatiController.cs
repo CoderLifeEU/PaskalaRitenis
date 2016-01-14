@@ -1,6 +1,11 @@
 ﻿using System.Data;
 using System.Web.Mvc;
 using AdminConsole.Models;
+using System.IO;
+using System.Web;
+using System;
+using System.Collections.Generic;
+using System.Net;
 
 namespace AdminConsole.Controllers
 {
@@ -23,117 +28,84 @@ namespace AdminConsole.Controllers
             return View();
         }
 
+        public ActionResult Upload()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Upload(HttpPostedFileBase file)
+        {
+            if (file != null && file.ContentLength > 0)
+                try
+            {
+                    string path = Path.Combine(Server.MapPath("~/RezultatiPdf"),
+                                               Path.GetFileName(file.FileName));
+                    file.SaveAs(path);
+                    ViewBag.Message = "Fails veiksmīgi augšupielādēts";
+                }
+                catch (Exception ex)
+                {
+                    ViewBag.Message = "Kļūda:" + ex.Message.ToString();
+                }
+            else
+            {
+                ViewBag.Message = "Izvēlieties failu (pdf):";
+            }
+            return View();
+        }
+
         public JsonResult GetYears()
         {   
             var result = _repository.GetYears();
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 
-        public JsonResult GetForms()
+        [HttpPost]
+        public string InsertYear(string year, string link, string publicet)
         {
-            var result = _repository.GetFormas();
+            if (validateYear(year)) return _repository.InsertYear(new RezultatiModel() { Gads = int.Parse(year), RezultatiLink = link, Publicets = bool.Parse(publicet) });
+            else return "Gads nav derīgs";
+        }
+
+        [HttpPost]
+        public string DeleteYear(string id)
+        {
+            return _repository.DeleteYear(int.Parse(id));
+        }
+
+        [HttpPost]
+        public string UpdateYear(int ID, bool publicet, bool arhivet)
+        {
+            return _repository.UpdateYear(new RezultatiModel() { RezultatsID = ID, Publicets = publicet, Arhivets = arhivet });
+        }
+
+        private bool validateYear(string year)
+        {
+            try
+            {
+                int yearParsed = int.Parse(year);
+                if (yearParsed >= 2006 && yearParsed < 10000) return true;
+                else return false;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        public JsonResult GetFiles()
+        {
+            var path = HttpContext.Server.MapPath("~/RezultatiPdf");
+            var faili = Directory.GetFiles(path);
+            List<FileModel> result = new List<FileModel>();
+            foreach (var fails in faili)
+            {
+                var name = Path.GetFileName(fails);
+                result.Add(new FileModel() { Name = name, Path = fails });
+            }
+
             return Json(result, JsonRequestBehavior.AllowGet);
-        }
-
-        public JsonResult GetAttachedForma(string _year)
-        {
-            if (validateYear(_year))
-            {
-                var result = _repository.GetAttachedForma(int.Parse(_year));
-                return Json(result, JsonRequestBehavior.AllowGet);
-            }
-            else
-            {
-                var result = new JsonResult();
-                result.Data = "Gads nav derīgs";
-                return Json(result, JsonRequestBehavior.AllowGet);
-            }
-
-        }
-
-        [HttpPost]
-        public string InsertNewYear(string _year)
-        {
-            if (validateYear(_year))
-            {
-                _repository.InsertYear(int.Parse(_year));
-                return "Saglabāts";
-            }
-            else return "Gads nav derīgs";
-        }
-
-        [HttpPost]
-        public string InsertNewForm(string title)
-        {
-            try
-            {
-                MvcHtmlString encoded = new MvcHtmlString(title);
-                _repository.InsertForm(new FormaModel() { FormaNosaukums = encoded.ToString(), FormaXML = "" });
-                return "Saglabāts";
-            }
-            catch
-            {
-                return "Kļūda";
-            }
-        }
-
-        [HttpPost]
-        public string DeleteYear(string _year)
-        {
-            if (validateYear(_year)) {
-                _repository.DeleteYear(int.Parse(_year));
-                return "Nodzēsts";
-            }
-            else return "Gads nav derīgs";
-        }
-
-        [HttpPost]
-        public string BindForm(string formId, string year)
-        {
-            if (validateFormID(formId) && validateYear(year))
-            {
-                _repository.BindForm(int.Parse(formId), int.Parse(year));
-                return "Savienots";
-            }
-            else return "Parametri nav derīgi";
-        }
-
-        [HttpPost]
-        public string DeleteForm(string formID)
-        {
-            if (validateFormID(formID)) {
-                _repository.DeleteForm(int.Parse(formID));
-                return "Nodzēsts";
-            }
-            else return "Formas ID nav derīgs";
-        }
-
-        private bool validateYear(string _year)
-        {
-            try
-            {
-                int year = int.Parse(_year);
-                if (year >= 2006 && year < 10000) return true;
-                else return false;
-            }
-            catch
-            {
-                return false;
-            }
-        }
-
-        private bool validateFormID(string _formID)
-        {
-            try
-            {
-                int id = int.Parse(_formID);
-                if (id > 0) return true;
-                else return false;
-            }
-            catch
-            {
-                return false;
-            }
         }
 
     }
