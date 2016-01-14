@@ -42,7 +42,7 @@
             <td>@Html.LabelFor(m=> m.School)</td>
         </tr>
         <tr>
-            <td>@Html.DropDownListFor(m => m.SelectedSchoolId, new SelectList(Model.School, "Value", "Text"), "--Select School--")<br />
+            <td>@Html.DropDownListFor(m => m.SelectedSchoolId, new SelectList(Model.School, "Value", "Text"), "--Mācību iestāde--")<br />
                 @Html.TextBoxFor(m => m.SpecialSchool)
             </td>
         </tr>
@@ -70,7 +70,7 @@
             </td>
         </tr>
         <tr>
-            <td><input type="submit" value="Send"/></td>
+            <td><input type="submit" value="Atsūtīt"/></td>
         </tr>
     </table>
 }
@@ -85,7 +85,7 @@
             var items = "";
 
             $.getJSON("@Url.Action("GetSchoolList","Registr")?val=" + $(this).val(), function (data) {
-                items += "<option value=''>--Select School--</option>";
+                items += "<option value=''>--Mācību iestāde--</option>";
               $.each(data, function (index, item) {
                 items += "<option value='" + item.Value + "'>" + item.Text + "</option>";
               });

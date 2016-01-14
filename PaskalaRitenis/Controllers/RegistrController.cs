@@ -16,7 +16,53 @@ namespace PaskalaRitenis.Controllers
 
         public ActionResult StudentRegistr()
         {
-            return View();
+            var model = new StudentRegModel();
+            model.School = RawSchoolList();
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult StudentRegistr(StudentRegModel model)
+        {
+            var schoolList = new List<SelectListItem>();
+            var schoolType = model.StudyType.Where(s => s.Value == model.SelectedStudyTypeId.ToString()).Select(t => t.Text).FirstOrDefault();
+
+            var school = string.Empty;
+
+            if (model.SelectedStudyTypeId == 0)
+            {
+                school = model.SpecialSchool;
+            }
+            else if (model.SelectedStudyTypeId == 1)
+            {
+                schoolList = RawSchoolList();
+                school = schoolList.Where(s => s.Value == model.SelectedSchoolId.ToString()).Select(t => t.Text).FirstOrDefault();
+            }
+            else
+            {
+                schoolList = RawOtherList();
+                school = schoolList.Where(s => s.Value == model.SelectedSchoolId.ToString()).Select(t => t.Text).FirstOrDefault();
+            }
+
+            var schoolClass = model.StudyYear.Where(s => s.Value == model.SelectedStudyYear .ToString()).Select(t => t.Text).FirstOrDefault();
+
+            var placeReq = model.PlaceRequired.Where(s => s.Value == model.PlaceRequiredId.ToString()).Select(t => t.Text).FirstOrDefault();
+
+            using (SqlConnection con = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["DataSourceConnectionString"].ConnectionString))
+            {
+                con.Open();
+                string command = @"INSERT INTO Registration (RegType, RegCode, Vards, Uzvards, Pilseta, Telefons, Email, Skolotajs, SkolasTips, SkolasNosaukums, SkolasKlase, Kopnite) 
+                                     VALUES ('" + model.RegType.ToString() + "', 'TTEST01','" + model.Name + "', '" + model.Surname + "', '" + model.City + "', '" + model.Phone + "', '" + model.Email + "', '" + model.Advicer + "', '" + schoolType + "', '" + school + "', '" + schoolClass + "', '" + placeReq + "')";
+
+                using (SqlCommand query = new SqlCommand(command, con))
+                {
+                    query.ExecuteNonQuery();
+
+                }
+            }
+
+            return RedirectToAction("Index", "Home");
         }
 
         public ActionResult TeacherRegistr()
@@ -65,7 +111,7 @@ namespace PaskalaRitenis.Controllers
                 }
             }
 
-            return RedirectToAction("Index", "Home");;
+            return RedirectToAction("Index", "Home");
         }
 
         [HttpGet]
@@ -85,7 +131,7 @@ namespace PaskalaRitenis.Controllers
             return Json(schoolNames, JsonRequestBehavior.AllowGet);
         }
 
-        [HttpPost]
+        [HttpGet]
         public ActionResult GetSchoolClassList(int val)
         {
             List<SelectListItem> schoolClass = new List<SelectListItem>();
@@ -109,11 +155,6 @@ namespace PaskalaRitenis.Controllers
             }
 
             return Json(schoolClass, JsonRequestBehavior.AllowGet);
-        }
-
-        private void SetSchoolList(List<SelectListItem> list)
-        {
-            list = RawSchoolList();
         }
 
         private List<SelectListItem> RawSchoolList()
