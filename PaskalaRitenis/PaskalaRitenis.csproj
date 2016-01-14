@@ -191,6 +191,7 @@
     <Compile Include="Controllers\ContactController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\NewsController.cs" />
+    <Compile Include="Controllers\PrgFileController.cs" />
     <Compile Include="Controllers\SupportersController.cs" />
     <Compile Include="Controllers\RegistrController.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
@@ -376,6 +377,7 @@
     <Content Include="Views\Gallery\Foto.cshtml" />
     <Content Include="Views\Gallery\Video.cshtml" />
     <Content Include="Views\Supporters\Index.cshtml" />
+    <Content Include="Views\PrgFile\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -396,8 +398,8 @@
     <None Include="Models\News.dbml.layout">
       <DependentUpon>News.dbml</DependentUpon>
     </None>
-</ItemGroup>
-<ItemGroup>
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\Repository\Repository.csproj">
       <Project>{c9113842-924a-4587-8990-cc0f7989b6d0}</Project>
       <Name>Repository</Name>

@@ -130,7 +130,7 @@ ol li {
 
 #main {
   margin: 50px auto;
-  width: 1000px;
+  width: 1070px;
   border-radius: 15px 15px 15px 15px;
   -moz-border-radius: 15px 15px 15px 15px;
   -webkit-border: 15px 15px 15px 15px;
@@ -179,7 +179,7 @@ header {
 
 nav { 
   height: 44px;
-  width: 930px;
+  width: 1050px;
   margin: -34px auto 0 auto;
   -webkit-border-radius: .5em .5em .5em .5em ; 
   -moz-border-radius: .5em .5em .5em .5em ;
@@ -195,12 +195,12 @@ nav {
 } 
 
 #menu_container { 
-  width: 930px;
+  width: 1050px;
   margin: 0 auto 0 auto;
 }
 
 #site_content { 
-  width: 930px;
+  width: 1030px;
   overflow: hidden;
   margin: 0px auto 0 auto;
   padding: 15px 0 15px 0;
@@ -285,7 +285,7 @@ nav {
 }
 
 footer { 
-  width: 930px;
+  width: 1050px;
   font: 170%, arial, sans-serif;
   text-shadow: 1px 1px #7E4D0E;
   height: 30px;
@@ -545,8 +545,6 @@ ul#nav li a:hover,ul#nav li a:focus {
     margin-right: auto;
     padding-top: 20px;
     padding-bottom: 20px;
-}
-
 }
 
 /**
