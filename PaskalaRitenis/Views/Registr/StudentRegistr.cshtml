@@ -6,7 +6,7 @@
 
 <h2>Studentu Registracija</h2>
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("StudentRegistr", "Registr", FormMethod.Post))
 {
     @Html.ValidationSummary(true)
     
@@ -18,19 +18,28 @@
             <td>@Html.LabelFor(m=> m.Name)</td>
         </tr>
         <tr>
-            <td>@Html.TextBoxFor(m => m.Name)</td>
+            <td>
+                @Html.TextBoxFor(m => m.Name)
+                @Html.ValidationMessageFor(m=> m.Name)
+            </td>
         </tr>
         <tr>
             <td>@Html.LabelFor(m=> m.Surname)</td>
         </tr>
         <tr>
-            <td>@Html.TextBoxFor(m => m.Surname)</td>
+            <td>
+                @Html.TextBoxFor(m => m.Surname)
+                @Html.ValidationMessageFor(m=> m.Surname)
+            </td>
         </tr>
         <tr>
             <td>@Html.LabelFor(m=> m.City)</td>
         </tr>
         <tr>
-            <td>@Html.TextBoxFor(m => m.City)</td>
+            <td>
+                @Html.TextBoxFor(m => m.City)
+                @Html.ValidationMessageFor(m => m.City)
+            </td>
         </tr>
         <tr>
             <td>@Html.LabelFor(m=> m.StudyType)</td>
@@ -42,76 +51,165 @@
             <td>@Html.LabelFor(m=> m.School)</td>
         </tr>
         <tr>
-            <td>@Html.DropDownListFor(m => m.SelectedSchoolId, new SelectList(Model.School, "Value", "Text"), "--Mācību iestāde--")<br />
+            <td>
                 @Html.TextBoxFor(m => m.SpecialSchool)
+                @Html.ValidationMessageFor(m => m.SpecialSchool)
             </td>
         </tr>
         <tr>
-            <td>@Html.LabelFor(m=> m.StudyYear)</td>
+            <td>@Html.LabelFor(m=> m.SelectedKlass)</td>
         </tr>
         <tr>
-            <td>@Html.DropDownListFor(m => m.SelectedStudyYear, new SelectList(Model.StudyYear, "Value", "Text"))
+            <td>
+                <div id="divKlase">
+                    <span>6. klase</span>
+                    @Html.RadioButtonFor(m => m.SelectedKlass, "6. klase", new { @checked = true })
+                    <span>7. klase</span>
+                    @Html.RadioButtonFor(m => m.SelectedKlass, "7. klase")
+                    <span>8. klase</span>
+                    @Html.RadioButtonFor(m => m.SelectedKlass, "8. klase")
+                    <span>9. klase</span>
+                    @Html.RadioButtonFor(m => m.SelectedKlass, "9. klase")
+                    <span>10. klase</span>
+                    @Html.RadioButtonFor(m => m.SelectedKlass, "10. klase")
+                    <span>11. klase</span>
+                    @Html.RadioButtonFor(m => m.SelectedKlass, "11. klase")
+                    <span>12. klase</span>
+                    @Html.RadioButtonFor(m => m.SelectedKlass, "12. klase")
+                </div>
+                <div id="divKurss">
+                    <span>1. kurss</span>
+                    @Html.RadioButtonFor(m => m.SelectedKurss, "1. kurss", new { @checked = true })
+                    <span>2. kurss</span>
+                    @Html.RadioButtonFor(m => m.SelectedKurss, "2. kurss")
+                    <span>3. kurss</span>
+                    @Html.RadioButtonFor(m => m.SelectedKurss, "3. kurss")
+                    <span>4. kurss</span>
+                    @Html.RadioButtonFor(m => m.SelectedKurss, "4. kurss")
+                </div>
             </td>
         </tr>
         <tr>
             <td>@Html.LabelFor(m=> m.Advicer)</td>
         </tr>
         <tr>
-            <td>@Html.TextBoxFor(m => m.Advicer)</td>
+            <td>
+                @Html.TextBoxFor(m => m.Advicer)
+                @Html.ValidationMessageFor(m => m.Advicer)
+            </td>
         </tr>
         <tr>
             <td>@Html.LabelFor(m=> m.Phone)</td>
         </tr>
         <tr>
-            <td>@Html.TextBoxFor(m => m.Phone)</td>
+            <td>
+                @Html.TextBoxFor(m => m.Phone)
+                @Html.ValidationMessageFor(m => m.Phone)
+            </td>
         </tr>
         <tr>
             <td>@Html.LabelFor(m=> m.Email)</td>
         </tr>
         <tr>
-            <td>@Html.TextBoxFor(m => m.Email)</td>
+            <td>
+                @Html.TextBoxFor(m => m.Email)
+                @Html.ValidationMessageFor(m => m.Email)
+            </td>
         </tr>
         <tr>
             <td>@Html.LabelFor(m=> m.PlaceRequired)</td>
         </tr>
         <tr>
-            <td>@Html.DropDownListFor(m => m.PlaceRequiredId, new SelectList(Model.PlaceRequired, "Value", "Text"))</td>
+            <td>           
+                <span>Nē:</span>
+                @Html.RadioButtonFor(m => m.PlaceRequired, "Nē", new { @checked = true })
+                <span>Jā:</span>
+                @Html.RadioButtonFor(m => m.PlaceRequired, "Jā")<br /><br />
+                <div id="PlaceType">
+                    <span>Pirms:</span>
+                    @Html.RadioButtonFor(m => m.PlaceRequiredType, "Pirms", new { @checked = true })
+                    <span>Pēc:</span>
+                    @Html.RadioButtonFor(m => m.PlaceRequiredType, "Pēc")
+                    <span>Gan pirms, gan pēc:</span>
+                 @Html.RadioButtonFor(m => m.PlaceRequiredType, "Gan pirms, gan pēc")
+                </div>
+            </td>
         </tr>
         <tr>
-            <td>@Html.CheckBoxFor(m=> m.Sequrity)
+            <td>
+                @Html.CheckBoxFor(m=> m.Sequrity)
                 @Html.LabelFor(m=> m.Sequrity)
             </td>
         </tr>
         <tr>
-            <td><input type="submit" value="Atsūtīt"/></td>
+            <td><input id="CompleteRegistr" type="submit" value="Atsūtīt"/></td>
         </tr>
     </table>
 }
 
-
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
     <script type="text/javascript">
         $(document).ready(function () {
+            $("#PlaceType").hide();
+
+            if ("@Model.SelectedStudyTypeId" != "2") {
+                $("#divKurss").hide();
+            }
+            else {
+                $("#divKlase").hide();
+            }
+            
+            GetTags(1);
+            $("#CompleteRegistr").prop('disabled', true);
+            $("input:radio[name=PlaceRequired]:first").attr('checked', true);
+            $("#Sequrity").prop('checked', false);
         });
 
         $("#SelectedStudyTypeId").change(function () {
+            GetTags($(this).val());
+        });
 
-            var schoolItems = "";
-            var classItems = "";
+        $("#Sequrity").change(function () {
+            if ($(this).is(':checked')) {
+                $("#CompleteRegistr").prop('disabled', false);
+            }
+            else {
+                $("#CompleteRegistr").prop('disabled', true);
+            }
+        });
 
-            $.getJSON("@Url.Action("GetSchoolList","Registr")?val=" + $(this).val(), function (data) {
-                schoolItems += "<option value=''>--Mācību iestāde--</option>";
-              $.each(data, function (index, item) {
-                  schoolItems += "<option value='" + item.Value + "'>" + item.Text + "</option>";
-              });
-              $("#SelectedSchoolId").html(schoolItems);
-            });
+        $("input[name=PlaceRequired]:radio").change(function () {
+            if ($(this).val() == "Nē") {
+                $("#PlaceType").hide();
+            }
+            else {
+                $("#PlaceType").show();
+            }
+        });
 
-            $.getJSON("@Url.Action("GetSchoolClassList","Registr")?val=" + $(this).val(), function (data) {
-                $.each(data, function (index, item) {
-                    classItems += "<option value='" + item.Value + "'>" + item.Text + "</option>";
+        var availableTags;
+
+        function GetTags(val) {
+            $.getJSON("/Registr/GetSchoolArray?val=" + val, function (data) {
+                availableTags = data;
+                $("#SpecialSchool").autocomplete({
+                    source: availableTags
                 });
-                $("#SelectedStudyYear").html(classItems);
             });
+        }
+
+        $("#SelectedStudyTypeId").change(function () {
+
+            GetTags($(this).val());
+
+            if ($(this).val() == 1) {
+                $("#divKlase").show();
+                $("#divKurss").hide();
+            }
+            else {
+                $("#divKlase").hide();
+                $("#divKurss").show();
+            }
         });
 
         $("#SelectedSchoolId").change(function () {

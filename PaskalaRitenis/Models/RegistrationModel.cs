@@ -13,35 +13,28 @@ namespace PaskalaRitenis.Models
         {
             School = new List<SelectListItem>();
 
-            StudyYear = new List<SelectListItem>();
-            StudyYear.Add(new SelectListItem { Value = "1", Text = "6. klase" });
-            StudyYear.Add(new SelectListItem { Value = "2", Text = "7. klase" });
-            StudyYear.Add(new SelectListItem { Value = "3", Text = "8. klase" });
-            StudyYear.Add(new SelectListItem { Value = "4", Text = "9. klase" });
-            StudyYear.Add(new SelectListItem { Value = "5", Text = "10. klase" });
-            StudyYear.Add(new SelectListItem { Value = "6", Text = "11. klase" });
-            StudyYear.Add(new SelectListItem { Value = "7", Text = "12. klase" });
-
             StudyType = new List<SelectListItem>();
             StudyType.Add(new SelectListItem { Value = "1", Text = "Vispārējās izglītības iestāde" });
             StudyType.Add(new SelectListItem { Value = "2", Text = "Profesionālo vidējo izglītības iestāde" });
-
-            PlaceRequired = new List<SelectListItem>();
-            PlaceRequired.Add(new SelectListItem { Value = "1", Text = "Ne" });
-            PlaceRequired.Add(new SelectListItem { Value = "2", Text = "Ja" });
         }
 
         public RegType RegType { get; set; }
 
         [Display(Name = "Vārds:")]
+        [Required(ErrorMessage = "'Vārds' ir obligāts lauks", AllowEmptyStrings = false)]
+        [StringLength(20)]
         public string Name { get; set; }
 
         [Display(Name = "Uzvārds:")]
+        [Required(ErrorMessage = "'Uzvārds' ir obligāts lauks", AllowEmptyStrings = false)]
+        [StringLength(20)]
         public string Surname { get; set; }
 
         public string PersonCode { get; set; }
 
         [Display(Name = "Pilsēta/Novads:")]
+        [Required(ErrorMessage = "'Pilsēta/Novads' ir obligāts lauks", AllowEmptyStrings = false)]
+        [StringLength(50)]
         public string City { get; set; }
 
         [Display(Name = "Skola:")]
@@ -49,15 +42,24 @@ namespace PaskalaRitenis.Models
 
         public int SelectedSchoolId { get; set; }
 
+        [Display(Name = "Skola:")]
+        [Required(ErrorMessage = "'Skola' ir obligāts lauks", AllowEmptyStrings = false)]
+        [StringLength(200)]
         public string SpecialSchool { get; set; }
 
         [Display(Name = "Telefons:")]
+        [Required(ErrorMessage = "'Telefons' ir obligāts lauks", AllowEmptyStrings = false)]
+        [StringLength(20)]
         public string Phone { get; set; }
 
         [Display(Name = "E­-pasts:")]
+        [Required(ErrorMessage = "'E­-pasts' ir obligāts lauks", AllowEmptyStrings = false)]
+        [StringLength(50)]
         public string Email { get; set; }
 
         [Display(Name = "Skolotājs/skolotāji:")]
+        [Required(ErrorMessage = "'Skolotājs/skolotāji' ir obligāts lauks", AllowEmptyStrings = false)]
+        [StringLength(50)]
         public string Advicer { get; set; }
 
         [Display(Name = "Mācību iestādes tips:")]
@@ -66,14 +68,15 @@ namespace PaskalaRitenis.Models
         public int SelectedStudyTypeId { get; set; }
 
         [Display(Name = "Kurss:")]
-        public List<SelectListItem> StudyYear { get; set; }
+        public string SelectedKlass { get; set; }
 
-        public int SelectedStudyYear { get; set; }
+        [Display(Name = "Kurss:")]
+        public string SelectedKurss { get; set; }
 
         [Display(Name = "Vai būs nepieciešamā kopmītne?")]
-        public List<SelectListItem> PlaceRequired { get; set; }
+        public string PlaceRequired { get; set; }
 
-        public string PlaceRequiredId { get; set; }
+        public string PlaceRequiredType { get; set; }
 
         [Display(Name = "Ar drošības noteikumiem iepazinos un piekrītu")]
         public bool Sequrity { get; set; }

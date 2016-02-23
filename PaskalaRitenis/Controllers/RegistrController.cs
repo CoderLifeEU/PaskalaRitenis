@@ -25,44 +25,56 @@ namespace PaskalaRitenis.Controllers
         [HttpPost]
         public ActionResult StudentRegistr(StudentRegModel model)
         {
-            var schoolList = new List<SelectListItem>();
-            var schoolType = model.StudyType.Where(s => s.Value == model.SelectedStudyTypeId.ToString()).Select(t => t.Text).FirstOrDefault();
-
-            var school = string.Empty;
-
-            if (model.SelectedStudyTypeId == 0)
+            if (ModelState.IsValid)
             {
-                school = model.SpecialSchool;
-            }
-            else if (model.SelectedStudyTypeId == 1)
-            {
-                schoolList = RawSchoolList();
-                school = schoolList.Where(s => s.Value == model.SelectedSchoolId.ToString()).Select(t => t.Text).FirstOrDefault();
+                var schoolList = new List<SelectListItem>();
+                var schoolType = model.StudyType.Where(s => s.Value == model.SelectedStudyTypeId.ToString()).Select(t => t.Text).FirstOrDefault();
+
+                var school = string.Empty;
+                var schoolClass = string.Empty;
+
+                if (model.SelectedStudyTypeId == 1)
+                {
+                    schoolList = RawSchoolList();
+                    school = schoolList.Where(s => s.Text == model.SpecialSchool).Select(t => t.Text).FirstOrDefault();
+                    schoolClass = model.SelectedKlass;
+                }
+                else
+                {
+                    schoolList = RawOtherList();
+                    school = schoolList.Where(s => s.Text == model.SpecialSchool).Select(t => t.Text).FirstOrDefault();
+                    schoolClass = model.SelectedKurss;
+                }
+
+                if (string.IsNullOrEmpty(school))
+                {
+                    school = model.SpecialSchool;
+                }
+
+                var placeReq = model.PlaceRequired;
+                var placeType = model.PlaceRequiredType;
+
+                using (SqlConnection con = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["DataSourceConnectionString"].ConnectionString))
+                {
+                    con.Open();
+                    string command = @"INSERT INTO Registration (Created, RegType, RegCode, Vards, Uzvards, Pilseta, Telefons, Email, Skolotajs, SkolasTips, SkolasNosaukums, SkolasKlase, Kopnite, KopnitesTips) 
+                                     VALUES ('" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "' ,'" + model.RegType.ToString() + "', '" + SpecialCode() + "','" + model.Name + "', '" + model.Surname + "', '" + model.City + "', '" + model.Phone + "', '" + model.Email + "', '" + model.Advicer + "', '" + schoolType + "', '" + school + "', '" + schoolClass + "', '" + placeReq + "', '" + placeType + "')";
+
+                    using (SqlCommand query = new SqlCommand(command, con))
+                    {
+                        query.ExecuteNonQuery();
+
+                    }
+                }
+
+                return RedirectToAction("Index", "Home");
             }
             else
             {
-                schoolList = RawOtherList();
-                school = schoolList.Where(s => s.Value == model.SelectedSchoolId.ToString()).Select(t => t.Text).FirstOrDefault();
+                model.Sequrity = false;
+                model.PlaceRequired = "Nē";
+                return View(model);
             }
-
-            var schoolClass = model.StudyYear.Where(s => s.Value == model.SelectedStudyYear .ToString()).Select(t => t.Text).FirstOrDefault();
-
-            var placeReq = model.PlaceRequired.Where(s => s.Value == model.PlaceRequiredId.ToString()).Select(t => t.Text).FirstOrDefault();
-
-            using (SqlConnection con = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["DataSourceConnectionString"].ConnectionString))
-            {
-                con.Open();
-                string command = @"INSERT INTO Registration (Created, RegType, RegCode, Vards, Uzvards, Pilseta, Telefons, Email, Skolotajs, SkolasTips, SkolasNosaukums, SkolasKlase, Kopnite) 
-                                     VALUES ('" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "' ,'" + model.RegType.ToString() + "', '" + SpecialCode() + "','" + model.Name + "', '" + model.Surname + "', '" + model.City + "', '" + model.Phone + "', '" + model.Email + "', '" + model.Advicer + "', '" + schoolType + "', '" + school + "', '" + schoolClass + "', '" + placeReq + "')";
-
-                using (SqlCommand query = new SqlCommand(command, con))
-                {
-                    query.ExecuteNonQuery();
-
-                }
-            }
-
-            return RedirectToAction("Index", "Home");
         }
 
         public ActionResult TeacherRegistr()
@@ -76,46 +88,58 @@ namespace PaskalaRitenis.Controllers
         [HttpPost]
         public ActionResult TeacherRegistr(TeacherRegModel model)
         {
-            var schoolList = new List<SelectListItem>();           
-            var schoolType = model.StudyType.Where(s => s.Value == model.SelectedStudyTypeId.ToString()).Select(t => t.Text).FirstOrDefault();
-
-            var school = string.Empty;
-
-            if (model.SelectedStudyTypeId == 0)
+            if (ModelState.IsValid)
             {
-                school = model.SpecialSchool;
-            }
-            else if (model.SelectedStudyTypeId == 1)
-            {
-                schoolList = RawSchoolList();
-                school = schoolList.Where(s => s.Value == model.SelectedSchoolId.ToString()).Select(t => t.Text).FirstOrDefault();
+                var schoolList = new List<SelectListItem>();
+                var schoolType = model.StudyType.Where(s => s.Value == model.SelectedStudyTypeId.ToString()).Select(t => t.Text).FirstOrDefault();
+
+                var school = string.Empty;
+
+                if (model.SelectedStudyTypeId == 1)
+                {
+                    schoolList = RawSchoolList();
+                    school = schoolList.Where(s => s.Text == model.SpecialSchool).Select(t => t.Text).FirstOrDefault();
+                }
+                else if (model.SelectedStudyTypeId == 2)
+                {
+                    schoolList = RawOtherList();
+                    school = schoolList.Where(s => s.Text == model.SpecialSchool).Select(t => t.Text).FirstOrDefault();
+                }
+
+                if (string.IsNullOrEmpty(school))
+                {
+                    school = model.SpecialSchool;
+                }
+
+                var placeReq = model.PlaceRequired;
+                var placeType = model.PlaceRequiredType;
+
+                using (SqlConnection con = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["DataSourceConnectionString"].ConnectionString))
+                {
+                    con.Open();
+                    string command = @"INSERT INTO Registration (Created, RegType, RegCode, Vards, Uzvards, Pilseta, Telefons, Email, SkolasTips, SkolasNosaukums, Kopnite, KopnitesTips) 
+                                     VALUES ('" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "' ,'" + model.RegType.ToString() + "', '" + SpecialCode() + "','" + model.Name + "', '" + model.Surname + "', '" + model.City + "', '" + model.Phone + "', '" + model.Email + "', '" + schoolType + "', '" + school + "', '" + placeReq + "', '" + placeType + "')";
+
+                    using (SqlCommand query = new SqlCommand(command, con))
+                    {
+                        query.ExecuteNonQuery();
+
+                    }
+                }
+
+                return RedirectToAction("Index", "Home");
             }
             else
             {
-                schoolList = RawOtherList();
-                school = schoolList.Where(s => s.Value == model.SelectedSchoolId.ToString()).Select(t => t.Text).FirstOrDefault();
+                model.Sequrity = false;
+                model.PlaceRequired = "Nē";
+                return View(model);
             }
-
-            var placeReq = model.PlaceRequired.Where(s => s.Value == model.PlaceRequiredId.ToString()).Select(t => t.Text).FirstOrDefault();
-
-            using(SqlConnection con = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["DataSourceConnectionString"].ConnectionString))
-            {
-                con.Open();
-                string command = @"INSERT INTO Registration (Created, RegType, RegCode, Vards, Uzvards, Pilseta, Telefons, Email, SkolasTips, SkolasNosaukums,Kopnite) 
-                                     VALUES ('" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "' ,'" + model.RegType.ToString() + "', '" + SpecialCode() + "','" + model.Name + "', '" + model.Surname + "', '" + model.City + "', '" + model.Phone + "', '" + model.Email + "', '" + schoolType + "', '" + school + "', '" + placeReq + "')";
-
-                using(SqlCommand query = new SqlCommand(command, con))
-                {
-                    query.ExecuteNonQuery();
-
-                }
-            }
-
-            return RedirectToAction("Index", "Home");
+            
         }
 
         [HttpGet]
-        public ActionResult GetSchoolList(int val)
+        public ActionResult GetSchoolArray(int val)
         {
             List<SelectListItem> schoolNames = new List<SelectListItem>();
 
@@ -128,33 +152,11 @@ namespace PaskalaRitenis.Controllers
                 schoolNames = RawOtherList();
             }
 
-            return Json(schoolNames, JsonRequestBehavior.AllowGet);
-        }
+            var array = new List<string>();
 
-        [HttpGet]
-        public ActionResult GetSchoolClassList(int val)
-        {
-            List<SelectListItem> schoolClass = new List<SelectListItem>();
+            schoolNames.ForEach(l => array.Add(l.Text));
 
-            if (val == 1)
-            {
-                schoolClass.Add(new SelectListItem { Value = "1", Text = "6. klase" });
-                schoolClass.Add(new SelectListItem { Value = "2", Text = "7. klase" });
-                schoolClass.Add(new SelectListItem { Value = "3", Text = "8. klase" });
-                schoolClass.Add(new SelectListItem { Value = "4", Text = "9. klase" });
-                schoolClass.Add(new SelectListItem { Value = "5", Text = "10. klase" });
-                schoolClass.Add(new SelectListItem { Value = "6", Text = "11. klase" });
-                schoolClass.Add(new SelectListItem { Value = "7", Text = "12. klase" });
-            }
-            else if (val == 2)
-            {
-                schoolClass.Add(new SelectListItem { Value = "1", Text = "1.kurss" });
-                schoolClass.Add(new SelectListItem { Value = "2", Text = "2.kurss" });
-                schoolClass.Add(new SelectListItem { Value = "3", Text = "3.kurss" });
-                schoolClass.Add(new SelectListItem { Value = "4", Text = "4.kurss" });
-            }
-
-            return Json(schoolClass, JsonRequestBehavior.AllowGet);
+            return Json(array, JsonRequestBehavior.AllowGet);
         }
 
         private List<SelectListItem> RawSchoolList()

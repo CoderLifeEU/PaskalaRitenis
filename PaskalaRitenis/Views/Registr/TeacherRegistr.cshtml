@@ -15,25 +15,40 @@
             <th>Registracijas forma</th>
         </tr>
         <tr>
-            <td>@Html.LabelFor(m=> m.Name)</td>
+            <td>
+                @Html.LabelFor(m=> m.Name)
+            </td>
         </tr>
         <tr>
-            <td>@Html.TextBoxFor(m => m.Name)</td>
+            <td>
+                @Html.TextBoxFor(m => m.Name)
+                @Html.ValidationMessageFor(m=> m.Name)
+            </td>
         </tr>
         <tr>
-            <td>@Html.LabelFor(m=> m.Surname)</td>
+            <td>
+                @Html.LabelFor(m=> m.Surname)                
+            </td>
         </tr>
         <tr>
-            <td>@Html.TextBoxFor(m => m.Surname)</td>
+            <td>
+                @Html.TextBoxFor(m => m.Surname)
+                @Html.ValidationMessageFor(m=> m.Surname)
+            </td>
         </tr>
         <tr>
             <td>@Html.LabelFor(m=> m.City)</td>
         </tr>
         <tr>
-            <td>@Html.TextBoxFor(m => m.City)</td>
+            <td>
+                @Html.TextBoxFor(m => m.City)
+                @Html.ValidationMessageFor(m => m.City)
+            </td>
         </tr>
         <tr>
-            <td>@Html.LabelFor(m=> m.StudyType)</td>
+            <td>
+                @Html.LabelFor(m=> m.StudyType)
+            </td>
         </tr>
         <tr>
             <td>@Html.DropDownListFor(m => m.SelectedStudyTypeId, new SelectList(Model.StudyType, "Value", "Text"))</td>
@@ -42,66 +57,101 @@
             <td>@Html.LabelFor(m=> m.School)</td>
         </tr>
         <tr>
-            <td>@Html.DropDownListFor(m => m.SelectedSchoolId, new SelectList(Model.School, "Value", "Text"), "--Mācību iestāde--")<br />
+            <td>
                 @Html.TextBoxFor(m => m.SpecialSchool)
+                @Html.ValidationMessageFor(m => m.SpecialSchool)
             </td>
         </tr>
         <tr>
             <td>@Html.LabelFor(m=> m.Phone)</td>
         </tr>
         <tr>
-            <td>@Html.TextBoxFor(m => m.Phone)</td>
+            <td>
+                @Html.TextBoxFor(m => m.Phone)
+                @Html.ValidationMessageFor(m => m.Phone)
+            </td>
         </tr>
         <tr>
             <td>@Html.LabelFor(m=> m.Email)</td>
         </tr>
         <tr>
-            <td>@Html.TextBoxFor(m => m.Email)</td>
+            <td>
+                @Html.TextBoxFor(m => m.Email)
+                @Html.ValidationMessageFor(m => m.Email)
+            </td>
         </tr>
         <tr>
             <td>@Html.LabelFor(m=> m.PlaceRequired)</td>
         </tr>
         <tr>
-            <td>@Html.DropDownListFor(m => m.PlaceRequiredId, new SelectList(Model.PlaceRequired, "Value", "Text"))</td>
+            <td>           
+                <span>Nē:</span>
+                @Html.RadioButtonFor(m => m.PlaceRequired, "Nē", new { @checked = true })
+                <span>Jā:</span>
+                @Html.RadioButtonFor(m => m.PlaceRequired, "Jā")<br /><br />
+                <div id="PlaceType">
+                    <span>Pirms:</span>
+                    @Html.RadioButtonFor(m => m.PlaceRequiredType, "Pirms", new { @checked = true })
+                    <span>Pēc:</span>
+                    @Html.RadioButtonFor(m => m.PlaceRequiredType, "Pēc")
+                    <span>Gan pirms, gan pēc:</span>
+                 @Html.RadioButtonFor(m => m.PlaceRequiredType, "Gan pirms, gan pēc")
+                </div>
+            </td>
         </tr>
         <tr>
-            <td>@Html.CheckBoxFor(m=> m.Sequrity)
+            <td>
+                @Html.CheckBoxFor(m=> m.Sequrity)
                 @Html.LabelFor(m=> m.Sequrity)
             </td>
         </tr>
         <tr>
-            <td><input type="submit" value="Atsūtīt"/></td>
+            <td><input id="CompleteRegistr" type="submit" value="Atsūtīt"/></td>
         </tr>
     </table>
 }
 
-
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
     <script type="text/javascript">
         $(document).ready(function () {
+            $("#PlaceType").hide();
+            GetTags(1);
+            $("#CompleteRegistr").prop('disabled', true);
+            $("input:radio[name=PlaceRequired]:first").attr('checked', true);
+            $("#Sequrity").prop('checked', false);
         });
 
         $("#SelectedStudyTypeId").change(function () {
-
-            var items = "";
-
-            $.getJSON("@Url.Action("GetSchoolList","Registr")?val=" + $(this).val(), function (data) {
-                items += "<option value=''>--Mācību iestāde--</option>";
-              $.each(data, function (index, item) {
-                items += "<option value='" + item.Value + "'>" + item.Text + "</option>";
-              });
-              $("#SelectedSchoolId").html(items);
-            });
+            GetTags($(this).val());
         });
 
-        $("#SelectedSchoolId").change(function () {
-            var test = $(this).val();
-
-            if ($(this).val() < 1) {
-                $("#SpecialSchool").show();
+        $("#Sequrity").change(function () {
+            if ($(this).is(':checked')) {
+                $("#CompleteRegistr").prop('disabled', false);
             }
             else {
-                $("#SpecialSchool").hide();
+                $("#CompleteRegistr").prop('disabled', true);
             }
-
         });
+
+        $("input[name=PlaceRequired]:radio").change(function () {
+            if ($(this).val() == "Nē") {
+                $("#PlaceType").hide();
+            }
+            else {
+                $("#PlaceType").show();
+            }
+        });
+
+        var availableTags;
+
+        function GetTags(val) {
+            $.getJSON("/Registr/GetSchoolArray?val=" + val, function (data) {
+                availableTags = data;
+                $("#SpecialSchool").autocomplete({
+                    source: availableTags
+                });
+            });      
+        }
+
     </script>
