@@ -2,16 +2,29 @@
 @{
     ViewBag.Title = "Home Page";
 }
+<script src="~/Scripts/jquery.easing.min.js"></script>
+<script src="~/Scripts/jquery.easy-ticker.js"></script>
 <section class="featured">
     <div class="content-wrapper">
         <h3>Ziņas</h3>
+    </div>
+    <div class="vticker">
+        <ul>
+            @foreach (var item in Model)
+            { 
+                <li>
+                    @Html.Raw(item.Info)
+                </li>
+            }
+        </ul>
+
     </div>
     <div class="carouselTicker">
         <ul class="carouselTicker__list">
             @foreach (var item in Model)
             { 
                 <li class="carouselTicker__item">
-                    @Html.DisplayFor(modelItem => item.Info)
+                    //TODO: Atbalstītāji
                 </li>
             }
         </ul>
@@ -20,6 +33,16 @@
 <script type="text/javascript">
     $(document).ready(function () {
         jQuery('.carouselTicker').carouselTicker();
+
+        var dd = $('.vticker').easyTicker({
+            direction: 'up',
+            easing: 'easeInOutBack',
+            speed: 'slow',
+            interval: 5000,
+            height: 'auto',
+            visible: 3,
+            mousePause: 1,
+        }).data('easyTicker');
     });
 
     jQuery('.carouselTicker').carouselTicker({

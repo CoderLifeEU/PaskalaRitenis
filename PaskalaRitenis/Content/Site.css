@@ -626,3 +626,21 @@ ul#nav li a:hover,ul#nav li a:focus {
     width: auto;  
     height: 480px;
 }
+
+.vticker{
+	border: 2px solid #ccc;
+}
+.vticker ul{
+	padding: 0;
+    width: 100%;
+}
+.vticker li{
+	list-style: none;
+	border-bottom: 2px solid #ccc;
+	padding: 10px;
+    height: 170px;
+    overflow: auto;
+}
+.et-run{
+	background: red;
+}

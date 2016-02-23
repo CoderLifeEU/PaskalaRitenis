@@ -38,8 +38,9 @@ namespace AdminConsole.Controllers
             {
                 if (ModelState.IsValid)
                 {
+                    news.Info = System.Net.WebUtility.HtmlDecode(news.Info);
                     _repository.InsertNews(news);
-                    return RedirectToAction("Index");
+                    return RedirectToAction("Index");   
                 }
             }
             catch (DataException)
@@ -62,6 +63,7 @@ namespace AdminConsole.Controllers
             {
                 if (ModelState.IsValid)
                 {
+                    news.Info = System.Net.WebUtility.HtmlDecode(news.Info);
                     _repository.UpdateNews(news);
                     return RedirectToAction("Index");
                 }

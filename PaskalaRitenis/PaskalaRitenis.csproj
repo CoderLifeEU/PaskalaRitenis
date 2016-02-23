@@ -330,6 +330,8 @@
     <Content Include="Scripts\jquery-ui-1.8.24.js" />
     <Content Include="Scripts\jquery-ui-1.8.24.min.js" />
     <Content Include="Scripts\jquery.easing-sooper.js" />
+    <Content Include="Scripts\jquery.easing.min.js" />
+    <Content Include="Scripts\jquery.easy-ticker.js" />
     <Content Include="Scripts\jquery.js" />
     <Content Include="Scripts\jquery.sooperfish.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
