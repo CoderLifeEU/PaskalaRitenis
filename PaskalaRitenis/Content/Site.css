@@ -648,3 +648,9 @@ ul#nav li a:hover,ul#nav li a:focus {
 .programmTable tr td{
      background-color: #FFF;
 }
+
+.youtube {
+    width: 640px;
+    height: 390px;
+
+}
