@@ -20,6 +20,7 @@
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -199,7 +200,9 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\SerializeUtil.cs" />
+    <Compile Include="Helpers\Utils.cs" />
     <Compile Include="Models\AccountModels.cs" />
+    <Compile Include="Models\HomePageModel.cs" />
     <Compile Include="Models\RegistrationModel.cs" />
     <Compile Include="Models\StudentRegModel.cs" />
     <Compile Include="Models\TeacherRegModel.cs" />

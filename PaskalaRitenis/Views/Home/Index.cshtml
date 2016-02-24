@@ -1,6 +1,7 @@
-﻿@model IEnumerable<PaskalaRitenis.Models.NewsModel>
+﻿@model PaskalaRitenis.Models.HomePageModel
 @{
     ViewBag.Title = "Home Page";
+
 }
 <script src="~/Scripts/jquery.easing.min.js"></script>
 <script src="~/Scripts/jquery.easy-ticker.js"></script>
@@ -10,10 +11,10 @@
     </div>
     <div class="vticker">
         <ul>
-            @foreach (var item in Model)
+            @foreach (var news in Model.News)
             { 
                 <li>
-                    @Html.Raw(item.Info)
+                    @Html.Raw(news.Info)
                 </li>
             }
         </ul>
@@ -21,10 +22,13 @@
     </div>
     <div class="carouselTicker">
         <ul class="carouselTicker__list">
-            @foreach (var item in Model)
+
+            @foreach (var supporter in Model.Supporters)
             { 
                 <li class="carouselTicker__item">
-                    //TODO: Atbalstītāji
+                    <a href="@supporter.Url" target="_blank">
+                        <img src="~/Images/supporters/@supporter.Logo" alt="@supporter.Name">
+                    </a>
                 </li>
             }
         </ul>

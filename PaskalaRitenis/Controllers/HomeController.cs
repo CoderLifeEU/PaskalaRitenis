@@ -22,7 +22,18 @@ namespace PaskalaRitenis.Controllers
         public ActionResult Index()
         {
             var news = _repository.GetNews();
-            return View(news);
+
+            var supporters = Helpers.SerializeUtils.DeserializeFromXML<SupportersModel>(Server.MapPath(Url.Content("~/Content/Supporters.xml"))).Supporters;
+
+            IEnumerable<Supporter> supportersRandom = Helpers.Utils.Randomize<Supporter>(supporters);
+
+            var model = new HomePageModel()
+            {
+                News = news,
+                Supporters = supportersRandom
+            };
+
+            return View(model);
         }
 
         public ActionResult About()
@@ -44,7 +55,7 @@ namespace PaskalaRitenis.Controllers
         }
 
 
-        
+
 
     }
 }
