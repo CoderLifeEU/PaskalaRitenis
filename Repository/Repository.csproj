@@ -41,6 +41,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Models\OProgramma\IOProgrammRepository.cs" />
+    <Compile Include="Models\OProgramma\OProgrammModel.cs" />
+    <Compile Include="Models\OProgramma\OProgrammRepository.cs" />
     <Compile Include="Models\Video\VideoModel.cs" />
     <Compile Include="Models\Video\IVideoRepository.cs" />
     <Compile Include="Models\Video\VideoRepository.cs" />
@@ -49,6 +52,11 @@
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="Repository\OProgramma.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>OProgramma.dbml</DependentUpon>
     </Compile>
     <Compile Include="Repository\Video.designer.cs">
       <AutoGen>True</AutoGen>
@@ -60,9 +68,15 @@
     <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="App.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Repository\OProgramma.dbml">
+      <Generator>MSLinqToSQLGenerator</Generator>
+      <LastGenOutput>OProgramma.designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </None>
     <None Include="Repository\Video.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>
@@ -73,6 +87,11 @@
   <ItemGroup>
     <None Include="Repository\Video.dbml.layout">
       <DependentUpon>Video.dbml</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Repository\OProgramma.dbml.layout">
+      <DependentUpon>OProgramma.dbml</DependentUpon>
     </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

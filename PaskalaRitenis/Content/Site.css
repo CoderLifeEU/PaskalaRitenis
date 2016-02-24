@@ -644,3 +644,7 @@ ul#nav li a:hover,ul#nav li a:focus {
 .et-run{
 	background: red;
 }
+
+.programmTable tr td{
+     background-color: #FFF;
+}

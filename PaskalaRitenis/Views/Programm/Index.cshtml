@@ -1,0 +1,18 @@
+﻿@model IEnumerable<Repository.Models.OProgramma.OProgrammModel>
+
+@{
+    ViewBag.Title = "Olimpiādes Programma";
+}
+
+<section class="featured">
+    <div class="content-wrapper">
+        <h2>Olimpiādes Programma 2016</h2>
+    </div>
+</section>
+
+@foreach (var item in Model)
+{ 
+    <div>
+        @Html.Raw(item.Programma)
+    </div>
+}

@@ -2,13 +2,21 @@
 <SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Repository.Properties" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
+    <Setting Name="DU_IK_PaskalaRitenisNewConnectionString" Type="(Connection string)" Scope="Application">
+      <DesignTimeValue Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
+&lt;SerializableConnectionString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
+  &lt;ConnectionString&gt;Data Source=159.148.144.30;Initial Catalog=DU_IK_PaskalaRitenisNew;User ID=PaskalaRitenisNewUser;Password=bSndBD35@cny7@gbhDFfghfhFG46&lt;/ConnectionString&gt;
+  &lt;ProviderName&gt;System.Data.SqlClient&lt;/ProviderName&gt;
+&lt;/SerializableConnectionString&gt;</DesignTimeValue>
+      <Value Profile="(Default)">Data Source=159.148.144.30;Initial Catalog=DU_IK_PaskalaRitenisNew;User ID=PaskalaRitenisNewUser;Password=bSndBD35@cny7@gbhDFfghfhFG46</Value>
+    </Setting>
     <Setting Name="DataSourceConnectionString" Type="(Connection string)" Scope="Application">
       <DesignTimeValue Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
 &lt;SerializableConnectionString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
-  &lt;ConnectionString&gt;Data Source=159.148.144.30;User ID=PaskalaRitenisNewUser;Password=bSndBD35@cny7@gbhDFfghfhFG46&lt;/ConnectionString&gt;
+  &lt;ConnectionString&gt;Data Source=159.148.144.30;Initial Catalog=DU_IK_PaskalaRitenisNew;User ID=PaskalaRitenisNewUser;Password=bSndBD35@cny7@gbhDFfghfhFG46&lt;/ConnectionString&gt;
   &lt;ProviderName&gt;System.Data.SqlClient&lt;/ProviderName&gt;
 &lt;/SerializableConnectionString&gt;</DesignTimeValue>
-      <Value Profile="(Default)">Data Source=159.148.144.30;User ID=PaskalaRitenisNewUser;Password=bSndBD35@cny7@gbhDFfghfhFG46</Value>
+      <Value Profile="(Default)">Data Source=159.148.144.30;Initial Catalog=DU_IK_PaskalaRitenisNew;User ID=PaskalaRitenisNewUser;Password=bSndBD35@cny7@gbhDFfghfhFG46</Value>
     </Setting>
   </Settings>
 </SettingsFile>

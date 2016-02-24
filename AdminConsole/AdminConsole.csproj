@@ -190,7 +190,7 @@
     <Compile Include="Controllers\ContactController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\NewsController.cs" />
-    <Compile Include="Controllers\PrgFileController.cs" />
+    <Compile Include="Controllers\ProgrammController.cs" />
     <Compile Include="Controllers\RezultatiController.cs" />
     <Compile Include="Controllers\VideoController.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
@@ -215,7 +215,6 @@
     </Compile>
     <Compile Include="Models\NewsModel.cs" />
     <Compile Include="Models\NewsRepository.cs" />
-    <Compile Include="Models\ProgFile.cs" />
     <Compile Include="Models\Rezultati.designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -832,8 +831,11 @@
     <Content Include="Views\Video\Edit.cshtml" />
     <Content Include="Views\Video\Create.cshtml" />
     <Content Include="Views\Video\Delete.cshtml" />
-    <Content Include="Views\PrgFile\Index.cshtml" />
     <Content Include="Upload.ashx" />
+    <Content Include="Views\Programm\Index.cshtml" />
+    <Content Include="Views\Programm\Create.cshtml" />
+    <Content Include="Views\Programm\Edit.cshtml" />
+    <Content Include="Views\Programm\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

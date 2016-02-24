@@ -191,7 +191,7 @@
     <Compile Include="Controllers\ContactController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\NewsController.cs" />
-    <Compile Include="Controllers\PrgFileController.cs" />
+    <Compile Include="Controllers\ProgrammController.cs" />
     <Compile Include="Controllers\SupportersController.cs" />
     <Compile Include="Controllers\RegistrController.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
@@ -379,7 +379,7 @@
     <Content Include="Views\Gallery\Foto.cshtml" />
     <Content Include="Views\Gallery\Video.cshtml" />
     <Content Include="Views\Supporters\Index.cshtml" />
-    <Content Include="Views\PrgFile\Index.cshtml" />
+    <Content Include="Views\Programm\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

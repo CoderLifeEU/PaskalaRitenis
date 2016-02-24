@@ -26,8 +26,19 @@ namespace Repository.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=159.148.144.30;User ID=PaskalaRitenisNewUser;Password=bSndBD35@cny7@g" +
-            "bhDFfghfhFG46")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=159.148.144.30;Initial Catalog=DU_IK_PaskalaRitenisNew;User ID=Paskal" +
+            "aRitenisNewUser;Password=bSndBD35@cny7@gbhDFfghfhFG46")]
+        public string DU_IK_PaskalaRitenisNewConnectionString {
+            get {
+                return ((string)(this["DU_IK_PaskalaRitenisNewConnectionString"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=159.148.144.30;Initial Catalog=DU_IK_PaskalaRitenisNew;User ID=Paskal" +
+            "aRitenisNewUser;Password=bSndBD35@cny7@gbhDFfghfhFG46")]
         public string DataSourceConnectionString {
             get {
                 return ((string)(this["DataSourceConnectionString"]));
