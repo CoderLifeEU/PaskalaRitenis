@@ -316,6 +316,24 @@
     <Content Include="Content\fonts\NewsCycle-Regular.ttf" />
     <Content Include="Content\fonts\YanoneKaffeesatz-Regular.eot" />
     <Content Include="Content\fonts\YanoneKaffeesatz-Regular.ttf" />
+    <Content Include="Images\supporters\1c.png" />
+    <Content Include="Images\supporters\binitex_large.png" />
+    <Content Include="Images\supporters\BTG_logo.png" />
+    <Content Include="Images\supporters\ctco_logo.png" />
+    <Content Include="Images\supporters\daritajiem.jpg" />
+    <Content Include="Images\supporters\daugavpils-pilsetas-izgliti.png" />
+    <Content Include="Images\supporters\dautkom.png" />
+    <Content Include="Images\supporters\e.jpg" />
+    <Content Include="Images\supporters\geidans.png" />
+    <Content Include="Images\supporters\globs_logo-2.jpg" />
+    <Content Include="Images\supporters\latinsoft.png" />
+    <Content Include="Images\supporters\latvijas_maiznieks.png" />
+    <Content Include="Images\supporters\lielvards.png" />
+    <Content Include="Images\supporters\mc_color.jpg" />
+    <Content Include="Images\supporters\protams.png" />
+    <Content Include="Images\supporters\pr_logo.png" />
+    <Content Include="Images\supporters\REM_PRO.jpg" />
+    <Content Include="Images\supporters\rotkoCentrs1.png" />
     <Content Include="Models\Contact\Contacts.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>
       <LastGenOutput>Contacts.designer.cs</LastGenOutput>
@@ -386,7 +404,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Images\supporters\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
