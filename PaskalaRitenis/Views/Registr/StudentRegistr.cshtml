@@ -6,147 +6,106 @@
 
 <h2>Studentu Registracija</h2>
 
+@{ Html.EnableClientValidation(true); }
 @using (Html.BeginForm("StudentRegistr", "Registr", FormMethod.Post))
 {
     @Html.ValidationSummary(true)
     
-    <table>
-        <tr>
-            <th>Registracijas forma</th>
-        </tr>
-        <tr>
-            <td>@Html.LabelFor(m=> m.Name)</td>
-        </tr>
-        <tr>
-            <td>
-                @Html.TextBoxFor(m => m.Name)
-                @Html.ValidationMessageFor(m=> m.Name)
-            </td>
-        </tr>
-        <tr>
-            <td>@Html.LabelFor(m=> m.Surname)</td>
-        </tr>
-        <tr>
-            <td>
-                @Html.TextBoxFor(m => m.Surname)
-                @Html.ValidationMessageFor(m=> m.Surname)
-            </td>
-        </tr>
-        <tr>
-            <td>@Html.LabelFor(m=> m.City)</td>
-        </tr>
-        <tr>
-            <td>
-                @Html.TextBoxFor(m => m.City)
-                @Html.ValidationMessageFor(m => m.City)
-            </td>
-        </tr>
-        <tr>
-            <td>@Html.LabelFor(m=> m.StudyType)</td>
-        </tr>
-        <tr>
-            <td>@Html.DropDownListFor(m => m.SelectedStudyTypeId, new SelectList(Model.StudyType, "Value", "Text"))</td>
-        </tr>
-        <tr>
-            <td>@Html.LabelFor(m=> m.School)</td>
-        </tr>
-        <tr>
-            <td>
-                @Html.TextBoxFor(m => m.SpecialSchool)
-                @Html.ValidationMessageFor(m => m.SpecialSchool)
-            </td>
-        </tr>
-        <tr>
-            <td>@Html.LabelFor(m=> m.SelectedKlass)</td>
-        </tr>
-        <tr>
-            <td>
-                <div id="divKlase">
-                    <span>6. klase</span>
-                    @Html.RadioButtonFor(m => m.SelectedKlass, "6. klase", new { @checked = true })
-                    <span>7. klase</span>
-                    @Html.RadioButtonFor(m => m.SelectedKlass, "7. klase")
-                    <span>8. klase</span>
-                    @Html.RadioButtonFor(m => m.SelectedKlass, "8. klase")
-                    <span>9. klase</span>
-                    @Html.RadioButtonFor(m => m.SelectedKlass, "9. klase")
-                    <span>10. klase</span>
-                    @Html.RadioButtonFor(m => m.SelectedKlass, "10. klase")
-                    <span>11. klase</span>
-                    @Html.RadioButtonFor(m => m.SelectedKlass, "11. klase")
-                    <span>12. klase</span>
-                    @Html.RadioButtonFor(m => m.SelectedKlass, "12. klase")
-                </div>
-                <div id="divKurss">
-                    <span>1. kurss</span>
-                    @Html.RadioButtonFor(m => m.SelectedKurss, "1. kurss", new { @checked = true })
-                    <span>2. kurss</span>
-                    @Html.RadioButtonFor(m => m.SelectedKurss, "2. kurss")
-                    <span>3. kurss</span>
-                    @Html.RadioButtonFor(m => m.SelectedKurss, "3. kurss")
-                    <span>4. kurss</span>
-                    @Html.RadioButtonFor(m => m.SelectedKurss, "4. kurss")
-                </div>
-            </td>
-        </tr>
-        <tr>
-            <td>@Html.LabelFor(m=> m.Advicer)</td>
-        </tr>
-        <tr>
-            <td>
-                @Html.TextBoxFor(m => m.Advicer)
-                @Html.ValidationMessageFor(m => m.Advicer)
-            </td>
-        </tr>
-        <tr>
-            <td>@Html.LabelFor(m=> m.Phone)</td>
-        </tr>
-        <tr>
-            <td>
-                @Html.TextBoxFor(m => m.Phone)
-                @Html.ValidationMessageFor(m => m.Phone)
-            </td>
-        </tr>
-        <tr>
-            <td>@Html.LabelFor(m=> m.Email)</td>
-        </tr>
-        <tr>
-            <td>
-                @Html.TextBoxFor(m => m.Email)
-                @Html.ValidationMessageFor(m => m.Email)
-            </td>
-        </tr>
-        <tr>
-            <td>@Html.LabelFor(m=> m.PlaceRequired)</td>
-        </tr>
-        <tr>
-            <td>           
-                <span>Nē:</span>
-                @Html.RadioButtonFor(m => m.PlaceRequired, "Nē", new { @checked = true })
-                <span>Jā:</span>
-                @Html.RadioButtonFor(m => m.PlaceRequired, "Jā")<br /><br />
-                <div id="PlaceType">
-                    <span>Pirms:</span>
-                    @Html.RadioButtonFor(m => m.PlaceRequiredType, "Pirms", new { @checked = true })
-                    <span>Pēc:</span>
-                    @Html.RadioButtonFor(m => m.PlaceRequiredType, "Pēc")
-                    <span>Gan pirms, gan pēc:</span>
-                 @Html.RadioButtonFor(m => m.PlaceRequiredType, "Gan pirms, gan pēc")
-                </div>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                @Html.CheckBoxFor(m=> m.Sequrity)
-                @Html.LabelFor(m=> m.Sequrity)
-            </td>
-        </tr>
-        <tr>
-            <td><input id="CompleteRegistr" type="submit" value="Atsūtīt"/></td>
-        </tr>
-    </table>
+    <div>
+        <strong >Registracijas forma</strong>
+    </div>
+    <div class="regForm" style="padding-top: 15px">
+        <p class="registr-p">@Html.LabelFor(m=> m.Name)</p>
+        <p>
+            @Html.TextBoxFor(m => m.Name)
+            @Html.ValidationMessageFor(m=> m.Name)
+        </p>
+        <p class="registr-p">@Html.LabelFor(m=> m.Surname)</p>
+        <p>
+            @Html.TextBoxFor(m => m.Surname)
+            @Html.ValidationMessageFor(m=> m.Surname)
+        </p>
+        <p class="registr-p">@Html.LabelFor(m=> m.City)</p>
+        <p>
+            @Html.TextBoxFor(m => m.City)
+            @Html.ValidationMessageFor(m => m.City)
+        </p>
+        <p class="registr-p">@Html.LabelFor(m=> m.StudyType)</p>
+        <p>
+            @Html.DropDownListFor(m => m.SelectedStudyTypeId, new SelectList(Model.StudyType, "Value", "Text"))
+        </p>
+        <p class="registr-p">@Html.LabelFor(m=> m.School)</p>
+        <p>
+            @Html.TextBoxFor(m => m.SpecialSchool)
+            @Html.ValidationMessageFor(m => m.SpecialSchool)
+        </p>
+        <p class="registr-p">@Html.LabelFor(m=> m.SelectedKlass)</p>
+        <div id="divKlase">
+            <span>6. klase</span>
+            @Html.RadioButtonFor(m => m.SelectedKlass, "6. klase", new { @checked = true })
+            <span>7. klase</span>
+            @Html.RadioButtonFor(m => m.SelectedKlass, "7. klase")
+            <span>8. klase</span>
+            @Html.RadioButtonFor(m => m.SelectedKlass, "8. klase")
+            <span>9. klase</span>
+            @Html.RadioButtonFor(m => m.SelectedKlass, "9. klase")
+            <span>10. klase</span>
+            @Html.RadioButtonFor(m => m.SelectedKlass, "10. klase")
+            <span>11. klase</span>
+            @Html.RadioButtonFor(m => m.SelectedKlass, "11. klase")
+            <span>12. klase</span>
+            @Html.RadioButtonFor(m => m.SelectedKlass, "12. klase")<br /><br />
+        </div>
+        <div id="divKurss">
+            <span>1. kurss</span>
+            @Html.RadioButtonFor(m => m.SelectedKurss, "1. kurss", new { @checked = true })
+            <span>2. kurss</span>
+            @Html.RadioButtonFor(m => m.SelectedKurss, "2. kurss")
+            <span>3. kurss</span>
+            @Html.RadioButtonFor(m => m.SelectedKurss, "3. kurss")
+            <span>4. kurss</span>
+            @Html.RadioButtonFor(m => m.SelectedKurss, "4. kurss")<br /><br />
+        </div>
+        <p class="registr-p">@Html.LabelFor(m=> m.Advicer)</p>
+        <p>
+            @Html.TextBoxFor(m => m.Advicer)
+            @Html.ValidationMessageFor(m => m.Advicer)
+        </p>
+        <p class="registr-p">@Html.LabelFor(m=> m.Phone)</p>
+        <p>
+            @Html.TextBoxFor(m => m.Phone)
+            @Html.ValidationMessageFor(m => m.Phone)
+        </p>
+        <p class="registr-p">@Html.LabelFor(m=> m.Email)</p>
+        <p>
+            @Html.TextBoxFor(m => m.Email)
+            @Html.ValidationMessageFor(m => m.Email)
+        </p>
+        <p class="registr-p">@Html.LabelFor(m=> m.PlaceRequired)</p>
+        <div id="PlaceRequired">
+            <span>Nē:</span>
+            @Html.RadioButtonFor(m => m.PlaceRequired, "Nē", new { @checked = true })
+            <span>Jā:</span>
+            @Html.RadioButtonFor(m => m.PlaceRequired, "Jā")<br /><br />
+        </div>
+        <div id="PlaceType">
+            <span>Pirms:</span>
+            @Html.RadioButtonFor(m => m.PlaceRequiredType, "Pirms", new { @checked = true })
+            <span>Pēc:</span>
+            @Html.RadioButtonFor(m => m.PlaceRequiredType, "Pēc")
+            <span>Gan pirms, gan pēc:</span>
+            @Html.RadioButtonFor(m => m.PlaceRequiredType, "Gan pirms, gan pēc")<br /><br />
+        </div>
+        <div>
+            @Html.CheckBoxFor(m=> m.Sequrity)
+            @Html.LabelFor(m=> m.Sequrity)
+        </div>
+        <input class="submit-btn" id="CompleteRegistr" type="submit" value="Atsūtīt"/>
+    </div>  
 }
 
+<script type="text/javascript" src="~/Scripts/jquery.validate.js"></script>
+<script type="text/javascript" src="~/Scripts/jquery.validate.unobtrusive.js"></script>
 <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
     <script type="text/javascript">
         $(document).ready(function () {

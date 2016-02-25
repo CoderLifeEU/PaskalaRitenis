@@ -658,3 +658,26 @@ ul#nav li a:hover,ul#nav li a:focus {
     height: 390px;
 
 }
+
+.field-validation-error {
+    color:Red;
+}
+
+.input-validation-error
+{
+    border: 3px solid red; 
+}
+
+.registr-p {
+    padding: 0px;
+}
+
+.submit-btn {
+    width: 100px;
+    height: 30px;
+    margin-top: 15px;
+}
+
+.regForm input[type="text"] {
+    width: 240px;
+}

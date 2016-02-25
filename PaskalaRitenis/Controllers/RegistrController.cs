@@ -32,6 +32,8 @@ namespace PaskalaRitenis.Controllers
 
                 var school = string.Empty;
                 var schoolClass = string.Empty;
+                var placeType = string.Empty;
+                var schoolChosen = "Yes";
 
                 if (model.SelectedStudyTypeId == 1)
                 {
@@ -49,16 +51,20 @@ namespace PaskalaRitenis.Controllers
                 if (string.IsNullOrEmpty(school))
                 {
                     school = model.SpecialSchool;
+                    schoolChosen = "No";
                 }
 
                 var placeReq = model.PlaceRequired;
-                var placeType = model.PlaceRequiredType;
+                if (placeReq != "Nē")
+                {
+                    placeType = model.PlaceRequiredType;
+                }
 
                 using (SqlConnection con = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["DataSourceConnectionString"].ConnectionString))
                 {
                     con.Open();
-                    string command = @"INSERT INTO Registration (Created, RegType, RegCode, Vards, Uzvards, Pilseta, Telefons, Email, Skolotajs, SkolasTips, SkolasNosaukums, SkolasKlase, Kopnite, KopnitesTips) 
-                                     VALUES ('" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "' ,'" + model.RegType.ToString() + "', '" + SpecialCode() + "','" + model.Name + "', '" + model.Surname + "', '" + model.City + "', '" + model.Phone + "', '" + model.Email + "', '" + model.Advicer + "', '" + schoolType + "', '" + school + "', '" + schoolClass + "', '" + placeReq + "', '" + placeType + "')";
+                    string command = @"INSERT INTO Registration (Created, RegType, RegCode, Vards, Uzvards, Pilseta, Telefons, Email, Skolotajs, SkolasTips, SkolasNosaukums, SkolasKlase, Kopnite, KopnitesTips, IrIzveletaSkola) 
+                                     VALUES ('" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "' ,'" + model.RegType.ToString() + "', '" + SpecialCode() + "','" + model.Name + "', '" + model.Surname + "', '" + model.City + "', '" + model.Phone + "', '" + model.Email + "', '" + model.Advicer + "', '" + schoolType + "', '" + school + "', '" + schoolClass + "', '" + placeReq + "', '" + placeType + "', '" + schoolChosen + "')";
 
                     using (SqlCommand query = new SqlCommand(command, con))
                     {
@@ -67,7 +73,7 @@ namespace PaskalaRitenis.Controllers
                     }
                 }
 
-                return RedirectToAction("Index", "Home");
+                return View("SuccessRegistr");
             }
             else
             {
@@ -94,6 +100,8 @@ namespace PaskalaRitenis.Controllers
                 var schoolType = model.StudyType.Where(s => s.Value == model.SelectedStudyTypeId.ToString()).Select(t => t.Text).FirstOrDefault();
 
                 var school = string.Empty;
+                var placeType = string.Empty;
+                var schoolChosen = "Yes";
 
                 if (model.SelectedStudyTypeId == 1)
                 {
@@ -109,16 +117,21 @@ namespace PaskalaRitenis.Controllers
                 if (string.IsNullOrEmpty(school))
                 {
                     school = model.SpecialSchool;
+                    schoolChosen = "No";
                 }
 
                 var placeReq = model.PlaceRequired;
-                var placeType = model.PlaceRequiredType;
+
+                if (placeReq != "Nē")
+                {
+                    placeType = model.PlaceRequiredType;
+                }
 
                 using (SqlConnection con = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["DataSourceConnectionString"].ConnectionString))
                 {
                     con.Open();
-                    string command = @"INSERT INTO Registration (Created, RegType, RegCode, Vards, Uzvards, Pilseta, Telefons, Email, SkolasTips, SkolasNosaukums, Kopnite, KopnitesTips) 
-                                     VALUES ('" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "' ,'" + model.RegType.ToString() + "', '" + SpecialCode() + "','" + model.Name + "', '" + model.Surname + "', '" + model.City + "', '" + model.Phone + "', '" + model.Email + "', '" + schoolType + "', '" + school + "', '" + placeReq + "', '" + placeType + "')";
+                    string command = @"INSERT INTO Registration (Created, RegType, RegCode, Vards, Uzvards, Pilseta, Telefons, Email, SkolasTips, SkolasNosaukums, Kopnite, KopnitesTips, IrIzveletaSkola) 
+                                     VALUES ('" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "' ,'" + model.RegType.ToString() + "', '" + SpecialCode() + "','" + model.Name + "', '" + model.Surname + "', '" + model.City + "', '" + model.Phone + "', '" + model.Email + "', '" + schoolType + "', '" + school + "', '" + placeReq + "', '" + placeType + "', '" + schoolChosen + "')";
 
                     using (SqlCommand query = new SqlCommand(command, con))
                     {
@@ -127,7 +140,7 @@ namespace PaskalaRitenis.Controllers
                     }
                 }
 
-                return RedirectToAction("Index", "Home");
+                return View("SuccessRegistr");
             }
             else
             {

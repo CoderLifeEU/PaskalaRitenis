@@ -23,11 +23,13 @@ namespace PaskalaRitenis.Models
         [Display(Name = "Vārds:")]
         [Required(ErrorMessage = "'Vārds' ir obligāts lauks", AllowEmptyStrings = false)]
         [StringLength(20)]
+        [RegularExpression(@"^[A-ZĀČĒĢĪĶĻŅŌŖŠŪŽa-zāčēģīķļņōŗšūž]+$", ErrorMessage = "Atļauts ievadīt tikai burtus")]
         public string Name { get; set; }
 
         [Display(Name = "Uzvārds:")]
         [Required(ErrorMessage = "'Uzvārds' ir obligāts lauks", AllowEmptyStrings = false)]
         [StringLength(20)]
+        [RegularExpression(@"^[A-ZĀČĒĢĪĶĻŅŌŖŠŪŽa-zāčēģīķļņōŗšūž]+$", ErrorMessage = "Atļauts ievadīt tikai burtus")]
         public string Surname { get; set; }
 
         public string PersonCode { get; set; }
@@ -50,6 +52,7 @@ namespace PaskalaRitenis.Models
         [Display(Name = "Telefons:")]
         [Required(ErrorMessage = "'Telefons' ir obligāts lauks", AllowEmptyStrings = false)]
         [StringLength(20)]
+        [RegularExpression(@"^[0-9]+$", ErrorMessage = "Atļauts ievadīt tikai ciparus")]        
         public string Phone { get; set; }
 
         [Display(Name = "E­-pasts:")]
