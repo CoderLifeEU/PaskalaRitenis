@@ -665,7 +665,8 @@ ul#nav li a:hover,ul#nav li a:focus {
 
 .input-validation-error
 {
-    border: 3px solid red; 
+    border: 1px solid #ff0000;
+    background-color: #ffeeee;
 }
 
 .registr-p {
