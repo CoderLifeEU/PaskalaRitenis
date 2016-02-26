@@ -29,8 +29,7 @@ namespace PaskalaRitenis.Controllers
 
             var model = new HomePageModel()
             {
-                News = news,
-                Supporters = supportersRandom
+                News = news
             };
 
             return View(model);

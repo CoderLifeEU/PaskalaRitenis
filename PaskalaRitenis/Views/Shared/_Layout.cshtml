@@ -54,7 +54,11 @@
         </header>
         <div id="site_content">
                 @RenderBody()
-        </div>
+
+            <div class="layout-supporters">
+                @{Html.RenderAction("GetSupportersList", "Supporters");}
+            </div>
+        </div>        
         <footer>
             <p><a href="#">©2016 Paskāla ritenis</a></p>
         </footer>

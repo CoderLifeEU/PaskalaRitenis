@@ -1,0 +1,27 @@
+﻿@model IEnumerable<PaskalaRitenis.Models.Supporter>
+
+<div class="carouselTicker">
+    <ul class="carouselTicker__list">
+
+        @foreach (var supporter in Model)
+        {
+            <li class="carouselTicker__item">
+                <a href="@supporter.Url" target="_blank">
+                    <img src="~/Images/supporters/@supporter.Logo" alt="@supporter.Name">
+                </a>
+            </li>
+        }
+    </ul>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        jQuery('.carouselTicker').carouselTicker();
+
+        jQuery('.carouselTicker').carouselTicker({
+            speed: 5,
+            delay: 50,
+            reverse: true
+        });
+    });
+</script>

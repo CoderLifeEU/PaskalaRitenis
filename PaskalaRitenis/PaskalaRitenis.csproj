@@ -403,6 +403,7 @@
     <Content Include="Views\Supporters\Index.cshtml" />
     <Content Include="Views\Programm\Index.cshtml" />
     <Content Include="Views\Registr\SuccessRegistr.cshtml" />
+    <Content Include="Views\Supporters\SupportersList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

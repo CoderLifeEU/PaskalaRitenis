@@ -13,9 +13,23 @@ namespace PaskalaRitenis.Controllers
 
         public ActionResult Index()
         {
-            var supporters = SerializeUtils.DeserializeFromXML<SupportersModel>(Server.MapPath(Url.Content("~/Content/Supporters.xml"))).Supporters;
+            var supporters = GetSupporters();
 
             return View(supporters);
+        }
+
+        public PartialViewResult GetSupportersList()
+        {
+            var supporters = GetSupporters();
+
+            IEnumerable<Supporter> supportersRandom = Helpers.Utils.Randomize<Supporter>(supporters);
+
+            return PartialView("~/Views/Supporters/SupportersList.cshtml", supportersRandom);
+        }
+
+        private List<Supporter> GetSupporters()
+        {
+            return SerializeUtils.DeserializeFromXML<SupportersModel>(Server.MapPath(Url.Content("~/Content/Supporters.xml"))).Supporters;
         }
 
     }

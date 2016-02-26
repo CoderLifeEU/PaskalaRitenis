@@ -18,25 +18,10 @@
                 </li>
             }
         </ul>
-
-    </div>
-    <div class="carouselTicker">
-        <ul class="carouselTicker__list">
-
-            @foreach (var supporter in Model.Supporters)
-            { 
-                <li class="carouselTicker__item">
-                    <a href="@supporter.Url" target="_blank">
-                        <img src="~/Images/supporters/@supporter.Logo" alt="@supporter.Name">
-                    </a>
-                </li>
-            }
-        </ul>
     </div>
 </section>
 <script type="text/javascript">
     $(document).ready(function () {
-        jQuery('.carouselTicker').carouselTicker();
 
         var dd = $('.vticker').easyTicker({
             direction: 'up',
@@ -47,11 +32,5 @@
             visible: 3,
             mousePause: 1,
         }).data('easyTicker');
-    });
-
-    jQuery('.carouselTicker').carouselTicker({
-        speed: 5,
-        delay: 50,
-        reverse: true
     });
 </script>
