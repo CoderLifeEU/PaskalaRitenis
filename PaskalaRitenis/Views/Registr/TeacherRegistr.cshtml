@@ -7,10 +7,10 @@
 <h2>Skolotaju registracija</h2>
 
 @{ Html.EnableClientValidation(true); }
-@using (Html.BeginForm())
+@using (Html.BeginForm("TeacherRegistr", "Registr", FormMethod.Post, new { name = "TeachReg" }))
 {
     @Html.ValidationSummary(true)
-    
+    <div class="divRegistr">
     <div>
         <strong >Registracijas forma</strong>
     </div>
@@ -68,8 +68,9 @@
             @Html.CheckBoxFor(m=> m.Sequrity)
             @Html.LabelFor(m=> m.Sequrity)
         </div>
-        <input class="submit-btn" id="CompleteRegistr" type="submit" value="Atsūtīt"/>
+        <input disabled="disabled" class="submit-btn" id="CompleteRegistr" type="submit" value="Atsūtīt"/>
         @Html.HiddenFor(m => m.Advicer, new { Value = "NoTeacher"})
+    </div>
     </div>
 }
 <script type="text/javascript" src="~/Scripts/jquery.validate.js"></script>
@@ -90,7 +91,9 @@
 
         $("#Sequrity").change(function () {
             if ($(this).is(':checked')) {
-                $("#CompleteRegistr").prop('disabled', false);
+                if ($("form").valid()) {
+                    $("#CompleteRegistr").prop('disabled', false);
+                }
             }
             else {
                 $("#CompleteRegistr").prop('disabled', true);

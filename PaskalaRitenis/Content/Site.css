@@ -681,3 +681,7 @@ ul#nav li a:hover,ul#nav li a:focus {
 .regForm input[type="text"] {
     width: 240px;
 }
+
+.divRegistr {
+    padding-left: 30px;
+}
