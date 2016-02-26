@@ -686,3 +686,7 @@ ul#nav li a:hover,ul#nav li a:focus {
 .divRegistr {
     padding-left: 30px;
 }
+
+.regForm input[type="radio"] {
+    margin-right: 10px;
+}

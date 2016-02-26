@@ -65,6 +65,7 @@
             @Html.RadioButtonFor(m => m.PlaceRequiredType, "Gan pirms, gan pēc")<br /><br />
         </div>
         <div>
+            <a href="http://paskalaritenis.ik.du.lv/wp-content/uploads/2015/02/drosiba_big.jpg" target="_blank">Drošības noteikumi</a><br /><br />
             @Html.CheckBoxFor(m=> m.Sequrity)
             @Html.LabelFor(m=> m.Sequrity)
         </div>
@@ -87,12 +88,16 @@
 
         $("#SelectedStudyTypeId").change(function () {
             GetTags($(this).val());
+            $("#SpecialSchool").val("");
         });
 
         $("#Sequrity").change(function () {
             if ($(this).is(':checked')) {
                 if ($("form").valid()) {
                     $("#CompleteRegistr").prop('disabled', false);
+                }
+                else {
+                    $(this).prop('checked', false);
                 }
             }
             else {
