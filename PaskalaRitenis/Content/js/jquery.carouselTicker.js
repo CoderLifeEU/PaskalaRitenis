@@ -455,8 +455,17 @@
         } else {
             _init();
         }
-        
 
+        el.changeDirectionToLeft = function () {
+            ticker.directionSwitcher = -1;
+            ticker.settings.direction = "prev";
+        }
+
+        el.changeDirectionToRight = function () {
+            ticker.directionSwitcher = 1;
+            ticker.settings.direction = "next";
+        }
+        
         // returns the current jQuery object
         return this;
     }

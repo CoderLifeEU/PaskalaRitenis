@@ -1,27 +1,52 @@
 ﻿@model IEnumerable<PaskalaRitenis.Models.Supporter>
 
-<div class="carouselTicker">
-    <ul class="carouselTicker__list">
+<div class="supporters-section">
 
-        @foreach (var supporter in Model)
-        {
-            <li class="carouselTicker__item">
-                <a href="@supporter.Url" target="_blank">
-                    <img src="~/Images/supporters/@supporter.Logo" alt="@supporter.Name">
-                </a>
-            </li>
-        }
-    </ul>
+    <div class="nav-circlepop">
+        <a id="supporterLeftDirection" class="prev" href="#">
+            <span class="icon-wrap"></span>
+        </a>
+        <a id="supporterRightDirection" class="next" href="#">
+            <span class="icon-wrap"></span>
+        </a>
+    </div>
+
+    <div class="carouselTicker">
+        <ul class="carouselTicker__list">
+
+            @foreach (var supporter in Model)
+            {
+                <li class="carouselTicker__item">
+                    <a href="@supporter.Url" target="_blank">
+                        <img src="~/Images/supporters/@supporter.Logo" alt="@supporter.Name">
+                    </a>
+                </li>
+            }
+        </ul>
+    </div>
 </div>
 
 <script type="text/javascript">
     $(document).ready(function () {
-        jQuery('.carouselTicker').carouselTicker();
-
-        jQuery('.carouselTicker').carouselTicker({
-            speed: 5,
+        var carousel = jQuery('.carouselTicker').carouselTicker({
+            speed: 3,
             delay: 50,
-            reverse: true
+            reverse: true,
+            direction: "next"
         });
+
+        $("#supporterLeftDirection").click(function (e) {
+            e.preventDefault();
+
+            carousel.changeDirectionToLeft();
+        });
+
+        $("#supporterRightDirection").click(function (e) {
+            e.preventDefault();
+
+            carousel.changeDirectionToRight();
+        });
+
+
     });
 </script>
