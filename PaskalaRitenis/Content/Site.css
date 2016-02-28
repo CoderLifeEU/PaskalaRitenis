@@ -503,7 +503,7 @@ span.sf-arrow {
   top: 20px;
   right: 5px;
   display: block;
-  background: url(../Content/images/arrows-white.png) no-repeat 0 0;
+  background: url(../Images/arrows-white.png) no-repeat 0 0;
   overflow: hidden; /* making sure IE6 doesn't overflow and expand the box */
   font-size: 1px;
 }
