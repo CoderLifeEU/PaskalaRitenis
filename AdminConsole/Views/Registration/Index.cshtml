@@ -1,0 +1,37 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Registration track</h2>
+
+<input type="button" id="showTable" value="Show Teachers" />
+<div id="students">
+    @{Html.RenderAction("StudentList"); }
+</div>
+<div id="teachers" style="display: none">
+    @{Html.RenderAction("TeacherList"); }
+</div>
+
+
+<script type="text/javascript" src="~/Scripts/jquery-1.8.2.js"></script>
+<link rel="stylesheet" type="text/css" href="~/Content/Rezultati.css">
+<script type="text/javascript">
+
+    var clickTrack = 0;
+
+    $("#showTable").click(function () {
+        if (clickTrack > 0) {
+            $("#students").show();
+            $("#teachers").hide();
+            $(this).val("Show Teachers");
+            clickTrack--;
+        }
+        else {
+            $("#students").hide();
+            $("#teachers").show();
+            $(this).val("Show Students");
+            clickTrack++;
+        }
+    });
+
+</script>

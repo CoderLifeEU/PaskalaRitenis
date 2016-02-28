@@ -228,9 +228,9 @@ namespace PaskalaRitenis.Controllers
 
         private string SpecialCode()
         {
-            const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+            const string chars = "ABCDEFGHIJKLMNPQRSTUVWXYZ123456789";
             var random = new Random();
-            return new string(Enumerable.Repeat(chars, 8)
+            return new string(Enumerable.Repeat(chars, 6)
               .Select(s => s[random.Next(s.Length)]).ToArray());
         }
     }

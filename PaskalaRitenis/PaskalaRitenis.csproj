@@ -186,6 +186,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\drosiba\drosiba_big.jpg" />
     <Content Include="Content\js\jquery.carouselTicker.js" />
     <Content Include="Content\js\jquery.plugins\jquery.hugeitmicro.min.js" />
     <Content Include="Content\Supporters.xml">
@@ -304,6 +305,7 @@
       <LastGenOutput>News.designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="Content\nolikums\Paskala_Ritenis_Nolikums.pdf" />
     <None Include="Properties\PublishProfiles\Paskalis.pubxml" />
     <None Include="Scripts\jquery-1.8.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.8.2.js" />

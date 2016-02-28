@@ -1,10 +1,10 @@
 ﻿@model PaskalaRitenis.Models.StudentRegModel
 
 @{
-    ViewBag.Title = "Studentu Registracija";
+    ViewBag.Title = "Studentu reģistrācija";
 }
 
-<h2>Studentu Registracija</h2>
+<h2>Studentu reģistrācija</h2>
 
 @{ Html.EnableClientValidation(true); }
 @using (Html.BeginForm("StudentRegistr", "Registr", FormMethod.Post, new { name = "StudReg" }))
@@ -12,7 +12,7 @@
     @Html.ValidationSummary(true)
     <div class="divRegistr">
     <div>
-        <strong >Registracijas forma</strong>
+        <strong >Reģistrācijas forma</strong>
     </div>
     <div class="regForm" style="padding-top: 15px">
         <p class="registr-p">@Html.LabelFor(m=> m.Name)</p>
@@ -97,7 +97,7 @@
             @Html.RadioButtonFor(m => m.PlaceRequiredType, "Gan pirms, gan pēc")<br /><br />
         </div>
         <div>
-            <a href="http://paskalaritenis.ik.du.lv/wp-content/uploads/2015/02/drosiba_big.jpg" target="_blank">Drošības noteikumi</a><br /><br />
+            <a href="~/Content/drosiba/drosiba_big.jpg" target="_blank">Drošības noteikumi</a><br /><br />
             @Html.CheckBoxFor(m=> m.Sequrity)
             @Html.LabelFor(m=> m.Sequrity)
         </div>

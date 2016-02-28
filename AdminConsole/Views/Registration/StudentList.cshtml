@@ -1,0 +1,51 @@
+﻿@model List<AdminConsole.Models.RegistrationModel>
+
+<h2>Student List</h2>
+<input type="button" id="exportStudents" value="Export Student .csv" />
+
+<table class="registrTable">
+    <tr>
+        <th>Token</th>
+        <th>Vards</th>
+        <th>Uzvards</th>
+        <th>Telefons</th>
+        <th>Email</th>
+        <th>Pilseta</th>
+        <th>Skolas tips</th>
+        <th>Skolas nosaukums</th>
+        <th>IrIzveletaSkola</th>
+        <th>Klase</th>
+        <th>Skolotajs</th>
+        <th>Kopnite</th>
+        <th>KopnitesTips</th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@Html.DisplayFor(m => item.PersonCode)</td>
+            <td>@Html.DisplayFor(m => item.Name)</td>
+            <td>@Html.DisplayFor(m => item.Surname)</td>
+            <td>@Html.DisplayFor(m => item.Phone)</td>
+            <td>@Html.DisplayFor(m => item.Email)</td>
+            <td>@Html.DisplayFor(m => item.City)</td>
+            <td>@Html.DisplayFor(m => item.StudyType)</td>
+            <td>@Html.DisplayFor(m => item.School)</td>
+            <td>@Html.DisplayFor(m => item.IsSelected)</td>
+            <td>@Html.DisplayFor(m => item.SelectedKlass)</td>
+            <td>@Html.DisplayFor(m => item.Advicer)</td>
+            <td>@Html.DisplayFor(m => item.PlaceRequired)</td>
+            <td>@Html.DisplayFor(m => item.PlaceRequiredType)</td>
+        </tr>
+    }
+</table>
+
+<script type="text/javascript" src="~/Scripts/jquery-1.8.2.js"></script>
+<script type="text/javascript">
+
+    $("#exportStudents").click(function () {
+        window.location.href = '/Registration/ExportStudentList';
+    });
+
+</script>
+

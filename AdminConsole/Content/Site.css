@@ -754,3 +754,14 @@ tr.pager td {
             margin: 0;
         }
 }
+
+.registrTable {
+    display: table;
+    border-collapse: separate;
+    border-spacing: 2px;
+    border-color: grey;
+}
+
+.registrTable td, th {
+    padding: 1px 0px 0px 10px;
+}
