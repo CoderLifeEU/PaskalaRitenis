@@ -160,11 +160,11 @@
     </Compile>
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\Archive.designer.cs">
-    <Compile Include="Models\RegistrationModel.cs" />
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Archive.dbml</DependentUpon>
     </Compile>
+    <Compile Include="Models\RegistrationModel.cs" />      
     <Compile Include="Models\ArchiveModel.cs" />
     <Compile Include="Models\ArchiveRepository.cs" />
     <Compile Include="Models\RezultatiModel.cs" />
