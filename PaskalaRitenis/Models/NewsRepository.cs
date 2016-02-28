@@ -17,7 +17,7 @@ namespace PaskalaRitenis.Models
             IList<NewsModel> newsList = new List<NewsModel>();
             var query = from zinjas in _dataContext.Zinjas
                         select zinjas;
-            var news = query.ToList();
+            var news = query.OrderByDescending(a => a.CreatedDate).ToList();
             foreach (var newsData in news)
             {
                 newsList.Add(new NewsModel()

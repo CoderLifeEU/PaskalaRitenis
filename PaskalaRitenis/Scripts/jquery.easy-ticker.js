@@ -16,6 +16,7 @@
 			height: 'auto',
 			visible: 0,
 			mousePause: 1,
+            animated: 0,
 			controls: {
 				up: '',
 				down: '',
@@ -55,6 +56,12 @@
 					start();
 			});
 		}
+
+		if (s.opts.animated == 1) {
+            s.timerTemp = s.timer;
+            stop();
+		}
+
 		
 		$(s.opts.controls.up).on('click', function(e){
 			e.preventDefault();

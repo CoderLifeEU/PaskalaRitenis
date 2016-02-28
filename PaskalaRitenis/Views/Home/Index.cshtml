@@ -9,28 +9,49 @@
     <div class="content-wrapper">
         <h2>Ziņas</h2>
     </div>
-    <div class="vticker">
-        <ul>
-            @foreach (var news in Model.News)
-            { 
-                <li>
-                    @Html.Raw(news.Info)
-                </li>
-            }
-        </ul>
+    <div>
+        <img src="~/Images/up1.png" class="up" />
+        <img src="~/Images/up1.png" class="down" />
+        @*<button class="up">Up</button>
+        <button class="down">Down</button>*@
+        <div class="vticker">
+
+            <ul>
+                @foreach (var news in Model.News)
+                { 
+                    <li>
+                        @Html.Raw(news.Info)
+                    </li>
+                }
+            </ul>
+        </div>
     </div>
 </section>
 <script type="text/javascript">
     $(document).ready(function () {
 
         var dd = $('.vticker').easyTicker({
-            direction: 'up',
             easing: 'easeInOutBack',
             speed: 'slow',
-            interval: 5000,
+            //interval: 5000,
+            animate: 0,
             height: 'auto',
-            visible: 3,
-            mousePause: 1,
+            visible: 2,
+            mousePause: 0,
+            animated: 1,
+            controls: {
+                up: '.up',
+                down: '.down',
+            }
         }).data('easyTicker');
+
+        $(".up, .down").mouseover(function () {
+            $(this).attr('src', location +'/Images/up2.png');
+        });
+        $(".up, .down").mouseout(function () {
+            $(this).attr('src', location + '/Images/up1.png');
+        });
     });
+
+
 </script>

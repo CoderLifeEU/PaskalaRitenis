@@ -200,10 +200,6 @@
     <Content Include="Content\fancybox\jquery.fancybox-thumbs.css" />
     <Content Include="Content\fancybox\jquery.fancybox.css" />
     <Content Include="Content\fonts\News Cycle SIL OFL Font License 1.1.txt" />
-    <Content Include="Content\images\another_page.png" />
-    <Content Include="Content\images\arrows-white.png" />
-    <Content Include="Content\images\back.jpg" />
-    <Content Include="Content\images\pr_logo.png" />
     <Content Include="Content\js\hugeitmicro.js" />
     <Content Include="Content\js\jquery.easing-sooper.js" />
     <Content Include="Content\js\jquery.js" />
@@ -276,6 +272,13 @@
     <Content Include="Content\fonts\NewsCycle-Regular.ttf" />
     <Content Include="Content\fonts\YanoneKaffeesatz-Regular.eot" />
     <Content Include="Content\fonts\YanoneKaffeesatz-Regular.ttf" />
+    <Content Include="Images\du0.png" />
+    <Content Include="Images\du1.png" />
+    <Content Include="Images\du2.png" />
+    <Content Include="Images\du3.png" />
+    <Content Include="Images\du4.png" />
+    <Content Include="Images\original.jpg" />
+    <Content Include="Images\pr_logo.png" />
     <Content Include="Images\supporters\1c.png" />
     <Content Include="Images\supporters\binitex_large.png" />
     <Content Include="Images\supporters\BTG_logo.png" />
@@ -294,6 +297,8 @@
     <Content Include="Images\supporters\pr_logo.png" />
     <Content Include="Images\supporters\REM_PRO.jpg" />
     <Content Include="Images\supporters\rotkoCentrs1.png" />
+    <Content Include="Images\up1.png" />
+    <Content Include="Images\up2.png" />
     <Content Include="Models\Contact\Contacts.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>
       <LastGenOutput>Contacts.designer.cs</LastGenOutput>

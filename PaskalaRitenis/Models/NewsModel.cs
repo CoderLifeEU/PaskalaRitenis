@@ -9,5 +9,6 @@ namespace PaskalaRitenis.Models
     {
         public int Id { get; set; }
         public string Info { get; set; }
+        public DateTime CreatedDate { get; set; }
     }
 }
