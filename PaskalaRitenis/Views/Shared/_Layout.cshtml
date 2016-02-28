@@ -25,7 +25,7 @@
     <div id="main">
         <header>
             <div id="logo">
-                <img class="paskalaLogo" src="~/Images/pr_logo.png" alt="Paskala Ritenis">
+                <img class="paskalaLogo" src="~/Content/images/pr_logo.png" alt="Paskala Ritenis">
             </div>
             <nav>
                 <div id="menu_container">
@@ -33,13 +33,13 @@
                         <li>@Html.ActionLink("Sākumlapa", "Index", "Home")</li>
                         <li class="sf-parent"><a href="#">Reģistrācija<span class="sf-arrow"></span></a>
                             <ul class="sf-content" style="left: auto; z-index: 1052; display: none; margin-top: 0px;">
-                                <li>@Html.ActionLink("Studentiem", "StudentRegistr", "Registr")</li>
-                                <li>@Html.ActionLink("Skolotajiem", "TeacherRegistr", "Registr")</li>
+                                <li>@Html.ActionLink("Skolēniem", "StudentRegistr", "Registr")</li>
+                                <li>@Html.ActionLink("Skolotājiem", "TeacherRegistr", "Registr")</li>
                             </ul>
                         </li>
-                        <li><a href="#">Rezultāti 2015</a></li>
+                        <li>@Html.ActionLink("Rezultāti", "Index", "Results")</li>
                         <li>@Html.ActionLink("Olimpiādes programma 2016","Index","Programm")</li>
-                        <li><a href="#">Olimpiāžu arhīvs</a></li>
+                        <li>@Html.ActionLink("Arhīvs", "Index", "Archive")</li>
                         <li class="sf-parent"><a href="#">Galerija<span class="sf-arrow"></span></a>
                             <ul class="sf-content" style="left: auto; z-index: 1052; display: none; margin-top: 0px;">
                                 <li>@Html.ActionLink("Foto","Foto","Gallery")</li>
@@ -60,7 +60,7 @@
             </div>
         </div>        
         <footer>
-            <p>©2016 Paskāla ritenis</p>
+            <p><a href="#">©2016 Paskāla ritenis</a></p>
         </footer>
         @RenderSection("scripts", required: false)
     </div>

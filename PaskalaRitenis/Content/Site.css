@@ -1,4 +1,10 @@
-﻿html { 
+﻿@font-face { 
+  font-family: Yanone Kaffeesatz; 
+    src: url('../Content/fonts/YanoneKaffeesatz-Regular.eot'); 
+    src: local("Yanone Kaffeesatz"), url('../Content/fonts/YanoneKaffeesatz-Regular.ttf');
+} 
+
+html { 
   height: 100%;
 }
 
@@ -14,12 +20,8 @@ article, aside, figure, footer, header, hgroup, nav, section {
 
 body { 
   font: normal .80em arial, sans-serif;
+  background: #000 url(../Content/images/back.jpg) no-repeat center fixed;
   color: #444;
-  background-image: url("../Images/du4.png");
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover;
-  background-attachment: fixed;
 }
 
 p { 
@@ -47,6 +49,7 @@ h1, h2, h3 {
 h2 { 
   font-size: 160%;
   padding: 9px 0 5px 0;
+  color: #F68500;
 }
 
 h3 { 
@@ -55,6 +58,7 @@ h3 {
 }
 
 h4, h6 { 
+  color: #F68500;
   padding: 0 0 5px 0;
   font: normal 150%, arial, sans-serif;
 }
@@ -69,7 +73,7 @@ h5, h6 {
 a, a:hover { 
   outline: none;
   text-decoration: underline;
-  color: #0041FF;
+  color: #09D4FF;
 }
 
 a:hover { 
@@ -140,8 +144,6 @@ ol li {
   -webkit-border: 15px 15px 15px 15px;
   background: #FFF;
   padding-bottom: 30px;
-  background: rgb(54, 25, 25);
-  background: rgba(255, 255, 255, 0.9);
 }
 
 header { 
@@ -194,9 +196,9 @@ nav {
   -moz-box-shadow: 0 1px 2px rgba(0,0,0,.2);
   box-shadow: 0 1px 2px rgba(0,0,0,.2);  
   color: #FFF;
-  border: solid 1px rgb(199, 187, 247);
+  border: solid 1px #DA7C0C;
   background: #F78D1D;
-  background: -webkit-gradient(linear, left top, left bottom, from(rgb(102, 228, 241)), to(rgb(54, 78, 232)));
+  background: -webkit-gradient(linear, left top, left bottom, from(#FAA51A), to(#F47A20));
   background: -moz-linear-gradient(top,  #FAA51A,  #F47A20);
 } 
 
@@ -304,9 +306,9 @@ footer {
   -moz-box-shadow: 0 1px 2px rgba(0,0,0,.2);
   box-shadow: 0 1px 2px rgba(0,0,0,.2);  
   color: #FFF;
-  border: solid 1px rgb(199, 187, 247);
+  border: solid 1px #DA7C0C;
   background: #F78D1D;
-  background: -webkit-gradient(linear, left top, left bottom, from(rgb(102, 228, 241)), to(rgb(54, 78, 232)));
+  background: -webkit-gradient(linear, left top, left bottom, from(#FAA51A), to(#F47A20));
   background: -moz-linear-gradient(top,  #FAA51A,  #F47A20);
 }
 
@@ -403,16 +405,20 @@ footer a:hover {
   
 table { 
   margin: 10px 0 30px 0;
-  border: 1px solid black;
 }
 
 table tr th, table tr td { 
-
-  padding: 7px 7px;
+  background: #70D4E6;
+  color: #FFF;
+  padding: 7px 4px;
   text-align: left;
-  border: 1px solid black;
 }
   
+table tr td { 
+  background: #D3F2F7;
+  color: #47433F;
+  border-top: 1px solid #FFF;
+}
 
 
 
@@ -503,7 +509,7 @@ span.sf-arrow {
   top: 20px;
   right: 5px;
   display: block;
-  background: url(../Images/arrows-white.png) no-repeat 0 0;
+  background: url(../Content/images/arrows-white.png) no-repeat 0 0;
   overflow: hidden; /* making sure IE6 doesn't overflow and expand the box */
   font-size: 1px;
 }
@@ -520,7 +526,7 @@ ul#nav {
 }
 
 ul#nav ul { 
-  background: #3B5DE9;
+  background: #F47A20;
   margin-top: 5px;
   padding-bottom: 15px;
 }
@@ -637,19 +643,26 @@ ul#nav li a:hover,ul#nav li a:focus {
     height: 480px;
 }
 
+.vticker{
+	border: 2px solid #ccc;
+}
 .vticker ul{
 	padding: 0;
     width: 100%;
 }
 .vticker li{
 	list-style: none;
-	border-bottom: 2px solid rgba(0, 161, 210, 0.66);
+	border-bottom: 2px solid #ccc;
 	padding: 10px;
     height: 170px;
     overflow: auto;
 }
 .et-run{
 	background: red;
+}
+
+.programmTable tr td{
+     background-color: #FFF;
 }
 
 .youtube {
@@ -808,19 +821,4 @@ ul#nav li a:hover,ul#nav li a:focus {
 .nav-circlepop a:hover .icon-wrap::after {
 	-webkit-transform: translateX(-50%) rotate(-45deg);
 	transform: translateX(-50%) rotate(-45deg);
-}
-
-.up {
-    cursor: pointer;
-    height: 35px;
-    width: 35px;
-}
-
-.down {
-    cursor: pointer;
-    height: 35px;
-    width: 35px;
-    -ms-transform: rotate(180deg); /* IE 9 */
-    -webkit-transform: rotate(180deg); /* Chrome, Safari, Opera */
-    transform: rotate(180deg);
 }

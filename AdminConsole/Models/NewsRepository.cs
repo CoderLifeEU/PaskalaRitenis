@@ -48,7 +48,6 @@ namespace AdminConsole.Models
             var newsData = new Zinja()
             {
                 Info = news.Info,
-                CreatedDate = DateTime.Now,
             };
             _dataContext.Zinjas.InsertOnSubmit(newsData);
             _dataContext.SubmitChanges();
@@ -65,7 +64,6 @@ namespace AdminConsole.Models
         {
             Zinja newsData = _dataContext.Zinjas.Where(u => u.Id == news.Id).SingleOrDefault();
             newsData.Info = news.Info;
-            newsData.CreatedDate = DateTime.Now;
             _dataContext.SubmitChanges();
         }
     }

@@ -4,43 +4,84 @@
 <hgroup class="title">
     <h1>Olimpiāžu Rezultāti</h1>
 </hgroup>
-<h3>Rezultātu failu augšupielāde:</h3>
+<h3>Rezultātu failu augšupielāde:</h3>
+<input type="hidden" id="fUpl" value="@ViewBag.fUpl" />
 @using (Html.BeginForm("Upload", "Rezultati", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
-    <i>@ViewBag.Message</i>
+    <i>Izvēlieties failu (pdf):</i>
     <input type="file" name="file" accept=".pdf" id="file" class="fileBrowse" />
-    <input type="submit" value="Augšupielādēt" class="button" />
+    <input type="submit" value="Augšupielādēt" class="button" /><br />
+    <i id="uplMsg">@ViewBag.Message</i>
     <hr />
 }
 
 <h3>Rezultātu failu dzēšana:</h3>
-<select id="pdfSelect"></select> <input type="button" onclick="deleteFile()" value="Dzēst" class="button" />
+<select id="pdfSelect"></select> <input type="button" onclick="deletePdf()" value="Dzēst" class="button" /><br />
+<i id="delMsg"></i>
 <hr />
 
 @using (Html.BeginForm("Index", "Rezultati"))
 {
     <input type="submit" value="Atpakaļ uz sarakstu" class="button" />
 }
-
 <script type="text/javascript">
 
     $(document).ready(function () {
+        $("#uplMsg").hide();
+        $("#delMsg").hide();
+
         getFiles();
+        ifFileUploaded();
     });
 
     function getFiles() {
         $.ajax({
             type: "GET",
-            url: "Rezultati/GetFiles",
+            url: "GetFiles",
             dataType: "json",
             cache: false
         })
-        .done(function (data) {
-            var tableHTML = "";
-            $.each(data, function (i, fails) {
-                tableHTML += "<option value='" + fails.Path + "'>" + fails.Name + "</option>";
-            });
-            $("#pdfSelect").html(tableHTML);
-        })
+    .done(function (data) {
+        var tableHTML = "";
+        $.each(data, function (i, fails) {
+            tableHTML += "<option value='" + fails.Name + "'>" + fails.Name + "</option>";
+        });
+        $("#pdfSelect").html(tableHTML);
+    })
     }
+
+    function deletePdf() {
+        if (confirm("Dzēst?")) {
+            $.ajax({
+                type: "POST",
+                url: "DeletePdf",
+                dataType: "text",
+                contentType: "application/json; charset=utf-8",
+                data: JSON.stringify({ name: $("#pdfSelect")[0].value })
+            })
+        .error(function (data) {
+            var dataText = JSON.stringify(data);
+            var substr = dataText.substring(1, dataText.length - 1);
+            $("#delMsg").text(substr);
+            $("#delMsg").fadeIn();
+            $("#delMsg").delay(1000).fadeOut(1000, "swing");
+        })
+        .success(function (data) {
+            var dataText = JSON.stringify(data);
+            var substr = dataText.substring(1, dataText.length - 1);
+            $("#delMsg").text(substr);
+            getFiles();
+            $("#delMsg").fadeIn();
+            $("#delMsg").delay(1000).fadeOut(1000, "swing");
+        })
+        }
+    }
+
+    function ifFileUploaded() {
+        if ($("#fUpl").attr("value") == "true") {
+            $("#uplMsg").fadeIn();
+            $("#uplMsg").delay(1000).fadeOut(1000, "swing");
+        }
+    }
+
 </script>

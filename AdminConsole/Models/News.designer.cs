@@ -22,7 +22,7 @@ namespace AdminConsole.Models
 	using System;
 	
 	
-	[global::System.Data.Linq.Mapping.DatabaseAttribute(Name="DU_IK_PaskalaRitenisNew")]
+	[global::System.Data.Linq.Mapping.DatabaseAttribute(Name="DataSource")]
 	public partial class NewsDataContext : System.Data.Linq.DataContext
 	{
 		
@@ -84,8 +84,6 @@ namespace AdminConsole.Models
 		
 		private string _Info;
 		
-		private System.Nullable<System.DateTime> _CreatedDate;
-		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -94,8 +92,6 @@ namespace AdminConsole.Models
     partial void OnIdChanged();
     partial void OnInfoChanging(string value);
     partial void OnInfoChanged();
-    partial void OnCreatedDateChanging(System.Nullable<System.DateTime> value);
-    partial void OnCreatedDateChanged();
     #endregion
 		
 		public Zinja()
@@ -139,26 +135,6 @@ namespace AdminConsole.Models
 					this._Info = value;
 					this.SendPropertyChanged("Info");
 					this.OnInfoChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CreatedDate", DbType="DateTime")]
-		public System.Nullable<System.DateTime> CreatedDate
-		{
-			get
-			{
-				return this._CreatedDate;
-			}
-			set
-			{
-				if ((this._CreatedDate != value))
-				{
-					this.OnCreatedDateChanging(value);
-					this.SendPropertyChanging();
-					this._CreatedDate = value;
-					this.SendPropertyChanged("CreatedDate");
-					this.OnCreatedDateChanged();
 				}
 			}
 		}

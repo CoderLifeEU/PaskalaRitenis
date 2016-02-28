@@ -1,0 +1,19 @@
+﻿@model IEnumerable<PaskalaRitenis.Models.RezultatiModel>
+@{
+    ViewBag.Title = "Olimpiāžu Rezultāti";
+}
+<h2>@ViewBag.Title</h2>
+
+@foreach (var item in Model)
+{
+    <button style="width:50px" onclick="previewPdf('@item.RezultatiLink')">@item.Gads.ToString()</button><br />
+}
+
+<script type="text/javascript">
+
+    function previewPdf(_name) {
+        var action = "@Url.Action("GetPdf", "Results")?name=" + _name;
+        location.href = action;
+    }
+
+</script>

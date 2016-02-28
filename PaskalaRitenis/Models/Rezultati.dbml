@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="DU_IK_PaskalaRitenisNew" Class="RezultatiDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="WebSettings" ConnectionString="Data Source=159.148.144.30;Initial Catalog=DU_IK_PaskalaRitenisNew;User ID=PaskalaRitenisNewUser" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="DU_IK_PaskalaRitenisNewConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.Rezultati" Member="Rezultatis">
+    <Type Name="Rezultati">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Gads" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Publicets" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="RezultatiLink" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="Arhivets" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+</Database>

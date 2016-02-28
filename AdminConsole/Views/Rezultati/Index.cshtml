@@ -4,28 +4,28 @@
 <hgroup class="title">
     <h1>Olimpiāžu Rezultāti</h1>
 </hgroup>
-    <section id="gadi">
-        <h3>Norises gads un rezultāti:</h3>
-        <table id="yearTable"></table>
+<section id="gadi">
+    <h3>Norises gads un rezultāti:</h3>
+    <table id="yearTable"></table>
+    <hr />
+    <input type="button" onclick="toggleNewYear()" value="Pievienot gadu" class="button" />
+    <div id="enterYear" hidden>
+        Ievadiet gadu: <input id="newYearInput" maxlength="4" /><br />
+        Izvēlieties rezultātu failu <select id="pdfSelect"></select><br />
+        Publicēt rezultātus <input type="checkbox" id="publishResultsCbx" /><br />
+        <input type="button" onclick="insertYear()" value="Pievienot" class="button" />
         <hr />
-        <input type="button" onclick="toggleNewYear()" value="Pievienot gadu" class="button" />
-        <div id="enterYear" hidden>
-            Ievadiet gadu: <input id="newYearInput" maxlength="4" /><br />
-            Izvēlieties rezultātu failu <select id="pdfSelect"></select><br />
-            Publicēt rezultātus <input type="checkbox" id="publishResultsCbx"/><br />
-            <input type="button" onclick="insertYear()" value="Pievienot" class="button" />
-            <hr />
-        </div>
-        @using (Html.BeginForm("Upload", "Rezultati"))
-        {
-            <input type="submit" value="Augšupielādēt/Dzēst rezultātu failus" class="button" />
-        }
-        
-    </section>
+    </div>
+    @using (Html.BeginForm("Upload", "Rezultati"))
+    {
+        <input type="submit" value="Augšupielādēt/Dzēst rezultātu failus" class="button" />
+    }
 
-    <script type="text/javascript">
-        var newYearVisibe = false;        
-        
+</section>
+
+<script type="text/javascript">
+        var newYearVisibe = false;
+
         $(document).ready(function () {
             getFiles();
             getYears();
@@ -64,7 +64,12 @@
                     var checkedArchive = "";
                     if (year.Publicets) { checked = "checked"; }
                     if (year.Arhivets) { checkedArchive = "checked"; }
-                    tableHTML += "<tr><th>" + year.Gads + "</th><td style='padding-left:10px'><label>Publicēt <input id='publishResultsCbx2_" + year.RezultatsID + "' type='checkbox' " + checked + " onchange='UpdateYear(&quot;" + year.RezultatsID + "&quot;)' /></label></td><td><label>Rādīt arhīvā <input id='archiveResultsCbx2_" + year.RezultatsID.toString() + "' type='checkbox' " + checkedArchive + " onchange='UpdateYear(&quot;" + year.RezultatsID + "&quot;)' /></label></td><td><input type='button' value='Dzēst' onclick='deleteYear(" + year.RezultatsID + ")' class='button' /></td><td><input type='button' class='button' onclick='previewPdf(&quot;" + year.RezultatiLink + "&quot;)' value='Skatīt failu'/></td></tr>";
+                    tableHTML += "<tr><th>" + year.Gads + "</th><td style='padding-left:10px'>";
+                    tableHTML += "<label>Publicēt Rezultātus <input id='publishResultsCbx2_" + year.RezultatsID + "' type='checkbox' " + checked + " onchange='UpdateYear(&quot;" + year.RezultatsID + "&quot;)' /></label></td>";
+                    tableHTML += "<td><label>Rādīt Uzdevumus Arhīvā <input id='archiveResultsCbx2_" + year.RezultatsID.toString() + "' type='checkbox' " + checkedArchive + " onchange='UpdateYear(&quot;" + year.RezultatsID + "&quot;)' /></label></td>";
+                    tableHTML += "<td><input type='button' value='Rezultāti' onclick='previewPdf(&quot;" + year.RezultatiLink + "&quot;)' class='button' /></td>";
+                    tableHTML += "<td><input type='button' value='Uzdevumi' onclick='archive(&quot;" + year.Gads + "&quot;)' class='button' /></td>";
+                    tableHTML += "<td><input type='button' value='Dzēst' onclick='deleteYear(&quot;" + year.RezultatsID + "&quot;)' class='button' /></td></tr>";
                 });
                 $("#yearTable").html(tableHTML);
                 hideNewYear();
@@ -81,7 +86,7 @@
             .done(function (data) {
                 var tableHTML = "";
                 $.each(data, function (i, fails) {
-                    tableHTML += "<option value='" + fails.Path + "'>" + fails.Name + "</option>";
+                    tableHTML += "<option value='" + fails.Name + "'>" + fails.Name + "</option>";
                 });
                 $("#pdfSelect").html(tableHTML);
             })
@@ -90,7 +95,7 @@
         function insertYear() {
             var inputYear = $("#newYearInput").val();
             var selectEl = $("#pdfSelect");
-            var fileLink = "@@" + selectEl[0].value;
+            var fileLink = selectEl[0].value;
             var publish = $("#publishResultsCbx").is(":checked");
 
             $.ajax({
@@ -142,8 +147,14 @@
             })
         }
 
-        function previewPdf(_path) {
-            //TODO: Get and preview PDF from _path
+        function previewPdf(_name) {
+            var action = "@Url.Action("GetPdf", "Rezultati")?name=" + _name;
+            location.href = action;
         }
 
-    </script>
+    function archive(year) {
+        var action = "@Url.Action("Index", "Archive")?year=" + year;
+        location.href = action;
+        }
+
+</script>
