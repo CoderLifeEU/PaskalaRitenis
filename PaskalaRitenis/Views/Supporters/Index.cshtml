@@ -10,22 +10,24 @@
 <script type="text/javascript" src="~/Content/js/hugeitmicro.js"></script>
 <link rel="stylesheet" href="~/Content/hugeitmicro.css" />
  
-<section id="huge_it_gallery_content_11">
-  <div id="huge_it_gallery_container_11" class="super-list variable-sizes clearfix hugeitmicro" style="position: relative; overflow: hidden; height: 894px;">
-   
-      @{
-          foreach(var supporter in Model)
-          {
-              <div class="element_11 hugeitmicro-item">
-                  <div class="image-block_11">
-                      <a href="@supporter.Url" target="_blank">
-                          <img src="~/Images/supporters/@supporter.Logo" alt="@supporter.Name">
-                      </a>
-                  </div>
-			</div>        
-          }            
-      }
+<center>
+    <section id="huge_it_gallery_content_11">
+        <div id="huge_it_gallery_container_11" class="super-list variable-sizes clearfix hugeitmicro" style="position: relative; overflow: hidden; height: 894px;">
 
-    </div>	
+            @{
+                foreach (var supporter in Model)
+                {
+                    <div class="element_11 hugeitmicro-item">
+                        <div class="image-block_11">
+                            <a href="@supporter.Url" target="_blank">
+                                <img src="~/Images/supporters/@supporter.Logo" alt="@supporter.Name">
+                            </a>
+                        </div>
+                    </div>
+                }
+            }
 
-</section>
+        </div>
+
+    </section>
+</center>
