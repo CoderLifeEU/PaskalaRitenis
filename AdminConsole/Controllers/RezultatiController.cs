@@ -235,7 +235,16 @@ namespace AdminConsole.Controllers
                 }
 
                 byte[] fileBytes = System.IO.File.ReadAllBytes(path);
-                return new FileContentResult(fileBytes, System.Net.Mime.MediaTypeNames.Application.Octet);
+                string ext = Path.GetExtension(path);
+
+                if (ext == ".pdf")
+                {
+                    return new FileContentResult(fileBytes, System.Net.Mime.MediaTypeNames.Application.Pdf);
+                }
+                else
+                {
+                    return File(fileBytes, System.Net.Mime.MediaTypeNames.Application.Octet, name);
+                }
             }
             return null;
         }

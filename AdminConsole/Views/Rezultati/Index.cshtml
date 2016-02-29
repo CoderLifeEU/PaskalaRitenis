@@ -93,7 +93,12 @@
                     }
                     tableHTML += "</td>";
                     tableHTML += "<td><label>Rādīt Uzdevumus Arhīvā <input id='archiveResultsCbx2_" + year.RezultatsID.toString() + "' type='checkbox' " + checkedArchive + " onchange='UpdateYear(&quot;" + year.RezultatsID + "&quot;)' /></label></td>";
-                    tableHTML += "<td><input type='button' value='Rezultāti' onclick='previewPdf(&quot;" + year.RezultatiLink + "&quot;)' class='button' /></td>";
+                    if (year.RezultatiLink == null) {
+                        tableHTML += "<td><input type='button' style='opacity:0.5' disabled value='Rezultāti' onclick='previewPdf(&quot;" + year.RezultatiLink + "&quot;)' class='button' /></td>";
+                    }
+                    else {
+                        tableHTML += "<td><input type='button' value='Rezultāti' onclick='previewPdf(&quot;" + year.RezultatiLink + "&quot;)' class='button' /></td>";
+                    }
                     tableHTML += "<td><input type='button' value='Uzdevumi' onclick='archive(&quot;" + year.Gads + "&quot;)' class='button' /></td>";
                     tableHTML += "<td><input type='button' value='Dzēst' onclick='deleteYear(&quot;" + year.RezultatsID + "&quot;)' class='button' /></td></tr>";
                 });

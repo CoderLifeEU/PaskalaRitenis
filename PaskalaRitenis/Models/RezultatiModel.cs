@@ -12,13 +12,13 @@ namespace PaskalaRitenis.Models
 
     public class FileModel
     {
-        public string Path { get; set; }
-        public string Name { get; set; }
+        public int Id { get; set; }
+        public string FileName { get; set; }
     }
 
     public class ArchiveModel
     {
         public int Year { get; set; }
-        public List<string> FileNames { get; set; }
+        public List<FileModel> FileNames { get; set; }
     }
 }

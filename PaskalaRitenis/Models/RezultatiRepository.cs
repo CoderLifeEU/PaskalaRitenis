@@ -144,10 +144,14 @@ namespace PaskalaRitenis.Models
             foreach (RezultatiModel gads in arhivetieGadi)
             {
                 var years = GetYearsByYearValue(gads.Gads).Distinct();
-                List<string> tempList = new List<string>();
+                List<FileModel> tempList = new List<FileModel>();
                 foreach (var y in years)
                 {
-                    tempList.Add(y.FileName);
+                    tempList.Add(new FileModel()
+                    {
+                        Id = y.ID,
+                        FileName = y.FileName
+                    });
                 }
                 result.Add(new ArchiveModel()
                     {
@@ -156,6 +160,25 @@ namespace PaskalaRitenis.Models
                     });
             }
             return result;
+        }
+
+        public FileModel GetArchiveFileById(int id)
+        {
+            var result = _dataContext.Archives.Where(x => x.ID == id).FirstOrDefault();
+            return new FileModel { Id = result.ID, FileName = result.FileName };
+        }
+
+        public RezultatiModel GetResultById(int id)
+        {
+            var result = _dataContext.Rezultatis.Where(x => x.Publicets && x.ID == id).FirstOrDefault();
+            return new RezultatiModel()
+                {
+                    RezultatsID = result.ID,
+                    Gads = result.Gads,
+                    RezultatiLink = result.RezultatiLink,
+                    Publicets = result.Publicets,
+                    Arhivets = result.Arhivets
+                };
         }
     }
 
@@ -166,5 +189,7 @@ namespace PaskalaRitenis.Models
         string UpdateYear(RezultatiModel gads);
         IEnumerable<ArchiveModel> GetArchive();
         string DeleteYear(int year);
+        FileModel GetArchiveFileById(int id);
+        RezultatiModel GetResultById(int id);
     }
 }

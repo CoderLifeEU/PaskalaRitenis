@@ -29,54 +29,42 @@ namespace PaskalaRitenis.Controllers
             return View(model);
         }
 
-        private int ResultFileInUse(string pdfName)
+        private bool FileInUse(int id)
         {
-            var years = _repository.GetYears();
-            foreach (var year in years)
+            if (id > 0)
             {
-                if (year.RezultatiLink == pdfName) return year.Gads;
+                if (_repository.GetArchiveFileById(id) != null) return true;
             }
-            return 0;
+            return false;
         }
 
-        public FileResult GetFile(string name)
+        public ActionResult GetFile(int id)
         {
-            if (name != null && name.Length > 0 && ResultFileInUse(name) != 0)
+            if (FileInUse(id))
             {
+                var file = _repository.GetArchiveFileById(id);
                 string path;
                 if (ConfigurationManager.AppSettings["UseDefaultUploadPath"].Trim() == "true")
                 {
                     string webRootPath = Server.MapPath("~");
-                    path = Path.GetFullPath(Path.Combine(webRootPath, "../AdminConsole/Uploads/" + name));
+                    path = Path.GetFullPath(Path.Combine(webRootPath, "../AdminConsole/Uploads/" + file.FileName));
                 }
                 else
                 {
-                    path = Path.Combine(ConfigurationManager.AppSettings["CustomUploadedFilesLocation"].Trim(), name);
+                    path = Path.Combine(ConfigurationManager.AppSettings["CustomUploadedFilesLocation"].Trim(), file.FileName);
                 }
 
                 byte[] fileBytes = System.IO.File.ReadAllBytes(path);
-                return File(fileBytes, System.Net.Mime.MediaTypeNames.Application.Octet, name);
-            }
-            return null;
-        }
+                string ext = Path.GetExtension(path);
 
-        public ActionResult GetPdf(string name)
-        {
-            if (name != null && name.Length > 0 && ResultFileInUse(name) != 0)
-            {
-                string path;
-                if (ConfigurationManager.AppSettings["UseDefaultUploadPath"].Trim() == "true")
+                if (ext == ".pdf")
                 {
-                    string webRootPath = Server.MapPath("~");
-                    path = Path.GetFullPath(Path.Combine(webRootPath, "../AdminConsole/Uploads/" + name));
+                    return new FileContentResult(fileBytes, System.Net.Mime.MediaTypeNames.Application.Pdf);
                 }
                 else
                 {
-                    path = Path.Combine(ConfigurationManager.AppSettings["CustomUploadedFilesLocation"].Trim(), name);
+                    return File(fileBytes, System.Net.Mime.MediaTypeNames.Application.Octet, file.FileName);
                 }
-
-                byte[] fileBytes = System.IO.File.ReadAllBytes(path);
-                return new FileContentResult(fileBytes, System.Net.Mime.MediaTypeNames.Application.Pdf);
             }
             return null;
         }

@@ -6,20 +6,16 @@
 
 @foreach (var item in Model)
 {
-    <button class="submit-btn" onclick="previewPdf('@item.RezultatiLink')">@item.Gads.ToString()</button><br />
+    <button class="submit-btn" onclick="getFile(@item.RezultatsID)">@item.Gads.ToString()</button><br />
 }
 
 <script type="text/javascript">
 
-    function previewPdf(_name) {
-        var re = /(?:\.([^.]+))?$/;
-        if (re.exec(_name)[1] == "pdf") {
-            var action = "@Url.Action("GetPdf", "Results")?name=" + _name;
+    function getFile(id) {
+        if (id > 0) {
+            var action = "@Url.Action("GetFile", "Results")?id=" + id;
+            location.href = action;
         }
-        else {
-            var action = "@Url.Action("GetFile", "Results")?name=" + _name;
-        }
-        location.href = action;
     }
 
 </script>

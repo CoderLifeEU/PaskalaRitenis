@@ -10,22 +10,18 @@
     <label>@item.Year:</label><br />
     foreach(var subitem in item.FileNames)
     {
-        <a style="cursor: pointer" onclick="previewPdf('@subitem')">@subitem</a><br />
+        <a style="cursor: pointer" onclick="getFile(@subitem.Id)">@subitem.FileName</a><br />
     }
 <br /><br />
 }
 
 <script type="text/javascript">
 
-    function previewPdf(_name) {
-        var re = /(?:\.([^.]+))?$/;
-        if (re.exec(_name)[1] == "pdf") {
-            var action = "@Url.Action("GetPdf", "Results")?name=" + _name;
+    function getFile(id) {
+        if (id > 0) {
+            var action = "@Url.Action("GetFile", "Archive")?id=" + id;
+            location.href = action;
         }
-        else {
-            var action = "@Url.Action("GetFile", "Results")?name=" + _name;
-        }
-        location.href = action;
     }
 
 </script>
