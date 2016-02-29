@@ -1,5 +1,31 @@
-﻿@{
-    ViewBag.Title = "Arhīvs";
+﻿@model IEnumerable<PaskalaRitenis.Models.ArchiveModel>
+@{
+    ViewBag.Title = "Olimpiāžu Arhīvs";
 }
 
 <h2>@ViewBag.Title</h2>
+
+@foreach (var item in Model)
+{
+    <label>@item.Year:</label><br />
+    foreach(var subitem in item.FileNames)
+    {
+        <a style="cursor: pointer" onclick="previewPdf('@subitem')">@subitem</a><br />
+    }
+<br /><br />
+}
+
+<script type="text/javascript">
+
+    function previewPdf(_name) {
+        var re = /(?:\.([^.]+))?$/;
+        if (re.exec(_name)[1] == "pdf") {
+            var action = "@Url.Action("GetPdf", "Results")?name=" + _name;
+        }
+        else {
+            var action = "@Url.Action("GetFile", "Results")?name=" + _name;
+        }
+        location.href = action;
+    }
+
+</script>

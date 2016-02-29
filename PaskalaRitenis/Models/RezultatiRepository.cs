@@ -113,6 +113,50 @@ namespace PaskalaRitenis.Models
             if (File.Exists(link)) return false;
             else return true;
         }
+
+        private bool YearExistsByYear(int year)
+        {
+            if (_dataContext.Archives.Where(x => x.Year == year).Count() > 0) return true;
+            else return false;
+        }
+
+        public IEnumerable<Archive> GetYearsByYearValue(int year)
+        {
+            try
+            {
+                if (YearExistsByYear(year))
+                {
+                    var query = from f in _dataContext.Archives
+                                where f.Year == year
+                                select f;
+                    var gadi = query.ToList();
+                    return gadi;
+                }
+            }
+            catch { }
+            return null;
+        }
+
+        public IEnumerable<ArchiveModel> GetArchive()
+        {
+            List<ArchiveModel> result = new List<ArchiveModel>();
+            List<RezultatiModel> arhivetieGadi = GetYears().Where(x => x.Arhivets).Distinct().ToList();
+            foreach (RezultatiModel gads in arhivetieGadi)
+            {
+                var years = GetYearsByYearValue(gads.Gads).Distinct();
+                List<string> tempList = new List<string>();
+                foreach (var y in years)
+                {
+                    tempList.Add(y.FileName);
+                }
+                result.Add(new ArchiveModel()
+                    {
+                        Year = gads.Gads,
+                        FileNames = tempList
+                    });
+            }
+            return result;
+        }
     }
 
     public interface IRezultatiRepository
@@ -120,6 +164,7 @@ namespace PaskalaRitenis.Models
         string InsertYear(RezultatiModel gads);
         IEnumerable<RezultatiModel> GetYears();
         string UpdateYear(RezultatiModel gads);
+        IEnumerable<ArchiveModel> GetArchive();
         string DeleteYear(int year);
     }
 }
