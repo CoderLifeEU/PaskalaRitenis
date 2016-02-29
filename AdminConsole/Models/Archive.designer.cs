@@ -33,9 +33,6 @@ namespace AdminConsole.Models
     partial void InsertArchive(Archive instance);
     partial void UpdateArchive(Archive instance);
     partial void DeleteArchive(Archive instance);
-    partial void InsertArchiveFile(ArchiveFile instance);
-    partial void UpdateArchiveFile(ArchiveFile instance);
-    partial void DeleteArchiveFile(ArchiveFile instance);
     #endregion
 		
 		public ArchiveDataContext() : 
@@ -75,14 +72,6 @@ namespace AdminConsole.Models
 				return this.GetTable<Archive>();
 			}
 		}
-		
-		public System.Data.Linq.Table<ArchiveFile> ArchiveFiles
-		{
-			get
-			{
-				return this.GetTable<ArchiveFile>();
-			}
-		}
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Archive")]
@@ -91,48 +80,45 @@ namespace AdminConsole.Models
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
-		private int _Id;
+		private int _ID;
 		
 		private int _Year;
 		
-		private int _FileId;
-		
-		private EntitySet<ArchiveFile> _ArchiveFiles;
+		private string _FileName;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
     partial void OnCreated();
-    partial void OnIdChanging(int value);
-    partial void OnIdChanged();
+    partial void OnIDChanging(int value);
+    partial void OnIDChanged();
     partial void OnYearChanging(int value);
     partial void OnYearChanged();
-    partial void OnFileIdChanging(int value);
-    partial void OnFileIdChanged();
+    partial void OnFileNameChanging(string value);
+    partial void OnFileNameChanged();
     #endregion
 		
 		public Archive()
 		{
-			this._ArchiveFiles = new EntitySet<ArchiveFile>(new Action<ArchiveFile>(this.attach_ArchiveFiles), new Action<ArchiveFile>(this.detach_ArchiveFiles));
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int Id
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int ID
 		{
 			get
 			{
-				return this._Id;
+				return this._ID;
 			}
 			set
 			{
-				if ((this._Id != value))
+				if ((this._ID != value))
 				{
-					this.OnIdChanging(value);
+					this.OnIDChanging(value);
 					this.SendPropertyChanging();
-					this._Id = value;
-					this.SendPropertyChanged("Id");
-					this.OnIdChanged();
+					this._ID = value;
+					this.SendPropertyChanged("ID");
+					this.OnIDChanged();
 				}
 			}
 		}
@@ -157,125 +143,7 @@ namespace AdminConsole.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FileId", DbType="Int NOT NULL")]
-		public int FileId
-		{
-			get
-			{
-				return this._FileId;
-			}
-			set
-			{
-				if ((this._FileId != value))
-				{
-					this.OnFileIdChanging(value);
-					this.SendPropertyChanging();
-					this._FileId = value;
-					this.SendPropertyChanged("FileId");
-					this.OnFileIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Archive_ArchiveFile", Storage="_ArchiveFiles", ThisKey="FileId", OtherKey="Id")]
-		public EntitySet<ArchiveFile> ArchiveFiles
-		{
-			get
-			{
-				return this._ArchiveFiles;
-			}
-			set
-			{
-				this._ArchiveFiles.Assign(value);
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_ArchiveFiles(ArchiveFile entity)
-		{
-			this.SendPropertyChanging();
-			entity.Archive = this;
-		}
-		
-		private void detach_ArchiveFiles(ArchiveFile entity)
-		{
-			this.SendPropertyChanging();
-			entity.Archive = null;
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.ArchiveFiles")]
-	public partial class ArchiveFile : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _Id;
-		
-		private string _FileName;
-		
-		private EntityRef<Archive> _Archive;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnIdChanging(int value);
-    partial void OnIdChanged();
-    partial void OnFileNameChanging(string value);
-    partial void OnFileNameChanged();
-    #endregion
-		
-		public ArchiveFile()
-		{
-			this._Archive = default(EntityRef<Archive>);
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int Id
-		{
-			get
-			{
-				return this._Id;
-			}
-			set
-			{
-				if ((this._Id != value))
-				{
-					if (this._Archive.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnIdChanging(value);
-					this.SendPropertyChanging();
-					this._Id = value;
-					this.SendPropertyChanged("Id");
-					this.OnIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FileName", DbType="NVarChar(80) NOT NULL", CanBeNull=false)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FileName", DbType="NVarChar(100) NOT NULL", CanBeNull=false)]
 		public string FileName
 		{
 			get
@@ -291,40 +159,6 @@ namespace AdminConsole.Models
 					this._FileName = value;
 					this.SendPropertyChanged("FileName");
 					this.OnFileNameChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Archive_ArchiveFile", Storage="_Archive", ThisKey="Id", OtherKey="FileId", IsForeignKey=true)]
-		public Archive Archive
-		{
-			get
-			{
-				return this._Archive.Entity;
-			}
-			set
-			{
-				Archive previousValue = this._Archive.Entity;
-				if (((previousValue != value) 
-							|| (this._Archive.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Archive.Entity = null;
-						previousValue.ArchiveFiles.Remove(this);
-					}
-					this._Archive.Entity = value;
-					if ((value != null))
-					{
-						value.ArchiveFiles.Add(this);
-						this._Id = value.FileId;
-					}
-					else
-					{
-						this._Id = default(int);
-					}
-					this.SendPropertyChanged("Archive");
 				}
 			}
 		}

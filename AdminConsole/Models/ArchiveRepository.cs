@@ -17,24 +17,26 @@ namespace AdminConsole.Models
             _dataContext = new ArchiveDataContext();
         }
 
-        public string InsertYear(ArchiveModel year)
+        public string InsertFile(ArchiveModel file)
         {
-            try
+            if (_dataContext.Archives.Where(x => x.FileName == file.FileName && x.Year == file.Year).FirstOrDefault() == null)
             {
-                var rezultats = new Archive()
+                try
                 {
-                    Year = year.Year,
-                    FileId = year.FileId
-                };
-
-                _dataContext.Archives.InsertOnSubmit(rezultats);
-                _dataContext.SubmitChanges();
-                return "Gads pievienots";
+                    _dataContext.Archives.InsertOnSubmit(new Archive()
+                    {
+                        FileName = file.FileName,
+                        Year = file.Year
+                    });
+                    _dataContext.SubmitChanges();
+                    return "Fails piesaistīts";
+                }
+                catch
+                {
+                    return "Kļūda DB apstrādē";
+                }
             }
-            catch
-            {
-                return "Kļūda DB apstrādē";
-            }
+            else return "Fails jau ir piesaistīts!";
         }
 
         public IEnumerable<ArchiveModel> GetYears()
@@ -47,9 +49,9 @@ namespace AdminConsole.Models
             {
                 yearList.Add(new ArchiveModel()
                 {
-                    Id = gadiData.Id,
+                    Id = gadiData.ID,
                     Year = gadiData.Year,
-                    FileId = gadiData.FileId
+                    FileName = gadiData.FileName
                 });
             }
             return yearList;
@@ -58,16 +60,43 @@ namespace AdminConsole.Models
         public ArchiveModel GetYearById(int id)
         {
             var query = from f in _dataContext.Archives
-                        where f.Id == id
+                        where f.ID == id
                         select f;
             var gads = query.FirstOrDefault();
 
             return new ArchiveModel
             {
-                Id = gads.Id,
+                Id = gads.ID,
                 Year = gads.Year,
-                FileId = gads.FileId
+                FileName = gads.FileName
             };
+        }
+
+        public IEnumerable<ArchiveModel> GetYearsByYearValue(int year)
+        {
+            try
+            {
+                if (YearExistsByYear(year))
+                {
+                    var query = from f in _dataContext.Archives
+                                where f.Year == year
+                                select f;
+                    var gadi = query.ToList();
+                    List<ArchiveModel> result = new List<ArchiveModel>();
+                    foreach (var x in gadi)
+                    {
+                        result.Add(new ArchiveModel()
+                        {
+                            Id = x.ID,
+                            Year = x.Year,
+                            FileName = x.FileName
+                        });
+                    }
+                    return result;
+                }
+            }
+            catch { }
+            return null;
         }
 
         public string UpdateYear(ArchiveModel gads)
@@ -76,9 +105,9 @@ namespace AdminConsole.Models
             {
                 if (YearExistsByYear(gads.Id))
                 {
-                    Archive existingYear = _dataContext.Archives.Where(f => f.Id == gads.Id).SingleOrDefault();
+                    Archive existingYear = _dataContext.Archives.Where(f => f.ID == gads.Id).SingleOrDefault();
                     existingYear.Year = gads.Year;
-                    existingYear.FileId = gads.FileId;
+                    existingYear.FileName = gads.FileName;
                     _dataContext.SubmitChanges();
 
                     return "Dati atjaunoti";
@@ -91,13 +120,13 @@ namespace AdminConsole.Models
             }
         }
 
-        public string DeleteYear(int id)
+        public string DeleteYearById(int id)
         {
             try
             {
                 if (YearExistsById(id))
                 {
-                    Archive gads = _dataContext.Archives.Where(f => f.Id == id).SingleOrDefault();
+                    Archive gads = _dataContext.Archives.Where(f => f.ID == id).SingleOrDefault();
                     _dataContext.Archives.DeleteOnSubmit(gads);
                     _dataContext.SubmitChanges();
                     return "Gads nodzēsts";
@@ -110,18 +139,39 @@ namespace AdminConsole.Models
             }
         }
 
-        public IEnumerable<ArchiveFile> GetFilesByYear(int year)
+        public string DeleteYearByYearNumber(int year)
+        {
+            try
+            {
+                if (YearExistsByYear(year))
+                {
+                    var gads = _dataContext.Archives.Where(f => f.Year == year).ToList();
+                    foreach (var g in gads)
+                    {
+                        _dataContext.Archives.DeleteOnSubmit(g);
+                    }
+                    _dataContext.SubmitChanges();
+                    return "Gads nodzēsts";
+                }
+                else return "Šāds gads neeksistē";
+            }
+            catch
+            {
+                return "Kļūda DB apstrādē";
+            }
+        }
+
+        public IEnumerable<Archive> GetFilesExceptYear(int year)
         {
             try
             {
                 if (YearExistsByYear(year))
                 {
                     var query = from f in _dataContext.Archives
-                                where f.Year == year
+                                where f.Year != year
                                 select f;
-                    var gads = query.FirstOrDefault();
-
-                    return gads.ArchiveFiles;
+                    var faili = query.ToList();
+                    return faili;
                 }
             }
             catch { }
@@ -130,59 +180,33 @@ namespace AdminConsole.Models
 
         private bool YearExistsByYear(int year)
         {
-            if (_dataContext.Archives.Where(x => x.Year == year).SingleOrDefault() == null) return false;
-            else return true;
+            if (_dataContext.Archives.Where(x => x.Year == year).Count() > 0) return true;
+            else return false;
         }
 
         private bool YearExistsById(int id)
         {
-            if (_dataContext.Archives.Where(x => x.Id == id).SingleOrDefault() == null) return false;
-            else return true;
+            if (_dataContext.Archives.Where(x => x.ID == id).Count() > 0) return true;
+            else return false;
         }
 
-        private bool FileExistsOnServer(string fileName)
+        private bool FileExistsOnDb(string name)
         {
-            if (File.Exists(fileName)) return false;
-            else return true;
+            if (_dataContext.Archives.Where(x => x.FileName == name).Count() > 0) return true;
+            else return false;
         }
 
-        private bool FileExistsOnDb(string fileName)
-        {
-            if (_dataContext.ArchiveFiles.Where(x => x.FileName == fileName).SingleOrDefault() == null) return false;
-            else return true;
-        }
-
-        private bool FileExistsOnDb(int id)
-        {
-            if (_dataContext.ArchiveFiles.Where(x => x.Id == id).SingleOrDefault() == null) return false;
-            else return true;
-        }
-
-        public string InsertFile(ArchiveFileModel file)
+        public string DeleteFileOnDb(string fileName)
         {
             try
             {
-                _dataContext.ArchiveFiles.InsertOnSubmit(new ArchiveFile()
+                if (FileExistsOnDb(fileName))
                 {
-                    FileName = file.FileName
-                });
-                _dataContext.SubmitChanges();
-                return "Fails pievienots";
-            }
-            catch
-            {
-                return "Kļūda DB apstrādē";
-            }
-        }
-
-        public string DeleteFileOnDb(int id)
-        {
-            try
-            {
-                if (FileExistsOnDb(id))
-                {
-                    ArchiveFile file = _dataContext.ArchiveFiles.Where(f => f.Id == id).SingleOrDefault();
-                    _dataContext.ArchiveFiles.DeleteOnSubmit(file);
+                    var file = _dataContext.Archives.Where(f => f.FileName == fileName).ToList();
+                    foreach (var x in file)
+                    {
+                        _dataContext.Archives.DeleteOnSubmit(x);
+                    }
                     _dataContext.SubmitChanges();
                     return "Fails nodzēsts";
                 }
@@ -198,13 +222,14 @@ namespace AdminConsole.Models
 
     public interface IArchiveRepository
     {
-        string InsertYear(ArchiveModel year);
         IEnumerable<ArchiveModel> GetYears();
         ArchiveModel GetYearById(int id);
+        IEnumerable<ArchiveModel> GetYearsByYearValue(int year);
         string UpdateYear(ArchiveModel gads);
-        string DeleteYear(int id);
-        IEnumerable<ArchiveFile> GetFilesByYear(int year);
-        string InsertFile(ArchiveFileModel file);
-        string DeleteFileOnDb(int id);
+        string DeleteYearById(int id);
+        IEnumerable<Archive> GetFilesExceptYear(int year);
+        string InsertFile(ArchiveModel file);
+        string DeleteFileOnDb(string fileName);
+        string DeleteYearByYearNumber(int year);
     }
 }

@@ -2,17 +2,9 @@
   <Connection Mode="WebSettings" ConnectionString="Data Source=159.148.144.30;Initial Catalog=DU_IK_PaskalaRitenisNew;User ID=PaskalaRitenisNewUser" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="DU_IK_PaskalaRitenisNewConnectionString" Provider="System.Data.SqlClient" />
   <Table Name="dbo.Archive" Member="Archives">
     <Type Name="Archive">
-      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="Year" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="FileId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Association Name="Archive_ArchiveFile" Member="ArchiveFiles" ThisKey="FileId" OtherKey="Id" Type="ArchiveFile" />
-    </Type>
-  </Table>
-  <Table Name="dbo.ArchiveFiles" Member="ArchiveFiles">
-    <Type Name="ArchiveFile">
-      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="FileName" Type="System.String" DbType="NVarChar(80) NOT NULL" CanBeNull="false" />
-      <Association Name="Archive_ArchiveFile" Member="Archive" ThisKey="Id" OtherKey="FileId" Type="Archive" IsForeignKey="true" />
+      <Column Name="FileName" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
     </Type>
   </Table>
 </Database>

@@ -11,7 +11,6 @@
 
     public class FileModel
     {
-        public string Path { get; set; }
         public string Name { get; set; }
     }
 }

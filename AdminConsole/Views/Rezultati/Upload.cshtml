@@ -4,18 +4,18 @@
 <hgroup class="title">
     <h1>Olimpiāžu Rezultāti</h1>
 </hgroup>
-<h3>Rezultātu failu augšupielāde:</h3>
+<h3>Failu augšupielāde:</h3>
 <input type="hidden" id="fUpl" value="@ViewBag.fUpl" />
 @using (Html.BeginForm("Upload", "Rezultati", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
-    <i>Izvēlieties failu (pdf):</i>
-    <input type="file" name="file" accept=".pdf" id="file" class="fileBrowse" />
+    <i>Izvēlieties failu:</i>
+    <input type="file" name="file" accept="file_extension|audio/*|video/*|image/*|media_type" id="file" class="fileBrowse" />
     <input type="submit" value="Augšupielādēt" class="button" /><br />
     <i id="uplMsg">@ViewBag.Message</i>
     <hr />
 }
 
-<h3>Rezultātu failu dzēšana:</h3>
+<h3>Failu dzēšana:</h3>
 <select id="pdfSelect"></select> <input type="button" onclick="deletePdf()" value="Dzēst" class="button" /><br />
 <i id="delMsg"></i>
 <hr />

@@ -11,93 +11,138 @@
     <input type="button" onclick="toggleNewYear()" value="Pievienot gadu" class="button" />
     <div id="enterYear" hidden>
         Ievadiet gadu: <input id="newYearInput" maxlength="4" /><br />
-        Izvēlieties rezultātu failu <select id="pdfSelect"></select><br />
-        Publicēt rezultātus <input type="checkbox" id="publishResultsCbx" /><br />
+        <div id="chooseRes">Izvēlieties rezultātu failu <select id="pdfSelect"></select></div>Nepievienot rezultātus <input id="newYearDontAddRes" type="checkbox" onchange="dontAddResCbxChange()" /><br />
+        <div id="chooseRes2">Publicēt rezultātus <input type="checkbox" id="publishResultsCbx" /></div><br />
         <input type="button" onclick="insertYear()" value="Pievienot" class="button" />
         <hr />
     </div>
     @using (Html.BeginForm("Upload", "Rezultati"))
     {
-        <input type="submit" value="Augšupielādēt/Dzēst rezultātu failus" class="button" />
+        <input type="submit" value="Augšupielādēt/Dzēst failus" class="button" />
     }
 
 </section>
 
 <script type="text/javascript">
-        var newYearVisibe = false;
+    var newYearVisibe = false;
 
-        $(document).ready(function () {
-            getFiles();
-            getYears();
-        });
+    $(document).ready(function () {
+        getFiles();
+        getYears();
+    });
 
-        function toggleNewYear() {
-            if (newYearVisibe) hideNewYear();
-            else showNewYear();
+    function toggleNewYear() {
+        if (newYearVisibe) hideNewYear();
+        else showNewYear();
+    }
+
+    function showNewYear() {
+        $("#newYearInput").val("");
+        $("#newYearDontAddRes").attr("checked", false);
+        $("#publishResultsCbx").attr("checked", false);
+        $("#chooseRes").fadeIn();
+        $("#chooseRes2").fadeIn();
+        $("#enterYear").fadeIn();
+        newYearVisibe = true;
+    }
+
+    function hideNewYear() {
+        $("#enterYear").fadeOut();
+        $("#newYearInput").val("");
+        newYearVisibe = false;
+    }
+
+    function dontAddResCbxChange() {
+        if ($("#newYearDontAddRes").is(":checked")) {
+            $("#chooseRes").fadeOut(500, "swing");
+            $("#chooseRes2").fadeOut(500, "swing");
         }
-
-        function showNewYear() {
-            $("#newYearInput").val("");
-            $("#enterYear").fadeIn();
-            newYearVisibe = true;
+        else {
+            $("#chooseRes").fadeIn(500, "swing");
+            $("#chooseRes2").fadeIn(500, "swing");
         }
+    }
 
-        function hideNewYear() {
-            $("#enterYear").fadeOut();
-            $("#newYearInput").val("");
-            newYearVisibe = false;
-        }
+    //AJAX ***********************************************************************************
 
-        //AJAX ***********************************************************************************
-
-        function getYears() {
-            $.ajax({
-                type: "GET",
-                url: "Rezultati/GetYears",
-                dataType: "json",
-                cache: false
-            })
-            .done(function (data) {
-                var tableHTML = "";
+    function getYears() {
+        $.ajax({
+            type: "GET",
+            url: "Rezultati/GetYears",
+            dataType: "json",
+            cache: false
+        })
+        .done(function (data) {
+            var tableHTML = "";
+            if (data == null) {
+                tableHTML = "<i>Nav pievienotu gadu</i>"
+            }
+            else {
                 $.each(data, function (i, year) {
                     var checked = "";
                     var checkedArchive = "";
                     if (year.Publicets) { checked = "checked"; }
                     if (year.Arhivets) { checkedArchive = "checked"; }
-                    tableHTML += "<tr><th>" + year.Gads + "</th><td style='padding-left:10px'>";
-                    tableHTML += "<label>Publicēt Rezultātus <input id='publishResultsCbx2_" + year.RezultatsID + "' type='checkbox' " + checked + " onchange='UpdateYear(&quot;" + year.RezultatsID + "&quot;)' /></label></td>";
+                    tableHTML += "<tr id='yearRow_" + year.RezultatsID + "'><th>" + year.Gads + "</th>";
+                    tableHTML += "<td style='padding-left:10px'>";
+                    if (year.RezultatiLink == null) {
+                        tableHTML += "<div id='addResDiv_" + year.RezultatsID + "'><input type='button' id='addResBtn_" + year.RezultatsID + "' value='Norādīt rezultātu failu' onclick='addResultFile(&quot;" + year.RezultatsID + "&quot;)' class='button' /></div>";
+                    }
+                    else {
+                        tableHTML += "<label>Publicēt Rezultātus <input id='publishResultsCbx2_" + year.RezultatsID + "' type='checkbox' " + checked + " onchange='UpdateYear(&quot;" + year.RezultatsID + "&quot;)' /></label>";
+                    }
+                    tableHTML += "</td>";
                     tableHTML += "<td><label>Rādīt Uzdevumus Arhīvā <input id='archiveResultsCbx2_" + year.RezultatsID.toString() + "' type='checkbox' " + checkedArchive + " onchange='UpdateYear(&quot;" + year.RezultatsID + "&quot;)' /></label></td>";
                     tableHTML += "<td><input type='button' value='Rezultāti' onclick='previewPdf(&quot;" + year.RezultatiLink + "&quot;)' class='button' /></td>";
                     tableHTML += "<td><input type='button' value='Uzdevumi' onclick='archive(&quot;" + year.Gads + "&quot;)' class='button' /></td>";
                     tableHTML += "<td><input type='button' value='Dzēst' onclick='deleteYear(&quot;" + year.RezultatsID + "&quot;)' class='button' /></td></tr>";
                 });
-                $("#yearTable").html(tableHTML);
-                hideNewYear();
-            })
-        }
+            }
+            $("#yearTable").html(tableHTML);
+            hideNewYear();
+        })
+    }
 
-        function getFiles() {
+    function getFiles() {
+        $.ajax({
+            type: "GET",
+            url: "Rezultati/GetFiles",
+            dataType: "json",
+            cache: false
+        })
+        .done(function (data) {
+            var tableHTML = "";
+            $.each(data, function (i, fails) {
+                tableHTML += "<option value='" + fails.Name + "'>" + fails.Name + "</option>";
+            });
+            $("#pdfSelect").html(tableHTML);
+        })
+    }
+
+    function insertYear() {
+        var inputYear = $("#newYearInput").val();
+        var selectEl = $("#pdfSelect");
+        var fileLink = selectEl[0].value;
+        var publish = $("#publishResultsCbx").is(":checked");
+        var empty = $("#newYearDontAddRes").is(":checked");
+
+        if (empty) {
             $.ajax({
-                type: "GET",
-                url: "Rezultati/GetFiles",
-                dataType: "json",
-                cache: false
+                type: "POST",
+                url: "Rezultati/InsertEmptyYear",
+                dataType: "text",
+                contentType: "application/json; charset=utf-8",
+                data: JSON.stringify({ year: inputYear, publicet: false })
             })
-            .done(function (data) {
-                var tableHTML = "";
-                $.each(data, function (i, fails) {
-                    tableHTML += "<option value='" + fails.Name + "'>" + fails.Name + "</option>";
-                });
-                $("#pdfSelect").html(tableHTML);
+            .error(function (error) {
+                alert(error.responseText);
+            })
+            .done(function () {
+                hideNewYear();
+                getYears();
             })
         }
-
-        function insertYear() {
-            var inputYear = $("#newYearInput").val();
-            var selectEl = $("#pdfSelect");
-            var fileLink = selectEl[0].value;
-            var publish = $("#publishResultsCbx").is(":checked");
-
+        else {
             $.ajax({
                 type: "POST",
                 url: "Rezultati/InsertYear",
@@ -113,48 +158,105 @@
                 getYears();
             })
         }
+    }
 
-        function deleteYear(id) {
-            if (confirm("Dzēst?")) {
-                $.ajax({
-                    type: "POST",
-                    url: "Rezultati/DeleteYear",
-                    dataType: "text",
-                    contentType: "application/json; charset=utf-8",
-                    data: "{'id': '" + id + "' }"
-                })
-                .done(function () {
-                    hideNewYear();
-                    getYears();
-                })
-            }
-        }
-
-        function UpdateYear(id) {
-            var publish = $("#publishResultsCbx2_" + id).is(":checked");
-            var archive = $("#archiveResultsCbx2_" + id).is(":checked");
-
+    function deleteYear(id) {
+        if (confirm("Dzēst?")) {
             $.ajax({
                 type: "POST",
-                url: "Rezultati/UpdateYear",
+                url: "Rezultati/DeleteYear",
                 dataType: "text",
                 contentType: "application/json; charset=utf-8",
-                data: JSON.stringify({ ID: id, publicet: publish, arhivet: archive })
+                data: "{'id': '" + id + "' }"
             })
             .done(function () {
                 hideNewYear();
                 getYears();
             })
         }
+    }
 
-        function previewPdf(_name) {
+    function UpdateYear(id) {
+        var publish = $("#publishResultsCbx2_" + id).is(":checked");
+        var archive = $("#archiveResultsCbx2_" + id).is(":checked");
+
+        $.ajax({
+            type: "POST",
+            url: "Rezultati/UpdateYear",
+            dataType: "text",
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify({ ID: id, publicet: publish, arhivet: archive })
+        })
+        .done(function () {
+            hideNewYear();
+            getYears();
+        })
+    }
+
+    function previewPdf(_name) {
+        var re = /(?:\.([^.]+))?$/;
+        if (re.exec(_name)[1] == "pdf") {
             var action = "@Url.Action("GetPdf", "Rezultati")?name=" + _name;
-            location.href = action;
         }
+        else {
+            var action = "@Url.Action("GetFile", "Rezultati")?name=" + _name;
+        }
+        location.href = action;
+    }
 
     function archive(year) {
         var action = "@Url.Action("Index", "Archive")?year=" + year;
         location.href = action;
+    }
+
+    function addResultFile(id) {
+        $("#addResBtn_" + id).fadeOut();
+
+        var select = "<select id='pdfSelect_" + id + "'></select> ";
+        var accept = "<input type='button' id='acceptAddResFile_" + id + "' value='&#10003;' onclick='acceptAddResFile(&quot;" + id + "&quot;)' class='button' />";
+        var cancel = "<input type='button' id='cancelAddResFile_" + id + "' value='&#10005;' onclick='cancelAddResFile(&quot;" + id + "&quot;)' class='button' />";
+        $("#addResDiv_" + id).append(select);
+        $("#addResDiv_" + id).append(accept);
+        $("#addResDiv_" + id).append(cancel);
+
+        $.ajax({
+            type: "GET",
+            url: "Rezultati/GetFiles",
+            dataType: "json",
+            cache: false
+        })
+        .done(function (data) {
+            var options = "";
+            $.each(data, function (i, fails) {
+                options += "<option value='" + fails.Name + "'>" + fails.Name + "</option>";
+            });
+            $("#pdfSelect_" + id).html(options);
+        })
+    }
+
+    function acceptAddResFile(id)
+    {
+        var selectedLinkVal = $("#pdfSelect_" + id)[0].value;
+        if (id != null && selectedLinkVal != null) {
+            $.ajax({
+                type: "POST",
+                url: "Rezultati/UpdateYearLink",
+                dataType: "text",
+                contentType: "application/json; charset=utf-8",
+                data: JSON.stringify({ ID: id, link: selectedLinkVal })
+            })
+            .done(function () {
+                hideNewYear();
+                getYears();
+            })
         }
+    }
+
+    function cancelAddResFile(id) {
+        $("#acceptAddResFile_" + id).remove();
+        $("#cancelAddResFile_" + id).remove();
+        $("#pdfSelect_" + id).remove();
+        $("#addResBtn_" + id).fadeIn(250, "swing");
+    }
 
 </script>

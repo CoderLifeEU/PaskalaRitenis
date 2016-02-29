@@ -9,12 +9,6 @@ namespace AdminConsole.Models
     {
         public int Id { get; set; }
         public int Year { get; set; }
-        public int FileId { get; set; }
-    }
-
-    public class ArchiveFileModel
-    {
-        public int Id { get; set; }
         public string FileName { get; set; }
     }
 }

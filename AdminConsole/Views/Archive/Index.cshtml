@@ -4,12 +4,21 @@
 <h3>@ViewBag.Year. Gada Uzdevumi:</h3>
 <table id="fileTable"></table>
 <hr />
-
-
+<h3>Piesaistīt failu:</h3>
+<select id="fileSelect"></select> <input type="button" onclick="attachFile()" value="Piesaistīt" class="button" /><br />
+<i id="attachMsg"></i>
+<hr />
+@using (Html.BeginForm("Index", "Rezultati"))
+{
+    <input type="submit" value="Atpakaļ uz sarakstu" class="button" />
+}
 <script type="text/javascript">
 
     $(document).ready(function () {
+        $("#attachMsg").hide();
+
         getFiles();
+        getAllFiles();
     });
 
     //AJAX ***********************************************************************************
@@ -22,14 +31,34 @@
             cache: false
         })
         .done(function (data) {
-            alert("ez peasy");
             var tableHTML = "";
-            $.each(data, function (i, file) {
-                tableHTML += "<tr><th>" + file.FileName + "</th>";
-                tableHTML += "<td><input type='button' value='Dzēst' onclick='deleteFile(&quot;" + file.Id + "&quot;)' class='button' /></td></tr>";
-            });
+            if (data == null) {
+                tableHTML = "<i>Nav piesaistītu failu</i>"
+            }
+            else {
+                $.each(data, function (i, file) {
+                    tableHTML += "<tr><th>" + file.FileName + "</th>";
+                    tableHTML += "<td><input type='button' value='Dzēst' onclick='deleteFile(&quot;" + file.Id + "&quot;)' class='button' style='margin-left:10px' /></td></tr>";
+                });
+            }
             $("#fileTable").html(tableHTML);
         })
+    }
+
+    function getAllFiles() {
+        $.ajax({
+            type: "GET",
+            url: "Archive/GetAllFiles?year=" + $("#year").val(),
+            dataType: "json",
+            cache: false
+        })
+    .done(function (data) {
+        var tableHTML = "";
+        $.each(data, function (i, fails) {
+            tableHTML += "<option value='" + fails.Name + "'>" + fails.Name + "</option>";
+        });
+        $("#fileSelect").html(tableHTML);
+    })
     }
 
     function deleteFile(id) {
@@ -43,7 +72,38 @@
             })
             .done(function () {
                 getFiles();
+                getAllFiles();
             })
+        }
+    }
+
+    function attachFile() {
+        if (confirm("Piesaistīt?")) {
+            $.ajax({
+                type: "POST",
+                url: "Archive/AttachFile",
+                dataType: "text",
+                contentType: "application/json; charset=utf-8",
+                data: JSON.stringify({ name: $("#fileSelect")[0].value, year: $("#year").val() })
+            })
+        .error(function (data) {
+            getFiles();
+            getAllFiles();
+            var dataText = JSON.stringify(data);
+            var substr = dataText.substring(1, dataText.length - 1);
+            $("#attachMsg").text(substr);
+            $("#attachMsg").fadeIn();
+            $("#attachMsg").delay(1000).fadeOut(1000, "swing");
+        })
+        .success(function (data) {
+            getFiles();
+            getAllFiles();
+            var dataText = JSON.string
+            var substr = dataText.substring(1, dataText.length - 1);
+            $("#attachMsg").text(substr);
+            $("#attachMsg").fadeIn();
+            $("#attachMsg").delay(1000).fadeOut(1000, "swing");
+        })
         }
     }
 

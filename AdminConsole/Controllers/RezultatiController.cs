@@ -48,7 +48,7 @@ namespace AdminConsole.Controllers
                     }
                     else
                     {
-                        path = ConfigurationManager.AppSettings["CustomUploadedFilesLocation"].Trim();
+                        path = Path.Combine(ConfigurationManager.AppSettings["CustomUploadedFilesLocation"].Trim(), Path.GetFileName(file.FileName));
                     }
 
                     file.SaveAs(path);
@@ -83,6 +83,17 @@ namespace AdminConsole.Controllers
         }
 
         [HttpPost]
+        public string InsertEmptyYear(string year, string publicet)
+        {
+            if (validateYear(year)) return _repository.InsertYear(new RezultatiModel()
+            {
+                Gads = int.Parse(year),
+                Publicets = bool.Parse(publicet)
+            });
+            else return "Gads nav derīgs";
+        }
+
+        [HttpPost]
         public string DeleteYear(string id)
         {
             return _repository.DeleteYear(int.Parse(id));
@@ -92,6 +103,12 @@ namespace AdminConsole.Controllers
         public string UpdateYear(int ID, bool publicet, bool arhivet)
         {
             return _repository.UpdateYear(new RezultatiModel() { RezultatsID = ID, Publicets = publicet, Arhivets = arhivet });
+        }
+
+        [HttpPost]
+        public string UpdateYearLink(int ID, string link)
+        {
+            return _repository.UpdateYearLink(new RezultatiModel() { RezultatsID = ID, RezultatiLink = link });
         }
 
         private bool validateYear(string year)
@@ -141,11 +158,12 @@ namespace AdminConsole.Controllers
             }
             else
             {
-                path = ConfigurationManager.AppSettings["CustomUploadedFilesLocation"].Trim();
+                path = Path.Combine(ConfigurationManager.AppSettings["CustomUploadedFilesLocation"].Trim(), name);
             }
 
             if (name.Trim() == String.Empty) return "Tukšs nosaukums!";
-            else if (PdfInUse(name) != 0) return "Šis fails tiek izmantots " + PdfInUse(name) + ". gada rezultātu atspoguļošanai!";
+            else if (PdfInResultUse(name) != 0) return "Šis fails tiek izmantots " + PdfInResultUse(name) + ". gada rezultātu atspoguļošanai!";
+            else if (PdfInArchiveUse(name) != 0) return "Šis fails ir piesaistīts " + PdfInArchiveUse(name) + ". gada arhīvā esošajiem uzdevumiem!";
             else if (!System.IO.File.Exists(path)) return name + " neeksistē!";
             else
             {
@@ -161,7 +179,7 @@ namespace AdminConsole.Controllers
             }
         }
 
-        private int PdfInUse(string pdfName)
+        private int PdfInResultUse(string pdfName)
         {
             var years = _repository.GetYears();
             foreach (var year in years)
@@ -171,9 +189,20 @@ namespace AdminConsole.Controllers
             return 0;
         }
 
-        public ActionResult GetPdf(string name)
+        private int PdfInArchiveUse(string pdfName)
         {
-            if (name != null && name.Length > 0 && PdfInUse(name) > 0)
+            ArchiveRepository ar = new ArchiveRepository();
+            var years = ar.GetYears();
+            foreach (var year in years)
+            {
+                if (year.FileName == pdfName) return year.Year;
+            }
+            return 0;
+        }
+
+        public FileResult GetFile(string name)
+        {
+            if (name != null && name.Length > 0 && PdfInResultUse(name) != 0)
             {
                 string path;
                 if (ConfigurationManager.AppSettings["UseDefaultUploadPath"].Trim() == "true")
@@ -182,11 +211,31 @@ namespace AdminConsole.Controllers
                 }
                 else
                 {
-                    path = ConfigurationManager.AppSettings["CustomUploadedFilesLocation"].Trim();
+                    path = Path.Combine(ConfigurationManager.AppSettings["CustomUploadedFilesLocation"].Trim(), name);
                 }
 
                 byte[] fileBytes = System.IO.File.ReadAllBytes(path);
-                return new FileContentResult(fileBytes, System.Net.Mime.MediaTypeNames.Application.Pdf);
+                return File(fileBytes, System.Net.Mime.MediaTypeNames.Application.Octet, name);
+            }
+            return null;
+        }
+
+        public ActionResult GetPdf(string name)
+        {
+            if (name != null && name.Length > 0 && PdfInResultUse(name) != 0)
+            {
+                string path;
+                if (ConfigurationManager.AppSettings["UseDefaultUploadPath"].Trim() == "true")
+                {
+                    path = Path.Combine(Server.MapPath("~/Uploads"), name);
+                }
+                else
+                {
+                    path = Path.Combine(ConfigurationManager.AppSettings["CustomUploadedFilesLocation"].Trim(), name);
+                }
+
+                byte[] fileBytes = System.IO.File.ReadAllBytes(path);
+                return new FileContentResult(fileBytes, System.Net.Mime.MediaTypeNames.Application.Octet);
             }
             return null;
         }
