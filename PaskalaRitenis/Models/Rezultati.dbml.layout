@@ -2,10 +2,16 @@
 <ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 8.5" name="Rezultati">
   <DataContextMoniker Name="/RezultatiDataContext" />
   <nestedChildShapes>
-    <classShape Id="97a3fe8b-f084-48df-8277-cef769c8115c" absoluteBounds="0.75, 0.625, 2, 1.7708968098958331">
+    <classShape Id="1ff9f7a4-a18e-4983-b9fa-c642cb88550d" absoluteBounds="1, 0.625, 2, 1.7708968098958331">
       <DataClassMoniker Name="/RezultatiDataContext/Rezultati" />
       <nestedChildShapes>
-        <elementListCompartment Id="3cf62a2b-d508-4d40-be37-d01255cd5f91" absoluteBounds="0.765, 1.085, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="cf3a7da3-8981-4c15-a10c-31472aa9f697" absoluteBounds="1.0150000000000001, 1.085, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="65fe96b9-8fa7-4c61-a517-3abe8805bbba" absoluteBounds="1.125, 3.25, 2, 1.3862939453125">
+      <DataClassMoniker Name="/RezultatiDataContext/Archive" />
+      <nestedChildShapes>
+        <elementListCompartment Id="6e339f04-5fc8-4196-b1db-9f43e299ca71" absoluteBounds="1.1400000000000001, 3.71, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
   </nestedChildShapes>

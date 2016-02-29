@@ -33,6 +33,9 @@ namespace PaskalaRitenis.Models
     partial void InsertRezultati(Rezultati instance);
     partial void UpdateRezultati(Rezultati instance);
     partial void DeleteRezultati(Rezultati instance);
+    partial void InsertArchive(Archive instance);
+    partial void UpdateArchive(Archive instance);
+    partial void DeleteArchive(Archive instance);
     #endregion
 		
 		public RezultatiDataContext() : 
@@ -70,6 +73,14 @@ namespace PaskalaRitenis.Models
 			get
 			{
 				return this.GetTable<Rezultati>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Archive> Archives
+		{
+			get
+			{
+				return this.GetTable<Archive>();
 			}
 		}
 	}
@@ -171,7 +182,7 @@ namespace PaskalaRitenis.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RezultatiLink", DbType="NVarChar(MAX) NOT NULL", CanBeNull=false)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RezultatiLink", DbType="NVarChar(MAX)")]
 		public string RezultatiLink
 		{
 			get
@@ -207,6 +218,116 @@ namespace PaskalaRitenis.Models
 					this._Arhivets = value;
 					this.SendPropertyChanged("Arhivets");
 					this.OnArhivetsChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Archive")]
+	public partial class Archive : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _ID;
+		
+		private int _Year;
+		
+		private string _FileName;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIDChanging(int value);
+    partial void OnIDChanged();
+    partial void OnYearChanging(int value);
+    partial void OnYearChanged();
+    partial void OnFileNameChanging(string value);
+    partial void OnFileNameChanged();
+    #endregion
+		
+		public Archive()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int ID
+		{
+			get
+			{
+				return this._ID;
+			}
+			set
+			{
+				if ((this._ID != value))
+				{
+					this.OnIDChanging(value);
+					this.SendPropertyChanging();
+					this._ID = value;
+					this.SendPropertyChanged("ID");
+					this.OnIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Year", DbType="Int NOT NULL")]
+		public int Year
+		{
+			get
+			{
+				return this._Year;
+			}
+			set
+			{
+				if ((this._Year != value))
+				{
+					this.OnYearChanging(value);
+					this.SendPropertyChanging();
+					this._Year = value;
+					this.SendPropertyChanged("Year");
+					this.OnYearChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FileName", DbType="NVarChar(100) NOT NULL", CanBeNull=false)]
+		public string FileName
+		{
+			get
+			{
+				return this._FileName;
+			}
+			set
+			{
+				if ((this._FileName != value))
+				{
+					this.OnFileNameChanging(value);
+					this.SendPropertyChanging();
+					this._FileName = value;
+					this.SendPropertyChanged("FileName");
+					this.OnFileNameChanged();
 				}
 			}
 		}

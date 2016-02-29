@@ -149,11 +149,13 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\ArchiveController.cs" />
     <Compile Include="Controllers\GalleryController.cs" />
     <Compile Include="Controllers\ContactController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\NewsController.cs" />
     <Compile Include="Controllers\ProgrammController.cs" />
+    <Compile Include="Controllers\ResultsController.cs" />
     <Compile Include="Controllers\SupportersController.cs" />
     <Compile Include="Controllers\RegistrController.cs" />
     <Compile Include="Global.asax.cs">
@@ -164,6 +166,13 @@
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\HomePageModel.cs" />
     <Compile Include="Models\RegistrationModel.cs" />
+    <Compile Include="Models\Rezultati.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Rezultati.dbml</DependentUpon>
+    </Compile>
+    <Compile Include="Models\RezultatiModel.cs" />
+    <Compile Include="Models\RezultatiRepository.cs" />
     <Compile Include="Models\StudentRegModel.cs" />
     <Compile Include="Models\TeacherRegModel.cs" />
     <Compile Include="Models\INewsRepository.cs" />
@@ -306,6 +315,11 @@
       <SubType>Designer</SubType>
     </Content>
     <Content Include="Content\nolikums\Paskala_Ritenis_Nolikums.pdf" />
+    <Content Include="Models\Rezultati.dbml">
+      <Generator>MSLinqToSQLGenerator</Generator>
+      <LastGenOutput>Rezultati.designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </Content>
     <None Include="Properties\PublishProfiles\Paskalis.pubxml" />
     <None Include="Scripts\jquery-1.8.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.8.2.js" />
@@ -340,6 +354,7 @@
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Archive\Index.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
@@ -356,6 +371,7 @@
     <Content Include="Views\Supporters\Index.cshtml" />
     <Content Include="Views\Programm\Index.cshtml" />
     <Content Include="Views\Registr\SuccessRegistr.cshtml" />
+    <Content Include="Views\Results\Index.cshtml" />
     <Content Include="Views\Supporters\SupportersList.cshtml" />
   </ItemGroup>
   <ItemGroup>
@@ -383,6 +399,11 @@
       <Project>{c9113842-924a-4587-8990-cc0f7989b6d0}</Project>
       <Name>Repository</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Models\Rezultati.dbml.layout">
+      <DependentUpon>Rezultati.dbml</DependentUpon>
+    </None>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
