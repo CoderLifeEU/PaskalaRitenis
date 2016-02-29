@@ -8,7 +8,20 @@
 <section class="featured">
     <div class="content-wrapper">
         <h2>Ziņas</h2>
+        <div id="newsArrows">
+            <div class="nav-circlepop">
+                <a id="newsUp" class="prev" href="#">
+                    <span class="icon-wrap"></span>
+                </a>
+                <a id="newsDown" class="next" href="#">
+                    <span class="icon-wrap"></span>
+                </a>
+            </div>
+        </div>
     </div>
+    <br />
+    <br />
+    <br />
     <div class="vticker">
         <ul>
             @foreach (var news in Model.News)
@@ -28,9 +41,17 @@
             easing: 'easeInOutBack',
             speed: 'slow',
             interval: 5000,
+            animate: 0,
             height: 'auto',
             visible: 3,
             mousePause: 1,
+            visible: 2,
+            mousePause: 0,
+            animated: 1,
+            controls: {
+                up: '#newsUp',
+                down: '#newsDown',
+            }
         }).data('easyTicker');
     });
 </script>
