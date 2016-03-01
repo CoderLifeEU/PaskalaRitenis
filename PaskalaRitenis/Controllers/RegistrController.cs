@@ -64,7 +64,7 @@ namespace PaskalaRitenis.Controllers
                 {
                     con.Open();
                     string command = @"INSERT INTO Registration (Created, RegType, RegCode, Vards, Uzvards, Pilseta, Telefons, Email, Skolotajs, SkolasTips, SkolasNosaukums, SkolasKlase, Kopnite, KopnitesTips, IrIzveletaSkola) 
-                                     VALUES ('" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "' ,'" + model.RegType.ToString() + "', '" + SpecialCode() + "','" + model.Name + "', '" + model.Surname + "', '" + model.City + "', '" + model.Phone + "', '" + model.Email + "', '" + model.Advicer + "', '" + schoolType + "', '" + school + "', '" + schoolClass + "', '" + placeReq + "', '" + placeType + "', '" + schoolChosen + "')";
+                                     VALUES ('" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "' ,N'" + model.RegType.ToString() + "', N'" + SpecialCode() + "',N'" + model.Name + "', N'" + model.Surname + "', N'" + model.City + "', N'" + model.Phone + "', N'" + model.Email + "', N'" + model.Advicer + "', N'" + schoolType + "', N'" + school + "', N'" + schoolClass + "', N'" + placeReq + "', N'" + placeType + "', N'" + schoolChosen + "')";
 
                     using (SqlCommand query = new SqlCommand(command, con))
                     {
@@ -131,7 +131,7 @@ namespace PaskalaRitenis.Controllers
                 {
                     con.Open();
                     string command = @"INSERT INTO Registration (Created, RegType, RegCode, Vards, Uzvards, Pilseta, Telefons, Email, SkolasTips, SkolasNosaukums, Kopnite, KopnitesTips, IrIzveletaSkola) 
-                                     VALUES ('" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "' ,'" + model.RegType.ToString() + "', '" + SpecialCode() + "','" + model.Name + "', '" + model.Surname + "', '" + model.City + "', '" + model.Phone + "', '" + model.Email + "', '" + schoolType + "', '" + school + "', '" + placeReq + "', '" + placeType + "', '" + schoolChosen + "')";
+                                     VALUES ('" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "' ,N'" + model.RegType.ToString() + "', N'" + SpecialCode() + "',N'" + model.Name + "', N'" + model.Surname + "', N'" + model.City + "', N'" + model.Phone + "', N'" + model.Email + "', N'" + schoolType + "', N'" + school + "', N'" + placeReq + "', N'" + placeType + "', N'" + schoolChosen + "')";
 
                     using (SqlCommand query = new SqlCommand(command, con))
                     {
