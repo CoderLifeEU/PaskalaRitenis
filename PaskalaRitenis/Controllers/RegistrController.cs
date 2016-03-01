@@ -192,7 +192,7 @@ namespace PaskalaRitenis.Controllers
 
             SqlConnection con = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["DataSourceConnectionString"].ConnectionString);
 
-            var sql = "SELECT * FROM [DU_IK_PaskalaRitenisNew].[dbo].[Skolas]";
+            var sql = "SELECT * FROM Skolas";
 
             con.Open();
             using (SqlCommand cmd = new SqlCommand(sql, con))
@@ -219,7 +219,7 @@ namespace PaskalaRitenis.Controllers
 
             SqlConnection con = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["DataSourceConnectionString"].ConnectionString);
 
-            var sql = "SELECT * FROM [DU_IK_PaskalaRitenisNew].[dbo].[Profes_Skolas]";
+            var sql = "SELECT * FROM Profes_Skolas";
 
             con.Open();
             using (SqlCommand cmd = new SqlCommand(sql, con))
