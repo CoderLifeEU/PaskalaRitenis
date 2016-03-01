@@ -15,7 +15,7 @@ namespace PaskalaRitenis.Models
 
             StudyType = new List<SelectListItem>();
             StudyType.Add(new SelectListItem { Value = "1", Text = "Vispārējās izglītības iestāde" });
-            StudyType.Add(new SelectListItem { Value = "2", Text = "Profesionālo vidējo izglītības iestāde" });
+            StudyType.Add(new SelectListItem { Value = "2", Text = "Profesionālās vidējas izglītības iestāde" });
         }
 
         public RegType RegType { get; set; }
