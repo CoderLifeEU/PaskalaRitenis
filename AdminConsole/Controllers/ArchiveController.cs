@@ -106,7 +106,7 @@ namespace AdminConsole.Controllers
             if (ConfigurationManager.AppSettings["UseDefaultUploadPath"].Trim() == "true")
             {
                 string webRootPath = Server.MapPath("~");
-                path = Path.GetFullPath(Path.Combine(webRootPath, "../Files/" + name));
+                path = Path.GetFullPath(Path.Combine(webRootPath, "../PaskalaRitenis/Files/" + name));
             }
             else
             {

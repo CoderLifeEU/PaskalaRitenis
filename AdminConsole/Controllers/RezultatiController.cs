@@ -45,7 +45,7 @@ namespace AdminConsole.Controllers
                     if (ConfigurationManager.AppSettings["UseDefaultUploadPath"].Trim() == "true")
                     {
                         string webRootPath = Server.MapPath("~");
-                        path = Path.GetFullPath(Path.Combine(webRootPath, "../Files/" + file.FileName));
+                        path = Path.GetFullPath(Path.Combine(webRootPath, "../PaskalaRitenis/Files/" + file.FileName));
                     }
                     else
                     {
@@ -132,7 +132,7 @@ namespace AdminConsole.Controllers
             if (ConfigurationManager.AppSettings["UseDefaultUploadPath"].Trim() == "true")
             {
                 string webRootPath = Server.MapPath("~");
-                path = Path.GetFullPath(Path.Combine(webRootPath, "../Files/"));
+                path = Path.GetFullPath(Path.Combine(webRootPath, "../PaskalaRitenis/Files/"));
             }
             else
             {
@@ -157,7 +157,7 @@ namespace AdminConsole.Controllers
             if (ConfigurationManager.AppSettings["UseDefaultUploadPath"].Trim() == "true")
             {
                 string webRootPath = Server.MapPath("~");
-                path = Path.GetFullPath(Path.Combine(webRootPath, "../Files/" + name));
+                path = Path.GetFullPath(Path.Combine(webRootPath, "../PaskalaRitenis/Files/" + name));
             }
             else
             {
@@ -211,7 +211,7 @@ namespace AdminConsole.Controllers
                 if (ConfigurationManager.AppSettings["UseDefaultUploadPath"].Trim() == "true")
                 {
                     string webRootPath = Server.MapPath("~");
-                    path = Path.GetFullPath(Path.Combine(webRootPath, "../Files/" + name));
+                    path = Path.GetFullPath(Path.Combine(webRootPath, "../PaskalaRitenis/Files/" + name));
                 }
                 else
                 {
@@ -232,7 +232,7 @@ namespace AdminConsole.Controllers
                 if (ConfigurationManager.AppSettings["UseDefaultUploadPath"].Trim() == "true")
                 {
                     string webRootPath = Server.MapPath("~");
-                    path = Path.GetFullPath(Path.Combine(webRootPath, "../Files/" + name));
+                    path = Path.GetFullPath(Path.Combine(webRootPath, "../PaskalaRitenis/Files/" + name));
                 }
                 else
                 {
