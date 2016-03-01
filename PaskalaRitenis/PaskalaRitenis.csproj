@@ -283,6 +283,7 @@
     <Content Include="Content\fonts\NewsCycle-Regular.ttf" />
     <Content Include="Content\fonts\YanoneKaffeesatz-Regular.eot" />
     <Content Include="Content\fonts\YanoneKaffeesatz-Regular.ttf" />
+    <Content Include="Images\arrows-white.png" />
     <Content Include="Images\dalibnieki.jpg" />
     <Content Include="Images\du4.jpg" />
     <Content Include="Images\DU_Plan_Big.png" />
