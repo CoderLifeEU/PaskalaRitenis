@@ -143,21 +143,24 @@ namespace PaskalaRitenis.Models
             List<RezultatiModel> arhivetieGadi = GetYears().Where(x => x.Arhivets).Distinct().ToList();
             foreach (RezultatiModel gads in arhivetieGadi)
             {
-                var years = GetYearsByYearValue(gads.Gads).Distinct();
-                List<FileModel> tempList = new List<FileModel>();
-                foreach (var y in years)
+                if (YearExistsByYear(gads.Gads))
                 {
-                    tempList.Add(new FileModel()
+                    var years = GetYearsByYearValue(gads.Gads).Distinct();
+                    List<FileModel> tempList = new List<FileModel>();
+                    foreach (var y in years)
                     {
-                        Id = y.ID,
-                        FileName = y.FileName
-                    });
+                        tempList.Add(new FileModel()
+                        {
+                            Id = y.ID,
+                            FileName = y.FileName
+                        });
+                    }
+                    result.Add(new ArchiveModel()
+                        {
+                            Year = gads.Gads,
+                            FileNames = tempList
+                        });
                 }
-                result.Add(new ArchiveModel()
-                    {
-                        Year = gads.Gads,
-                        FileNames = tempList
-                    });
             }
             return result;
         }

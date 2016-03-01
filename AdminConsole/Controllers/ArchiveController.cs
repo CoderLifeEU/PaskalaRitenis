@@ -71,7 +71,7 @@ namespace AdminConsole.Controllers
             {
 
                 string webRootPath = Server.MapPath("~");
-                path = Path.GetFullPath(Path.Combine(webRootPath, "../PaskalaRitenis/Uploads/"));
+                path = Path.GetFullPath(Path.Combine(webRootPath, "../PaskalaRitenis/Files/"));
             }
             else
             {
