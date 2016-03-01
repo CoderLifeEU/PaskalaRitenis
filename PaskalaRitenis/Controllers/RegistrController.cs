@@ -16,10 +16,17 @@ namespace PaskalaRitenis.Controllers
 
         public ActionResult StudentRegistr()
         {
-            var model = new StudentRegModel();
-            model.School = RawSchoolList();
+            if (SiteConfiguration.EnableRegistration())
+            {
+                var model = new StudentRegModel();
+                model.School = RawSchoolList();
 
-            return View(model);
+                return View(model);
+            }
+            else
+            {
+                return RedirectToAction("Index", "Home");
+            }
         }
 
         [HttpPost]
@@ -85,10 +92,17 @@ namespace PaskalaRitenis.Controllers
 
         public ActionResult TeacherRegistr()
         {
-            var model = new TeacherRegModel();
-            model.School = RawSchoolList();
+            if (SiteConfiguration.EnableRegistration())
+            {
+                var model = new TeacherRegModel();
+                model.School = RawSchoolList();
 
-            return View(model);
+                return View(model);
+            }
+            else
+            {
+                return RedirectToAction("Index", "Home");
+            }
         }
 
         [HttpPost]

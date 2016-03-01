@@ -31,12 +31,15 @@
                 <div id="menu_container">
                     <ul class="sf-menu" id="nav">
                         <li>@Html.ActionLink("Sākumlapa", "Index", "Home")</li>
-                        <li class="sf-parent"><a href="#">Reģistrācija<span class="sf-arrow"></span></a>
-                            <ul class="sf-content" style="left: auto; z-index: 1052; display: none; margin-top: 0px;">
-                                <li>@Html.ActionLink("Skolēniem", "StudentRegistr", "Registr")</li>
-                                <li>@Html.ActionLink("Skolotājiem", "TeacherRegistr", "Registr")</li>
-                            </ul>
-                        </li>
+                        @if (PaskalaRitenis.SiteConfiguration.EnableRegistration())
+                        {
+                            <li class="sf-parent"><a href="#">Reģistrācija<span class="sf-arrow"></span></a>
+                                <ul class="sf-content" style="left: auto; z-index: 1052; display: none; margin-top: 0px;">
+                                    <li>@Html.ActionLink("Skolēniem", "StudentRegistr", "Registr")</li>
+                                    <li>@Html.ActionLink("Skolotājiem", "TeacherRegistr", "Registr")</li>
+                                </ul>
+                            </li>
+                        }
                         <li>@Html.ActionLink("Rezultāti", "Index", "Results")</li>
                         <li>@Html.ActionLink("Olimpiādes programma 2016","Index","Programm")</li>
                         <li>@Html.ActionLink("Arhīvs", "Index", "Archive")</li>
