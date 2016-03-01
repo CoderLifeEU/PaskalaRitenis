@@ -439,8 +439,9 @@ ul.sf-menu,ul.sf-menu * {
 }
 
 ul.sf-menu { 
-  display: block;
   position: relative;
+  display: flex;
+  justify-content: space-between;
 }
   
 ul.sf-menu li { 

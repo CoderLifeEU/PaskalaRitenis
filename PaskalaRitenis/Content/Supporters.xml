@@ -50,7 +50,7 @@
 
   <Supporter visible="true">
     <Name></Name>
-    <Logo>geidans.png</Logo>
+    <Logo>geidanssolutions.png</Logo>
     <Url>http://www.geidans.co.uk/</Url>
   </Supporter>
 
@@ -102,7 +102,11 @@
     <Url>http://www.btg.org.lv/</Url>
   </Supporter>
   
-  
+  <Supporter visible="true">
+    <Name></Name>
+    <Logo>certeslv_logo.png</Logo>
+    <Url>http://www.certes.lv/</Url>
+  </Supporter>
   
 </SupportersModel>
 

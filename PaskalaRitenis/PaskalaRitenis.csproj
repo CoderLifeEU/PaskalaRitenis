@@ -282,17 +282,23 @@
     <Content Include="Content\fonts\NewsCycle-Regular.ttf" />
     <Content Include="Content\fonts\YanoneKaffeesatz-Regular.eot" />
     <Content Include="Content\fonts\YanoneKaffeesatz-Regular.ttf" />
+    <Content Include="Images\dalibnieki.jpg" />
     <Content Include="Images\du4.jpg" />
+    <Content Include="Images\DU_Plan_Big.png" />
+    <Content Include="Images\Latvia_flag_map.png" />
+    <Content Include="Images\logo.png" />
     <Content Include="Images\pr_logo.png" />
     <Content Include="Images\supporters\1c.png" />
     <Content Include="Images\supporters\binitex_large.png" />
     <Content Include="Images\supporters\BTG_logo.png" />
+    <Content Include="Images\supporters\certeslv_logo.png" />
     <Content Include="Images\supporters\ctco_logo.png" />
     <Content Include="Images\supporters\daritajiem.jpg" />
     <Content Include="Images\supporters\daugavpils-pilsetas-izgliti.png" />
     <Content Include="Images\supporters\dautkom.png" />
     <Content Include="Images\supporters\e.jpg" />
     <Content Include="Images\supporters\geidans.png" />
+    <Content Include="Images\supporters\geidanssolutions.png" />
     <Content Include="Images\supporters\globs_logo-2.jpg" />
     <Content Include="Images\supporters\latinsoft.png" />
     <Content Include="Images\supporters\latvijas_maiznieks.png" />
@@ -304,6 +310,7 @@
     <Content Include="Images\supporters\rotkoCentrs1.png" />
     <Content Include="Images\up1.png" />
     <Content Include="Images\up2.png" />
+    <Content Include="Images\uzvaretaji2015.jpg" />
     <Content Include="Models\Contact\Contacts.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>
       <LastGenOutput>Contacts.designer.cs</LastGenOutput>
