@@ -46,7 +46,8 @@ namespace PaskalaRitenis.Controllers
                 string path;
                 if (ConfigurationManager.AppSettings["UseDefaultUploadPath"].Trim() == "true")
                 {
-                    path = Server.MapPath("~/Uploads");
+                    string webRootPath = Server.MapPath("~");
+                    path = Path.GetFullPath(Path.Combine(webRootPath, "../Files/" + file.FileName));
                 }
                 else
                 {

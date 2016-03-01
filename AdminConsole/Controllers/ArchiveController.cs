@@ -69,7 +69,9 @@ namespace AdminConsole.Controllers
             string path;
             if (ConfigurationManager.AppSettings["UseDefaultUploadPath"].Trim() == "true")
             {
-                path = Server.MapPath("~/Uploads");
+
+                string webRootPath = Server.MapPath("~");
+                path = Path.GetFullPath(Path.Combine(webRootPath, "../PaskalaRitenis/Uploads/"));
             }
             else
             {
@@ -103,7 +105,8 @@ namespace AdminConsole.Controllers
             string path;
             if (ConfigurationManager.AppSettings["UseDefaultUploadPath"].Trim() == "true")
             {
-                path = Path.Combine(Server.MapPath("~/Uploads"), name);
+                string webRootPath = Server.MapPath("~");
+                path = Path.GetFullPath(Path.Combine(webRootPath, "../Files/" + name));
             }
             else
             {

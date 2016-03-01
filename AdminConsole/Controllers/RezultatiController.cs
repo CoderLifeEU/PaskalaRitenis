@@ -44,7 +44,8 @@ namespace AdminConsole.Controllers
                     string path;
                     if (ConfigurationManager.AppSettings["UseDefaultUploadPath"].Trim() == "true")
                     {
-                        path = Path.Combine(Server.MapPath("~/Uploads"), Path.GetFileName(file.FileName));
+                        string webRootPath = Server.MapPath("~");
+                        path = Path.GetFullPath(Path.Combine(webRootPath, "../Files/" + file.FileName));
                     }
                     else
                     {
@@ -130,7 +131,8 @@ namespace AdminConsole.Controllers
             string path;
             if (ConfigurationManager.AppSettings["UseDefaultUploadPath"].Trim() == "true")
             {
-                path = Server.MapPath("~/Uploads");
+                string webRootPath = Server.MapPath("~");
+                path = Path.GetFullPath(Path.Combine(webRootPath, "../Files/"));
             }
             else
             {
@@ -154,7 +156,8 @@ namespace AdminConsole.Controllers
             string path;
             if (ConfigurationManager.AppSettings["UseDefaultUploadPath"].Trim() == "true")
             {
-                path = Path.Combine(Server.MapPath("~/Uploads"), name);
+                string webRootPath = Server.MapPath("~");
+                path = Path.GetFullPath(Path.Combine(webRootPath, "../Files/" + name));
             }
             else
             {
@@ -207,7 +210,8 @@ namespace AdminConsole.Controllers
                 string path;
                 if (ConfigurationManager.AppSettings["UseDefaultUploadPath"].Trim() == "true")
                 {
-                    path = Path.Combine(Server.MapPath("~/Uploads"), name);
+                    string webRootPath = Server.MapPath("~");
+                    path = Path.GetFullPath(Path.Combine(webRootPath, "../Files/" + name));
                 }
                 else
                 {
@@ -227,7 +231,8 @@ namespace AdminConsole.Controllers
                 string path;
                 if (ConfigurationManager.AppSettings["UseDefaultUploadPath"].Trim() == "true")
                 {
-                    path = Path.Combine(Server.MapPath("~/Uploads"), name);
+                    string webRootPath = Server.MapPath("~");
+                    path = Path.GetFullPath(Path.Combine(webRootPath, "../Files/" + name));
                 }
                 else
                 {
