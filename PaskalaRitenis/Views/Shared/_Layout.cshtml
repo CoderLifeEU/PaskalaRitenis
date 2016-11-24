@@ -19,6 +19,7 @@
     <link rel="stylesheet" href="~/Content/picassagallery/jquery.picasagallery.css" />
     <link rel="stylesheet" href="~/Content/fancybox/jquery.fancybox.css?v=2.0.5" />
     <link rel="stylesheet" href="~/Content/fancybox/jquery.fancybox-thumbs.css?v=2.0.5" />
+    <link rel="stylesheet" href="~/Content/bootstrap-3.3.7/css/bootstrap.min.css" />
     <link rel="shortcut icon" type="image/ico" href="~/Images/favicon.jpg">
 </head>
 <body>
@@ -62,7 +63,7 @@
                 @{Html.RenderAction("GetSupportersList", "Supporters");}
             </div>
         </div>        
-        <footer>
+        <footer class="p-footer">
             <p>©2016 Paskāla ritenis</p>
         </footer>
         @RenderSection("scripts", required: false)

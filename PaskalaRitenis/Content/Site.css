@@ -831,3 +831,6 @@ ul#nav li a:hover,ul#nav li a:focus {
     transform: rotate(90deg);
     left: 40px !important;
 }
+.p-footer{
+    box-sizing:initial;
+}

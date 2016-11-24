@@ -4,10 +4,15 @@
 }
 <h2>@ViewBag.Title</h2>
 
+<div class="row">
 @foreach (var item in Model)
 {
-    <button class="submit-btn" onclick="getFile(@item.RezultatsID)">@item.Gads.ToString()</button><br />
+    <div class="col-md-4 text-center">
+        <button class="submit-btn" onclick="getFile(@item.RezultatsID)">@item.Gads.ToString()</button>
+    </div>
 }
+</div>
+
 
 <script type="text/javascript">
 
