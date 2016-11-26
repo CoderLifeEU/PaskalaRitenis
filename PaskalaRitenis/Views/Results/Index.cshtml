@@ -1,6 +1,8 @@
 ﻿@model IEnumerable<PaskalaRitenis.Models.RezultatiModel>
 @{
     ViewBag.Title = "Olimpiāžu Rezultāti";
+    string webRootPath = Request.Url.GetLeftPart(UriPartial.Authority) + "/Files";
+    
 }
 <h2>@ViewBag.Title</h2>
 
@@ -8,13 +10,13 @@
 @foreach (var item in Model)
 {
     <div class="col-md-4 text-center">
-        <button class="submit-btn" onclick="getFile(@item.RezultatsID)">@item.Gads.ToString()</button>
+        <button class="submit-btn" onclick="location.href = '@webRootPath/@item.RezultatiLink'">@item.Gads.ToString()</button>
     </div>
 }
 </div>
 
 
-<script type="text/javascript">
+@*<script type="text/javascript">
 
     function getFile(id) {
         if (id > 0) {
@@ -23,4 +25,4 @@
         }
     }
 
-</script>
+</script>*@
