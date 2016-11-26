@@ -30,46 +30,47 @@ namespace PaskalaRitenis.Controllers
             return View(model);
         }
 
-        private bool ResultFileInUse(int id)
-        {
-            if (id > 0)
-            {
-                var year = _repository.GetYears().Where(x => x.RezultatsID == id).FirstOrDefault();
-                if (year != null) return true;
-            }
-            return false;
-        }
+        //private bool ResultFileInUse(int id)
+        //{
+        //    if (id > 0)
+        //    {
+        //        var year = _repository.GetYears().Where(x => x.RezultatsID == id).FirstOrDefault();
+        //        if (year != null) return true;
+        //    }
+        //    return false;
+        //}
 
-        public ActionResult GetFile(int id)
-        {
-            if (ResultFileInUse(id))
-            {
-                var file = _repository.GetResultById(id);
-                string path;
-                if (ConfigurationManager.AppSettings["UseDefaultUploadPath"].Trim() == "true")
-                {
-                    string webRootPath = Server.MapPath("~/Files");
-                    path = Path.GetFullPath(Path.Combine(webRootPath, file.RezultatiLink));
-                }
-                else
-                {
-                    path = Path.Combine(ConfigurationManager.AppSettings["CustomUploadedFilesLocation"].Trim(), file.RezultatiLink);
-                }
+        //public ActionResult GetFile(int id)
+        //{
+        //    if (ResultFileInUse(id))
+        //    {
+        //        var file = _repository.GetResultById(id);
+        //        System.Console.WriteLine(file.RezultatiLink);
+        //        string path;
+        //        if (ConfigurationManager.AppSettings["UseDefaultUploadPath"].Trim() == "true")
+        //        {
+        //            string webRootPath = Server.MapPath("~/Files");
+        //            path = Path.GetFullPath(Path.Combine(webRootPath, file.RezultatiLink));
+        //        }
+        //        else
+        //        {
+        //            path = Path.Combine(ConfigurationManager.AppSettings["CustomUploadedFilesLocation"].Trim(), file.RezultatiLink);
+        //        }
 
-                byte[] fileBytes = System.IO.File.ReadAllBytes(path);
-                string ext = Path.GetExtension(path);
+        //        byte[] fileBytes = System.IO.File.ReadAllBytes(path);
+        //        string ext = Path.GetExtension(path);
 
-                if(ext == ".pdf")
-                {
-                    return new FileContentResult(fileBytes, System.Net.Mime.MediaTypeNames.Application.Pdf);
-                }
-                else
-                {
-                    return File(fileBytes, System.Net.Mime.MediaTypeNames.Application.Octet, file.RezultatiLink);
-                }
-            }
-            return null;
-        }
+        //        if(ext == ".pdf")
+        //        {
+        //            return new FileContentResult(fileBytes, System.Net.Mime.MediaTypeNames.Application.Pdf);
+        //        }
+        //        else
+        //        {
+        //            return File(fileBytes, System.Net.Mime.MediaTypeNames.Application.Octet, file.RezultatiLink);
+        //        }
+        //    }
+        //    return null;
+        //}
 
     }
 }
