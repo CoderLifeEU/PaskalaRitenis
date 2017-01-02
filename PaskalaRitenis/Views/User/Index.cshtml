@@ -1,0 +1,88 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+
+<script src="~/Content/js/dataTables/datatables.min.js"></script>
+<link rel="stylesheet" type="text/css" href="~/Content/css/dataTables/datatables.min.css">
+
+<div class="row m-b-10">
+    <div class="col-md-12 text-right">
+        <a class="btn btn-success" href="/User/Create">Izveidot</a>
+    </div>
+    
+</div>
+
+<table id="example" class="table table-bordered table-hover display" cellspacing="0" width="100%">
+    <thead>
+        <tr>
+            <th>Lietotaja vards</th>
+            <th>Vards</th>
+            <th>Uzvards</th>
+            <th>Loma</th>
+            <th>Darbibas</th>
+        </tr>
+    </thead>
+    <tfoot>
+        <tr>
+            <th>Lietotaja vards</th>
+            <th>Vards</th>
+            <th>Uzvards</th>
+            <th>Loma</th>
+            <th>Darbibas</th>
+        </tr>
+    </tfoot>
+</table>
+
+<script type="text/javascript">
+
+
+    $(document).ready(function () {
+        $('#example').DataTable({
+            "ajax": {
+                "url": "/User/GetUsers",
+            },
+            "columnDefs": [ {
+                    "targets": 3,
+                    "data": "role",
+                    "render": function (data, type, full, meta) {
+                        if (data == 0) return "<span class='label label-success'>" + "Administrators" + "</span>";
+                        else return "<span class='label label-success'>"+ "Lietotajs" +"</span>";
+                    }
+                },
+                {
+                    "targets": 4,
+                    "data": "ID", 
+                    "render": function (data, type, full, meta) {
+                        return "<a class='btn btn-default' href='/User/Edit/" + data + "'>Labot</a>"
+                    }
+                }
+            ],
+            "bSort" : false,
+            "serverSide": true,
+            "processing": true,
+            "paging": true,
+            "pageLength": 10,
+            "language": {
+                "paginate": {
+                    "previous": "Iepriekšēja",
+                    "next": "Nākama"
+                },
+                "sSearch": "Meklēt",
+                "lengthMenu": "Radit _MENU_ ierakstus lapā",
+                "zeroRecords": "Nekas nav atrasts - piedodiet",
+                "info": "Tiek radita  _PAGE_ lapa no _PAGES_",
+            },
+            "aoColumns" : [
+                { "data": "UserName" },
+                { "data": "FirstName" },
+                { "data": "LastName" },
+                { "data": "Role" },
+                { "data": "ID" },
+            ],
+            "lengthChange": true
+
+        });
+    });
+
+
+</script>

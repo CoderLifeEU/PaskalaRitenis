@@ -11,6 +11,8 @@ namespace PaskalaRitenis.Models
     {
         User GetUser(string username);
         bool Exists(string username, string password);
+        List<User> GetUsers(int start,int pageSize,string search);
+        int CountUsers(string search);
     }
 
     public class UserRepository: IUserRepository
@@ -24,8 +26,35 @@ namespace PaskalaRitenis.Models
 
         public User GetUser(string username)
         {
-            User user = _datacontext.Users.Where(x => x.UserName == username).FirstOrDefault();
+            User user = new User();
+            using (var datacontext = new PaskalaRitenisDataContext())
+            {
+                user = datacontext.Users.Where(x => x.UserName == username).FirstOrDefault();
+            }
+            //User user = _datacontext.Users.Where(x => x.UserName == username).FirstOrDefault();
             return user;
+        }
+
+        public List<User> GetUsers(int start, int pageSize, string search)
+        {
+            List<User> users = new List<User>();
+            using (var datacontext = new PaskalaRitenisDataContext())
+            {
+                users = datacontext.Users.Where(x => x.FirstName.Contains(search) || x.LastName.Contains(search) || x.UserName.Contains(search)).Skip(start).Take(pageSize).ToList();
+            }
+
+            return users;
+        }
+
+        public int CountUsers(string search)
+        {
+            int count = 0;
+            using (var datacontext = new PaskalaRitenisDataContext())
+            {
+                count = datacontext.Users.Where(x => x.FirstName.Contains(search) || x.LastName.Contains(search) || x.UserName.Contains(search)).Count();
+            }
+
+            return count;
         }
 
         public bool Exists(string username, string password)

@@ -158,8 +158,10 @@
     <Compile Include="Controllers\NewsController.cs" />
     <Compile Include="Controllers\ProgrammController.cs" />
     <Compile Include="Controllers\ResultsController.cs" />
+    <Compile Include="Controllers\RezultatiController.cs" />
     <Compile Include="Controllers\SupportersController.cs" />
     <Compile Include="Controllers\RegistrController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -167,6 +169,7 @@
     <Compile Include="Helpers\SiteConfiguration.cs" />
     <Compile Include="Helpers\Utils.cs" />
     <Compile Include="Models\AccountModels.cs" />
+    <Compile Include="Models\DataTablesContext.cs" />
     <Compile Include="Models\HomePageModel.cs" />
     <Compile Include="Models\LoginViewModel.cs" />
     <Compile Include="Models\News.cs">
@@ -222,7 +225,9 @@
     <Content Include="Content\bootstrap-3.3.7\js\bootstrap.js" />
     <Content Include="Content\bootstrap-3.3.7\js\bootstrap.min.js" />
     <Content Include="Content\bootstrap-3.3.7\js\npm.js" />
+    <Content Include="Content\css\dataTables\datatables.min.css" />
     <Content Include="Content\drosiba\drosiba_big.jpg" />
+    <Content Include="Content\js\dataTables\datatables.min.js" />
     <Content Include="Content\js\jquery.carouselTicker.js" />
     <Content Include="Content\js\jquery.plugins\jquery.hugeitmicro.min.js" />
     <Content Include="Content\Supporters.xml">
@@ -425,6 +430,9 @@
     <Content Include="Views\Supporters\SupportersList.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Admin\Index.cshtml" />
+    <Content Include="Views\Rezultati\Index.cshtml" />
+    <Content Include="Views\Rezultati\Upload.cshtml" />
+    <Content Include="Views\User\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
