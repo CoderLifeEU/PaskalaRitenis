@@ -314,6 +314,13 @@
     <Content Include="Images\du4.jpg" />
     <Content Include="Images\DU_Plan_Big.png" />
     <Content Include="Images\favicon.jpg" />
+    <Content Include="Images\icons\Access-icon.png" />
+    <Content Include="Images\icons\document-compress-icon.png" />
+    <Content Include="Images\icons\Excel-icon.png" />
+    <Content Include="Images\icons\pdf-icon.png" />
+    <Content Include="Images\icons\PowerPoint-icon.png" />
+    <Content Include="Images\icons\Tests-icon.png" />
+    <Content Include="Images\icons\Word-icon.png" />
     <Content Include="Images\Latvia_flag_map.png" />
     <Content Include="Images\logo.png" />
     <Content Include="Images\pr_logo.png" />
@@ -371,9 +378,13 @@
     </Content>
     <None Include="Properties\PublishProfiles\FinalPascal.pubxml" />
     <None Include="Properties\PublishProfiles\Paskalis.pubxml" />
-    <None Include="Scripts\jquery-1.8.2.intellisense.js" />
-    <Content Include="Scripts\jquery-1.8.2.js" />
-    <Content Include="Scripts\jquery-1.8.2.min.js" />
+    <None Include="Scripts\jquery-3.1.1.intellisense.js" />
+    <Content Include="Scripts\jquery-3.1.1.js" />
+    <Content Include="Scripts\jquery-3.1.1.min.js" />
+    <Content Include="Scripts\jquery-3.1.1.slim.js" />
+    <Content Include="Scripts\jquery-3.1.1.slim.min.js" />
+    <Content Include="Scripts\jquery-3.1.1.slim.min.map" />
+    <Content Include="Scripts\jquery-3.1.1.min.map" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery-ui-1.8.24.js" />
     <Content Include="Scripts\jquery-ui-1.8.24.min.js" />
@@ -381,6 +392,7 @@
     <Content Include="Scripts\jquery.easing.min.js" />
     <Content Include="Scripts\jquery.easy-ticker.js" />
     <Content Include="Scripts\jquery.js" />
+    <Content Include="Scripts\jquery.matchHeight.js" />
     <Content Include="Scripts\jquery.sooperfish.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />

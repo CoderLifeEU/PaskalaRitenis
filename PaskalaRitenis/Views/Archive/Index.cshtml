@@ -1,27 +1,99 @@
 ﻿@model IEnumerable<PaskalaRitenis.Models.ArchiveModel>
 @{
     ViewBag.Title = "Olimpiāžu Arhīvs";
+    var iconType = "None";
+    string webRootPath = Request.Url.GetLeftPart(UriPartial.Authority) + "/Files";
 }
 
 <h2>@ViewBag.Title</h2>
+<div class="container-fluid">
+    <div class="panel-group" id="accordion">
+        @foreach (var item in Model)
+        {
+            <div class="panel panel-info">
+                <div class="panel-heading text-center">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" href="#@item.Year">
+                            @item.Year Gads
+                        </a>
+                    </h4>
+                </div>
+                <div id="@item.Year" class="panel-collapse collapse">
+                    @*<label>@item.Year:</label><br />*@
+                    <div class="panel-body">
+                        <div class="row">
+                            @foreach (var subitem in item.FileNames)
+                            {
+                                if (subitem.FileName.StartsWith("Access"))
+                                {
+                                    iconType = "Access";
+                                }
+                                else if (subitem.FileName.StartsWith("Excel"))
+                                {
+                                    iconType = "Excel";
+                                }
+                                else if (subitem.FileName.StartsWith("Word"))
+                                {
+                                    iconType = "Word";
+                                }
+                                else if (subitem.FileName.StartsWith("PowerPoint"))
+                                {
+                                    iconType = "PowerPoint";
+                                }
+                                else if (subitem.FileName.StartsWith("Rezultāti"))
+                                {
+                                    iconType = "pdf";
+                                }
+                                else if (subitem.FileName.StartsWith("Testa"))
+                                {
+                                    iconType = "Tests";
+                                }
+                                else if (subitem.FileName.StartsWith("Datnes"))
+                                {
+                                    iconType = "document-compress";
+                                }
 
-@foreach (var item in Model)
-{
-    <label>@item.Year:</label><br />
-    foreach(var subitem in item.FileNames)
-    {
-        <a style="cursor: pointer" onclick="getFile(@subitem.Id)">@subitem.FileName</a><br />
-    }
-<br /><br />
-}
+                                <div class="col-sm-6 col-md-3">
+                                    <div class="thumbnail">
+                                        <a href="@webRootPath/@subitem.FileName">
+                                            <img src="~/Images/icons/@iconType-icon.png" class="img-responsive"
+                                                 width="128px" height="128px" alt="@iconType" />
+                                            <div class="caption text-center">
+                                                <p>@subitem.FileName</p>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            @*<a style="cursor: pointer" onclick="getFile(@subitem.Id)">@subitem.FileName</a><br />*@
+
+        }
+    </div>
+</div>
 
 <script type="text/javascript">
 
-    function getFile(id) {
-        if (id > 0) {
-            var action = "@Url.Action("GetFile", "Archive")?id=" + id;
-            location.href = action;
-        }
-    }
+        @*function getFile(id) {
+                if (id > 0) {
+                    var action = "@Url.Action("GetFile", "Archive")?id=" + id;
+                    location.href = action;
+                }
+            }*@
+
+    (function () {
+        $(function () {
+            $('.thumbnail').matchHeight({
+                byRow: true,
+                property: 'height',
+                target: null,
+                remove: false
+            });
+        });
+    })();
 
 </script>
