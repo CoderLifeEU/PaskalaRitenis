@@ -52,6 +52,22 @@
                         </li>
                         <li>@Html.ActionLink("Atbalstītāji","Index","Supporters")</li>
                         <li>@Html.ActionLink("Kontakti","Index","Contact")</li>
+
+                         <!--<li>@Html.ActionLink("Ielogoties", "Login", "Account")</li>-->
+
+                       @if (Request.IsAuthenticated && User.IsInRole("Administrator"))
+                       {
+                        <li class="sf-parent">
+                            <a href="#">Panelis<span class="sf-arrow"></span></a>
+                            <ul class="sf-content" style="left: auto; z-index: 1052; display: none; margin-top: 0px;">
+                                <li>@Html.ActionLink("Lietotāji", "Index", "User")</li>
+                                <li>@Html.ActionLink("Rezultati", "Index", "Rezultati")</li>
+                                <li>@Html.ActionLink("Iziet", "Logout", "Account")</li>
+                            </ul>
+                        </li>
+                       }
+
+
                     </ul>
                 </div>
             </nav>

@@ -12,23 +12,23 @@
     
 </div>
 
-<table id="example" class="table table-bordered table-hover display" cellspacing="0" width="100%">
+<table id="example" class="table table-bordered table-hover display" cellspacing="0" >
     <thead>
         <tr>
-            <th>Lietotaja vards</th>
-            <th>Vards</th>
-            <th>Uzvards</th>
+            <th>Lietotāja vārds</th>
+            <th>Vārds</th>
+            <th>Uzvārds</th>
             <th>Loma</th>
             <th>Darbibas</th>
         </tr>
     </thead>
     <tfoot>
         <tr>
-            <th>Lietotaja vards</th>
-            <th>Vards</th>
-            <th>Uzvards</th>
+            <th>Lietotāja vārds</th>
+            <th>Vārds</th>
+            <th>Uzvārds</th>
             <th>Loma</th>
-            <th>Darbibas</th>
+            <th>Darbības</th>
         </tr>
     </tfoot>
 </table>
@@ -53,7 +53,7 @@
                     "targets": 4,
                     "data": "ID", 
                     "render": function (data, type, full, meta) {
-                        return "<a class='btn btn-default' href='/User/Edit/" + data + "'>Labot</a>"
+                        return "<div class='row'><div class='col-md-4'><a class='btn btn-default' href='/User/Edit/" + data + "'>Labot Paroli</a></div>" + /*"<div class='col-md-4'><a class='btn btn-danger' href='/User/Delete/" + data + "'>Dzēst</a></div>*/"</div>";
                     }
                 }
             ],
@@ -61,7 +61,7 @@
             "serverSide": true,
             "processing": true,
             "paging": true,
-            "pageLength": 10,
+            "pageLength": 2,
             "language": {
                 "paginate": {
                     "previous": "Iepriekšēja",

@@ -59,6 +59,13 @@ namespace PaskalaRitenis.Controllers
             return "tested!";
         }
 
+        [Authorize]
+        public ActionResult Logout()
+        {
+            FormsAuthentication.SignOut();
+            return RedirectToAction("Index","Home");
+        }
+
 
         
 

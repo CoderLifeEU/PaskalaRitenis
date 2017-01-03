@@ -13,6 +13,11 @@ namespace PaskalaRitenis.Models
         bool Exists(string username, string password);
         List<User> GetUsers(int start,int pageSize,string search);
         int CountUsers(string search);
+        bool Save(User user);
+        User GetUser(int id);
+        bool Delete(int id);
+        bool Update(int id, string password);
+        void SubmitChanges();
     }
 
     public class UserRepository: IUserRepository
@@ -24,6 +29,20 @@ namespace PaskalaRitenis.Models
             _datacontext = new PaskalaRitenisDataContext();
         }
 
+        public bool Save(User user)
+        {
+            try
+            {
+                _datacontext.Users.InsertOnSubmit(user);
+                _datacontext.SubmitChanges();
+                return true;
+            }catch(Exception ex)
+            {
+                return false;
+            }
+            
+        }
+
         public User GetUser(string username)
         {
             User user = new User();
@@ -33,6 +52,67 @@ namespace PaskalaRitenis.Models
             }
             //User user = _datacontext.Users.Where(x => x.UserName == username).FirstOrDefault();
             return user;
+        }
+
+        public User GetUser(int id)
+        {
+            User user = new User();
+            using (var datacontext = new PaskalaRitenisDataContext())
+            {
+                user = datacontext.Users.Where(x => x.ID== id).FirstOrDefault();
+            }
+            return user;
+        }
+
+        public bool Delete(int id)
+        {
+            try
+            {
+                var user = GetUser(id);
+                
+                _datacontext.Users.DeleteOnSubmit(user);
+                _datacontext.SubmitChanges();
+                return true;
+            }catch(Exception ex)
+            {
+                return false;
+            }
+            
+        }
+
+        public bool Update(int id, string password)
+        {
+            try
+            {
+                if(IDExists(id))
+                {
+                    User user = GetUser(id); //_datacontext.Users.Where(x => x.ID == id).FirstOrDefault();
+                    user.Password = FormsAuthentication.HashPasswordForStoringInConfigFile(password, "md5");
+                    _datacontext.SubmitChanges();
+                    return true;
+
+                }
+                else return false;
+
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+
+        }
+
+        private bool IDExists(int id)
+        {
+            if (_datacontext.Users.Where(x => x.ID == id).SingleOrDefault() == null) return false;
+            else return true;
+        }
+
+
+
+        public void SubmitChanges()
+        {
+            _datacontext.SubmitChanges();
         }
 
         public List<User> GetUsers(int start, int pageSize, string search)
