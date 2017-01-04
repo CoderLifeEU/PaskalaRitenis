@@ -36,7 +36,6 @@ namespace PaskalaRitenis.Controllers
         {
             DataTablesContext<PaskalaRitenis.Models.User> result = new DataTablesContext<PaskalaRitenis.Models.User>();
 
-            //var t1 = Request.QueryString["search"].ToArray();
             model.Search = Request.QueryString["Search[value]"].ToString();
 
             result.data = _repository.GetUsers(model.Start, model.Length, model.Search);

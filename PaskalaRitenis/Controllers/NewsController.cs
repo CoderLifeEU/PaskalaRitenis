@@ -24,9 +24,21 @@ namespace PaskalaRitenis.Controllers
 
         public ActionResult Index()
         {
-            var news = _repository.GetNews();
-            return View(news);
+            return View();
         }
+
+        public JsonResult GetNews(DataTablesParams model)
+        {
+            DataTablesContext<PaskalaRitenis.Models.NewsModel> result = new DataTablesContext<PaskalaRitenis.Models.NewsModel>();
+
+            model.Search = Request.QueryString["Search[value]"].ToString();
+
+            result.data = _repository.GetNews(model.Start, model.Length, model.Search);
+            result.recordsTotal = _repository.CountNews(model.Search);
+            result.recordsFiltered = result.recordsTotal;
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
 
         public ActionResult Create()
         {

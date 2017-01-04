@@ -1,8 +1,10 @@
-﻿@model IEnumerable<PaskalaRitenis.Models.NewsModel>
-
+﻿
 @{
     ViewBag.Title = "Index";
 }
+
+<script src="~/Content/js/dataTables/datatables.min.js"></script>
+<link rel="stylesheet" type="text/css" href="~/Content/css/dataTables/datatables.min.css">
 
 <div class="row m-b-10">
     <div class="col-md-12 text-right">
@@ -11,29 +13,66 @@
 
 </div>
 
-<table>
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Id)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Info)
-        </th>
-    </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Id)
-        </td>
-        <td>
-            @Html.Raw(item.Info)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-        </td>
-    </tr>
-}
-
+<table id="example" class="table table-bordered table-hover display" cellspacing="0">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Info</th>
+            <th>Darbibas</th>
+        </tr>
+    </thead>
+    <tfoot>
+        <tr>
+            <th>ID</th>
+            <th>Info</th>
+            <th>Darbibas</th>
+        </tr>
+    </tfoot>
 </table>
+
+
+<script type="text/javascript">
+
+
+    $(document).ready(function () {
+        $('#example').DataTable({
+            "ajax": {
+                "url": "/News/GetNews",
+            },
+            "columnDefs": [ 
+                {
+                    "targets": 2,
+                    "width":200,
+                    "data": "ID",
+                    "render": function (data, type, full, meta) {
+                        return "<div class='row'><div class='col-md-4'><a class='btn btn-default' href='/News/Edit/" + data + "'>Labot</a></div>" + "<div class='col-md-4'><a class='btn btn-danger' href='/News/Delete/" + data + "'>Dzēst</a></div></div>";
+                    }
+                }
+            ],
+            "bSort" : false,
+            "serverSide": true,
+            "processing": true,
+            "paging": true,
+            "pageLength": 10,
+            "language": {
+                "paginate": {
+                    "previous": "Iepriekšēja",
+                    "next": "Nākama"
+                },
+                "sSearch": "Meklēt",
+                "lengthMenu": "Radit _MENU_ ierakstus lapā",
+                "zeroRecords": "Nekas nav atrasts - piedodiet",
+                "info": "Tiek radita  _PAGE_ lapa no _PAGES_",
+            },
+            "aoColumns" : [
+                { "data": "Id" },
+                { "data": "Info" },
+                { "data": "Id" },
+            ],
+            "lengthChange": true
+
+        });
+    });
+
+
+</script>

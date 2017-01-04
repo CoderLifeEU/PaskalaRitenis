@@ -50,7 +50,6 @@ namespace PaskalaRitenis.Models
             {
                 user = datacontext.Users.Where(x => x.UserName == username).FirstOrDefault();
             }
-            //User user = _datacontext.Users.Where(x => x.UserName == username).FirstOrDefault();
             return user;
         }
 

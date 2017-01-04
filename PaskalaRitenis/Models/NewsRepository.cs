@@ -29,6 +29,30 @@ namespace PaskalaRitenis.Models
             return newsList;
         }
 
+        public List<NewsModel> GetNews(int start, int pageSize, string search)
+        {
+            List<Zinja> news = new List<Zinja>();
+            news = _dataContext.Zinjas.Where(x=>x.Info.Contains(search)).Skip(start).Take(pageSize).ToList();
+
+            List<NewsModel> newsList = new List<NewsModel>();
+            foreach (var newsData in news)
+            {
+                newsList.Add(new NewsModel()
+                {
+                    Id = newsData.Id,
+                    Info = newsData.Info,
+                });
+            }
+            return newsList;
+        }
+
+        public int CountNews(string search)
+        {
+            int count = 0;
+            count = _dataContext.Zinjas.Where(x => x.Info.Contains(search)).Count();
+            return count;
+        }
+
         public NewsModel GetNewsById(int newsId)
         {
             var query = from u in _dataContext.Zinjas
