@@ -1,0 +1,39 @@
+﻿@model IEnumerable<PaskalaRitenis.Models.NewsModel>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<div class="row m-b-10">
+    <div class="col-md-12 text-right">
+        <a class="btn btn-success" href="/News/Create">Izveidot</a>
+    </div>
+
+</div>
+
+<table>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Info)
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Id)
+        </td>
+        <td>
+            @Html.Raw(item.Info)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+        </td>
+    </tr>
+}
+
+</table>
