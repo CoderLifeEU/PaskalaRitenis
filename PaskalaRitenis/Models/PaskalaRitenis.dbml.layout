@@ -8,5 +8,11 @@
         <elementListCompartment Id="5d2ae179-eb53-48b1-a51d-4ca5c606dd4a" absoluteBounds="3.3899999999999997, 2.21, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
+    <classShape Id="852f6c1e-e94b-4afb-b76d-fa507df2d2c2" absoluteBounds="6.625, 3.375, 2, 3.8862125651041666">
+      <DataClassMoniker Name="/PaskalaRitenisDataContext/Registration" />
+      <nestedChildShapes>
+        <elementListCompartment Id="b2a51efa-a96c-4b81-bfef-c1e6c82df699" absoluteBounds="6.64, 3.835, 1.9700000000000002, 3.3262125651041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
   </nestedChildShapes>
 </ordesignerObjectsDiagram>

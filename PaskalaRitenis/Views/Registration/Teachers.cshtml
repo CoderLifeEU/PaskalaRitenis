@@ -1,0 +1,105 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+<script src="~/Content/js/dataTables/datatables.min.js"></script>
+<link rel="stylesheet" type="text/css" href="~/Content/css/dataTables/datatables.min.css">
+
+<div class="row m-b-10">
+    <div class="col-md-12 text-right">
+        <a class="btn btn-success" href="/Registration/ExportTeachersList">Eksportet datus</a>
+    </div>
+
+</div>
+
+<table id="example" class="table table-bordered table-hover display" cellspacing="0" width="100%">
+    <thead>
+        <tr>
+            <th>Token</th>
+            <th>Vārds</th>
+            <th>Uzvārds</th>
+            <th>Telefons</th>
+            <th>Email</th>
+            <th>Pilsēta</th>
+            <th>Skolas Tips</th>
+            <th>Skolas Nosaukums</th>
+            <th>Ir Izvēlēta Skola</th>
+            <th>Klase</th>
+            <th>Skolotājs</th>
+            <th>Kopnite</th>
+            <th>KopnitesTips</th>
+        </tr>
+    </thead>
+    <tfoot>
+        <tr>
+            <th>Token</th>
+            <th>Vārds</th>
+            <th>Uzvārds</th>
+            <th>Telefons</th>
+            <th>Email</th>
+            <th>Pilsēta</th>
+            <th>Skolas Tips</th>
+            <th>Skolas Nosaukums</th>
+            <th>Ir Izvēlēta Skola</th>
+            <th>Klase</th>
+            <th>Skolotājs</th>
+            <th>Kopnite</th>
+            <th>KopnitesTips</th>
+        </tr>
+    </tfoot>
+</table>
+
+<script type="text/javascript">
+
+
+    $(document).ready(function () {
+        $('#example').DataTable({
+            "responsive": true,
+            "ajax": {
+                "url": "/Registration/GetTeachers",
+                data: function (data) {
+                    delete data.columns;
+                }
+            },
+            "columnDefs": [
+
+            ],
+            "bSort" : false,
+            "serverSide": true,
+            "processing": true,
+            "paging": true,
+            "pageLength": 10,
+            "language": {
+                "paginate": {
+                    "previous": "Iepriekšēja",
+                    "next": "Nākama"
+                },
+                "sSearch": "Meklēt",
+                "lengthMenu": "Radit _MENU_ ierakstus lapā",
+                "zeroRecords": "Nekas nav atrasts - piedodiet",
+                "info": "Tiek radita  _PAGE_ lapa no _PAGES_",
+            },
+            "aoColumns" : [
+                { "data": "RegCode" },
+                { "data": "Vards" },
+                { "data": "Uzvards" },
+                { "data": "Telefons" },
+                { "data": "Email" },
+                { "data": "Pilseta" },
+                { "data": "SkolasTips" },
+                { "data": "SkolasNosaukums" },
+                { "data": "IrIzveletaSkola" },
+                { "data": "SkolasKlase" },
+                { "data": "Skolotajs" },
+                { "data": "Kopnite" },
+                { "data": "KopnitesTips" },
+            ],
+            "lengthChange": true
+
+        });
+    });
+
+
+</script>
+
+
+

@@ -12,6 +12,8 @@ namespace PaskalaRitenis.Models
         User GetUser(string username);
         bool Exists(string username, string password);
         List<User> GetUsers(int start,int pageSize,string search);
+        List<Registration> GetRegistrations(int start, int pageSize, string type, string search);
+        int CountRegistrations(string type, string search);
         int CountUsers(string search);
         bool Save(User user);
         User GetUser(int id);
@@ -123,6 +125,30 @@ namespace PaskalaRitenis.Models
             }
 
             return users;
+        }
+
+        public List<Registration> GetRegistrations(int start, int pageSize,string type, string search)
+        {
+            List<Registration> data = new List<Registration>();
+            using (var datacontext = new PaskalaRitenisDataContext())
+            {
+                data = datacontext.Registrations.Where(x => x.RegType.Equals(type) && (x.Email.Contains(search) || x.Pilseta.Contains(search) || x.SkolasNosaukums.Contains(search)
+                || x.Skolotajs.Contains(search) || x.RegType.Contains(search) || x.RegCode.Contains(search))).Skip(start).Take(pageSize).ToList();
+            }
+
+            return data;
+        }
+
+        public int CountRegistrations(string type, string search)
+        {
+            int count = 0;
+            using (var datacontext = new PaskalaRitenisDataContext())
+            {
+                count = datacontext.Registrations.Where(x => x.RegType.Equals(type) && (x.Email.Contains(search) || x.Pilseta.Contains(search) || x.SkolasNosaukums.Contains(search)
+                || x.Skolotajs.Contains(search) || x.RegType.Contains(search) || x.RegCode.Contains(search))).Count();
+            }
+
+            return count;
         }
 
         public int CountUsers(string search)

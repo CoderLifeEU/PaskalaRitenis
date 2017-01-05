@@ -72,6 +72,14 @@ namespace PaskalaRitenis.Models
 				return this.GetTable<User>();
 			}
 		}
+		
+		public System.Data.Linq.Table<Registration> Registrations
+		{
+			get
+			{
+				return this.GetTable<Registration>();
+			}
+		}
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Users")]
@@ -252,6 +260,303 @@ namespace PaskalaRitenis.Models
 			if ((this.PropertyChanged != null))
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Registration")]
+	public partial class Registration
+	{
+		
+		private int _Id;
+		
+		private System.DateTime _Created;
+		
+		private string _RegType;
+		
+		private string _RegCode;
+		
+		private string _Vards;
+		
+		private string _Uzvards;
+		
+		private string _Pilseta;
+		
+		private string _Telefons;
+		
+		private string _Email;
+		
+		private string _Skolotajs;
+		
+		private string _SkolasTips;
+		
+		private string _SkolasNosaukums;
+		
+		private string _SkolasKlase;
+		
+		private string _Kopnite;
+		
+		private string _KopnitesTips;
+		
+		private string _IrIzveletaSkola;
+		
+		public Registration()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.Always, DbType="Int NOT NULL IDENTITY", IsDbGenerated=true)]
+		public int Id
+		{
+			get
+			{
+				return this._Id;
+			}
+			set
+			{
+				if ((this._Id != value))
+				{
+					this._Id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Created", DbType="DateTime2 NOT NULL")]
+		public System.DateTime Created
+		{
+			get
+			{
+				return this._Created;
+			}
+			set
+			{
+				if ((this._Created != value))
+				{
+					this._Created = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RegType", DbType="NVarChar(20) NOT NULL", CanBeNull=false)]
+		public string RegType
+		{
+			get
+			{
+				return this._RegType;
+			}
+			set
+			{
+				if ((this._RegType != value))
+				{
+					this._RegType = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RegCode", DbType="NVarChar(10) NOT NULL", CanBeNull=false)]
+		public string RegCode
+		{
+			get
+			{
+				return this._RegCode;
+			}
+			set
+			{
+				if ((this._RegCode != value))
+				{
+					this._RegCode = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Vards", DbType="NVarChar(20)")]
+		public string Vards
+		{
+			get
+			{
+				return this._Vards;
+			}
+			set
+			{
+				if ((this._Vards != value))
+				{
+					this._Vards = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Uzvards", DbType="NVarChar(20)")]
+		public string Uzvards
+		{
+			get
+			{
+				return this._Uzvards;
+			}
+			set
+			{
+				if ((this._Uzvards != value))
+				{
+					this._Uzvards = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Pilseta", DbType="NVarChar(50)")]
+		public string Pilseta
+		{
+			get
+			{
+				return this._Pilseta;
+			}
+			set
+			{
+				if ((this._Pilseta != value))
+				{
+					this._Pilseta = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Telefons", DbType="NVarChar(20)")]
+		public string Telefons
+		{
+			get
+			{
+				return this._Telefons;
+			}
+			set
+			{
+				if ((this._Telefons != value))
+				{
+					this._Telefons = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Email", DbType="NVarChar(50)")]
+		public string Email
+		{
+			get
+			{
+				return this._Email;
+			}
+			set
+			{
+				if ((this._Email != value))
+				{
+					this._Email = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Skolotajs", DbType="NVarChar(50)")]
+		public string Skolotajs
+		{
+			get
+			{
+				return this._Skolotajs;
+			}
+			set
+			{
+				if ((this._Skolotajs != value))
+				{
+					this._Skolotajs = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SkolasTips", DbType="NVarChar(50)")]
+		public string SkolasTips
+		{
+			get
+			{
+				return this._SkolasTips;
+			}
+			set
+			{
+				if ((this._SkolasTips != value))
+				{
+					this._SkolasTips = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SkolasNosaukums", DbType="NVarChar(200)")]
+		public string SkolasNosaukums
+		{
+			get
+			{
+				return this._SkolasNosaukums;
+			}
+			set
+			{
+				if ((this._SkolasNosaukums != value))
+				{
+					this._SkolasNosaukums = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SkolasKlase", DbType="NVarChar(20)")]
+		public string SkolasKlase
+		{
+			get
+			{
+				return this._SkolasKlase;
+			}
+			set
+			{
+				if ((this._SkolasKlase != value))
+				{
+					this._SkolasKlase = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Kopnite", DbType="NVarChar(5)")]
+		public string Kopnite
+		{
+			get
+			{
+				return this._Kopnite;
+			}
+			set
+			{
+				if ((this._Kopnite != value))
+				{
+					this._Kopnite = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_KopnitesTips", DbType="NVarChar(50)")]
+		public string KopnitesTips
+		{
+			get
+			{
+				return this._KopnitesTips;
+			}
+			set
+			{
+				if ((this._KopnitesTips != value))
+				{
+					this._KopnitesTips = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IrIzveletaSkola", DbType="NVarChar(5)")]
+		public string IrIzveletaSkola
+		{
+			get
+			{
+				return this._IrIzveletaSkola;
+			}
+			set
+			{
+				if ((this._IrIzveletaSkola != value))
+				{
+					this._IrIzveletaSkola = value;
+				}
 			}
 		}
 	}
