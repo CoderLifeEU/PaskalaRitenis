@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Data.Objects;
 using System.IO;
 using System.Linq;
@@ -29,6 +30,43 @@ namespace PaskalaRitenis.Models
                 _dataContext.Rezultatis.InsertOnSubmit(rezultats);
                 _dataContext.SubmitChanges();
                 return "Gads pievienots";
+            }
+            catch
+            {
+                return "Kļūda DB apstrādē";
+            }
+        }
+
+        public string GetFilename(TaskViewModel task)
+        {
+            switch ((FileType)task.Type)
+            {
+                case FileType.Access: return String.Format("Access uzdevumi un atrisinājumi {0}.rar",task.Year);
+                case FileType.Datnes: return String.Format("Datnes uzdevumiem {0}.rar", task.Year);
+                case FileType.Excel: return String.Format("Excel uzdevumi un atrisinājumi {0}.rar", task.Year);
+                case FileType.PDF: return String.Format("PDF uzdevumi un atrisinājumi {0}.rar", task.Year);
+                case FileType.Powerpoint: return String.Format("PowerPoint uzdevumi un atrisinājumi {0}.rar", task.Year);
+                case FileType.Word: return String.Format("Word uzdevumi un atrisinājumi {0}.rar", task.Year);
+                case FileType.QuestionsAndAnswers: return String.Format("Testa jautājumi un atbildes {0}.rar", task.Year);
+                default:
+                    return task.TaskFile.FileName;
+            }
+
+        }
+        public string InsertTask(TaskViewModel task)
+        {
+            try
+            {
+                var archive = new Archive()
+                {
+                    Year = task.Year,
+                    FileName = GetFilename(task),
+                    FileType = task.Type
+                };
+
+                _dataContext.Archives.InsertOnSubmit(archive);
+                _dataContext.SubmitChanges();
+                return archive.FileName;
             }
             catch
             {
@@ -130,10 +168,11 @@ namespace PaskalaRitenis.Models
                                 where f.Year == year
                                 select f;
                     var gadi = query.ToList();
+                    
                     return gadi;
                 }
             }
-            catch { }
+            catch(Exception ex) { }
             return null;
         }
 
@@ -194,5 +233,7 @@ namespace PaskalaRitenis.Models
         string DeleteYear(int year);
         FileModel GetArchiveFileById(int id);
         RezultatiModel GetResultById(int id);
+        string InsertTask(TaskViewModel task);
+        string GetFilename(TaskViewModel task);
     }
 }

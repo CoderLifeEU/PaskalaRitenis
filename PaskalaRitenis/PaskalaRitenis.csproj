@@ -192,6 +192,7 @@
     <Compile Include="Helpers\Utils.cs" />
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\DataTablesContext.cs" />
+    <Compile Include="Models\FileType.cs" />
     <Compile Include="Models\HomePageModel.cs" />
     <Compile Include="Models\LoginViewModel.cs" />
     <Compile Include="Models\News.cs">
@@ -216,6 +217,7 @@
     <Compile Include="Models\RezultatiRepository.cs" />
     <Compile Include="Models\Role.cs" />
     <Compile Include="Models\StudentRegModel.cs" />
+    <Compile Include="Models\TaskViewModel.cs" />
     <Compile Include="Models\TeacherRegModel.cs" />
     <Compile Include="Models\INewsRepository.cs" />
     <Compile Include="Models\News.designer.cs">
@@ -942,6 +944,7 @@
     <Content Include="Views\Registration\StudentList.cshtml" />
     <Content Include="Views\Registration\TeacherList.cshtml" />
     <Content Include="Views\Registration\Teachers.cshtml" />
+    <Content Include="Views\Archive\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

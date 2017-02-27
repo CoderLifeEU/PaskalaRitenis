@@ -14,6 +14,7 @@
       <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="Year" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="FileName" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Member="FileType" Type="System.Int32" CanBeNull="true" />
     </Type>
   </Table>
 </Database>

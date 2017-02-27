@@ -70,7 +70,7 @@ namespace PaskalaRitenis.Controllers
             var result = _repository.GetYears();
             return Json(result, JsonRequestBehavior.AllowGet);
         }
-        /*
+        
         [HttpPost]
         public string InsertYear(string year, string link, string publicet)
         {

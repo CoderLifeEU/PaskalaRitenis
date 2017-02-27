@@ -25,7 +25,7 @@ namespace PaskalaRitenis.Controllers
 
         public ActionResult Index()
         {
-            var model = _repository.GetArchive().OrderByDescending(x=>x.Year);
+            var model = _repository.GetArchive().OrderByDescending(x => x.Year);
             return View(model);
         }
 
@@ -67,6 +67,38 @@ namespace PaskalaRitenis.Controllers
                 }
             }
             return null;
+        }
+
+        public ActionResult Create()
+        {
+            List<RezultatiModel> years =_repository.GetYears().Distinct().ToList();
+            TaskViewModel model = new TaskViewModel(years);
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult Create(TaskViewModel model)
+        {
+            if(ModelState.IsValid)
+            {
+                string filename = _repository.InsertTask(model);
+                string path;
+                if (ConfigurationManager.AppSettings["UseDefaultUploadPath"].Trim() == "true")
+                {
+                    string webRootPath = Server.MapPath("~");
+                    path = Path.GetFullPath(Path.Combine(webRootPath, "../PaskalaRitenis/Files/" + filename));
+                }
+                else
+                {
+                    path = Path.Combine(ConfigurationManager.AppSettings["CustomUploadedFilesLocation"].Trim(), Path.GetFileName(filename));
+                }
+
+                model.TaskFile.SaveAs(path);
+                return RedirectToAction("Index");
+            }
+            List<RezultatiModel> years = _repository.GetYears().Distinct().ToList();
+            model.SetYears(years);
+            return View(model);
         }
 
     }

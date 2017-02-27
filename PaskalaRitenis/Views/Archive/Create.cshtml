@@ -1,0 +1,50 @@
+﻿@model PaskalaRitenis.Models.TaskViewModel
+
+@{
+    ViewBag.Title = "Pievienot Uzdevumu Gadam";
+}
+
+<h2>Pievienot Uzdevumu Gadam</h2>
+
+@using (Html.BeginForm("Create", "Archive", FormMethod.Post, new { enctype = "multipart/form-data" })) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <div class="row">
+        <div class="col-md-6">
+            <fieldset>
+
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.Type)
+                </div>
+                <div class="editor-field">
+                    <div class="form-group">
+                        @Html.DropDownListFor(m => m.Type, Model.Types, new { @class = "form-control" })
+                    </div>
+                    @Html.ValidationMessageFor(model => model.Type)
+                </div>
+
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.Year)
+                </div>
+                <div class="editor-field">
+                    <div class="form-group">
+                        @Html.DropDownListFor(m => m.Year, Model.Years, new { @class = "form-control" })
+                    </div>
+                    @Html.ValidationMessageFor(model => model.Year)
+                </div>
+
+                @Html.TextBoxFor(x => x.TaskFile, new { @type = "file", @accept = "file_extension|audio/*|video/*|image/*|media_type", @class="m-b-10" })
+
+
+                <p>
+                    <input type="submit" value="Create" class="btn btn-primary" />
+                </p>
+            </fieldset>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Arhivs", "Index", "Archive", null, new { @class = "btn btn-warning" })
+</div>

@@ -7,6 +7,14 @@
 
 <h2>@ViewBag.Title</h2>
 <div class="container-fluid">
+
+    @if (Request.IsAuthenticated && User.IsInRole("Administrator"))
+    {
+            <div class="alert alert-info" role="alert">
+                <div class=""><h3>Nav noteikta gada uzdevumu?</h3> @Html.ActionLink("Pievienot", "Create", "Archive", null, new { @class = "btn btn-primary" })</div>
+            </div>
+    }
+
     <div class="panel-group" id="accordion">
         @foreach (var item in Model)
         {
