@@ -26,7 +26,7 @@ namespace PaskalaRitenis.Controllers
 
         public ActionResult Index()
         {
-            var model = _repository.GetYears().Where(x => x.Publicets).OrderByDescending(x => x.Gads);
+            var model = _repository.GetAllYears().Where(x => x.Publicets).OrderByDescending(x => x.Gads);
             return View(model);
         }
 
