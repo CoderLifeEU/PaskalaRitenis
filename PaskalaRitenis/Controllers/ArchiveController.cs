@@ -69,6 +69,7 @@ namespace PaskalaRitenis.Controllers
             return null;
         }
 
+        [Authorize(Roles = "Administrator")]
         public ActionResult Create()
         {
             List<RezultatiModel> years =_repository.GetYears().Distinct().ToList();
@@ -77,6 +78,7 @@ namespace PaskalaRitenis.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Administrator")]
         public ActionResult Create(TaskViewModel model)
         {
             if(ModelState.IsValid)
@@ -101,5 +103,27 @@ namespace PaskalaRitenis.Controllers
             return View(model);
         }
 
+        [Authorize(Roles = "Administrator")]
+        public ActionResult Delete(int id)
+        {
+            var task = _repository.GetTask(id);
+            string path;
+            if (ConfigurationManager.AppSettings["UseDefaultUploadPath"].Trim() == "true")
+            {
+                string webRootPath = Server.MapPath("~");
+                path = Path.GetFullPath(Path.Combine(webRootPath, "../PaskalaRitenis/Files/" + task.FileName));
+            }
+            else
+            {
+                path = Path.Combine(ConfigurationManager.AppSettings["CustomUploadedFilesLocation"].Trim(), Path.GetFileName(task.FileName));
+            }
+
+            if ((System.IO.File.Exists(path)))
+            {
+                System.IO.File.Delete(path);
+            }
+            _repository.DeleteTask(task);
+            return RedirectToAction("Index");
+        }
     }
 }

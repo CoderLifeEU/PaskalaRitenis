@@ -61,7 +61,7 @@
                                     iconType = "document-compress";
                                 }
 
-                                <div class="col-sm-6 col-md-3">
+                                <div class="col-sm-6 col-md-3 m-b-10">
                                     <div class="thumbnail">
                                         <a href="@webRootPath/@subitem.FileName">
                                             <img src="~/Images/icons/@iconType-icon.png" class="img-responsive"
@@ -71,6 +71,13 @@
                                             </div>
                                         </a>
                                     </div>
+                                @if (Request.IsAuthenticated && User.IsInRole("Administrator"))
+                                {
+                                    <div class="row text-center">
+                                        @Html.ActionLink("Dzest", "Delete", "Archive", new { id = @subitem.Id }, new { @class = "btn btn-danger" })
+                                    </div>
+                                }
+
                                 </div>
                             }
                         </div>
