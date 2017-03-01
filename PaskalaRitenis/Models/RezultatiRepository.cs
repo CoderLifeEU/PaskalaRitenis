@@ -14,6 +14,24 @@ namespace PaskalaRitenis.Models
         {
             _dataContext = new RezultatiDataContext();
         }
+        public Archive GetTask(int id)
+        {
+            Archive archive = _dataContext.Archives.Where(x => x.ID == id).FirstOrDefault();
+            return archive;
+        }
+        public string DeleteTask(Archive archive)
+        {
+            try
+            {
+                _dataContext.Archives.DeleteOnSubmit(archive);
+                _dataContext.SubmitChanges();
+                return "Uzdevums nodzēsts";
+            }
+            catch
+            {
+                return "Kļūda DB apstrādē";
+            }
+        }
 
         public string InsertYear(RezultatiModel gads)
         {
@@ -259,5 +277,8 @@ namespace PaskalaRitenis.Models
         RezultatiModel GetResultById(int id);
         string InsertTask(TaskViewModel task);
         string GetFilename(TaskViewModel task);
+        Archive GetTask(int id);
+        string DeleteTask(Archive archive);
+
     }
 }
