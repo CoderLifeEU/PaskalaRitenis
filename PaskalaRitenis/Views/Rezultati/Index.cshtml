@@ -1,43 +1,119 @@
 ﻿<script src="~/Scripts/jquery.easing.min.js"></script>
 <script src="~/Scripts/jquery.easy-ticker.js"></script>
 <link rel="stylesheet" type="text/css" href="~/Content/Rezultati.css">
+<script src="~/Content/js/dataTables/datatables.min.js"></script>
+<link rel="stylesheet" type="text/css" href="~/Content/css/dataTables/datatables.min.css">
 
 <hgroup class="title">
     <h1>Olimpiāžu Rezultāti</h1>
 </hgroup>
-<section id="gadi">
+@*<section id="gadi">
 
-    <h3>Norises gads un rezultāti:</h3>
-    <table id="yearTable" class="table table-bordered table-hover"></table>
-    <hr />
-    <div class="row">
-        <div class="col-md-12 m-b-10">
-            <input type="button" onclick="toggleNewYear()" value="Pievienot gadu" class="btn btn-default " />
-            <div id="enterYear" hidden>
-                Ievadiet gadu: <input id="newYearInput" maxlength="4" /><br />
-                <div id="chooseRes">Izvēlieties rezultātu failu <select id="pdfSelect"></select></div>Nepievienot rezultātus <input id="newYearDontAddRes" type="checkbox" onchange="dontAddResCbxChange()" /><br />
-                <div id="chooseRes2">Publicēt rezultātus <input type="checkbox" id="publishResultsCbx" /></div><br />
-                <input type="button" onclick="insertYear()" value="Pievienot" class="btn btn-default" />
-                <hr />
+        <h3>Norises gads un rezultāti:</h3>
+        <table id="yearTable" class="table table-bordered table-hover"></table>
+        <hr />
+        <div class="row">
+            <div class="col-md-12 m-b-10">
+                <input type="button" onclick="toggleNewYear()" value="Pievienot gadu" class="btn btn-default " />
+                <div id="enterYear" hidden>
+                    Ievadiet gadu: <input id="newYearInput" maxlength="4" /><br />
+                    <div id="chooseRes">Izvēlieties rezultātu failu <select id="pdfSelect"></select></div>Nepievienot rezultātus <input id="newYearDontAddRes" type="checkbox" onchange="dontAddResCbxChange()" /><br />
+                    <div id="chooseRes2">Publicēt rezultātus <input type="checkbox" id="publishResultsCbx" /></div><br />
+                    <input type="button" onclick="insertYear()" value="Pievienot" class="btn btn-default" />
+                    <hr />
+                </div>
             </div>
+
+            <div class="col-md-12">
+
+                @using (Html.BeginForm("Upload", "Rezultati"))
+                {
+                    <input type="submit" value="Augšupielādēt/Dzēst failus" class="btn btn-default" />
+                }
+            </div>
+
         </div>
 
-        <div class="col-md-12">
 
-            @using (Html.BeginForm("Upload", "Rezultati"))
-            {
-                <input type="submit" value="Augšupielādēt/Dzēst failus" class="btn btn-default" />
-            }
-        </div>
-        
+
+    </section>*@
+
+<div class="row m-b-10">
+    <div class="col-md-12 text-right">
+
+        <a id="addRow" onclick="toggleNewYear()" class="btn btn-success">Pievienot gadu</a>
+        <a class="btn btn-success" href="/Rezultati/Upload">Augšupielādēt/Dzēst failus</a>
     </div>
-    
-    
+</div>
 
-</section>
+<div class="col-md-12 m-b-10">
+    <div id="enterYear" hidden>
+        <table class="table table-bordered table-hover display" cellspacing="0">
+            <thead>
+                <tr>
+                    <th>Gads</th>
+                    <th>Publicēts</th>
+                    <th>Rādīt Arhīvā</th>
+                    <th>Fails</th>
+                    <th>Darbības</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <div class="form-group">
+                            <label for="newYearInput">Ievadiet gadu:</label>
+                            <input id="newYearInput" maxlength="4" class="form-control" />
+                        </div>
+                    </td>
+                    <td>
+                        <div id="chooseRes2">
+                            <label class="checkbox-inline"><input id="publishResultsCbx" type="checkbox" value="">Publicēt rezultātus</label>
+                        </div>
+                    </td>
+                    <td>
+                        <label class="checkbox-inline"><input id="newYearDontAddRes" onchange="dontAddResCbxChange()" type="checkbox" value="">Nepievienot rezultātus</label>
+                    </td>
+                    <td>
+                        <div class="form-group">
+                            <div id="chooseRes">
+                                <label for="sel1">Izvēlieties rezultātu failu:</label>
+                                <select class="form-control" id="pdfSelect"></select>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <input type="button" onclick="insertYear()" value="Pievienot" class="btn btn-default" />
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<table id="example" class="table table-bordered table-hover display" cellspacing="0">
+    <thead>
+        <tr>
+            <th>Gads</th>
+            <th>Publicēts</th>
+            <th>Rādīt Arhīvā</th>
+            <th>Fails</th>
+            <th>Darbības</th>
+        </tr>
+    </thead>
+    <tfoot>
+        <tr>
+            <th>Gads</th>
+            <th>Publicēts</th>
+            <th>Rādīt Arhīvā</th>
+            <th>Fails</th>
+            <th>Darbības</th>
+        </tr>
+    </tfoot>
+</table>
 
 <script type="text/javascript">
-    var newYearVisibe = false;
+    @*var newYearVisibe = false;
 
     $(document).ready(function () {
         getFiles();
@@ -275,6 +351,174 @@
         $("#cancelAddResFile_" + id).remove();
         $("#pdfSelect_" + id).remove();
         $("#addResBtn_" + id).fadeIn(250, "swing");
+    }*@
+
+    // Testing
+
+    //var editIcon = function (data, type, row) {
+    //    if (type === 'display') {
+    //        return data + ' <i class="fa fa-pencil"/>';
+    //    }
+    //    return data;
+    //};
+
+    var newYearVisibe = false;
+
+    function toggleNewYear() {
+        if (newYearVisibe) hideNewYear();
+        else showNewYear();
     }
+
+    function showNewYear() {
+        $("#newYearInput").val("");
+        $("#newYearDontAddRes").attr("checked", false);
+        $("#publishResultsCbx").attr("checked", false);
+        $("#chooseRes").fadeIn();
+        $("#chooseRes2").fadeIn();
+        $("#enterYear").fadeIn();
+        newYearVisibe = true;
+    }
+
+    function hideNewYear() {
+        $("#enterYear").fadeOut();
+        $("#newYearInput").val("");
+        newYearVisibe = false;
+    }
+
+    function dontAddResCbxChange() {
+        if ($("#newYearDontAddRes").is(":checked")) {
+            $("#chooseRes").fadeOut(500, "swing");
+            $("#chooseRes2").fadeOut(500, "swing");
+        }
+        else {
+            $("#chooseRes").fadeIn(500, "swing");
+            $("#chooseRes2").fadeIn(500, "swing");
+        }
+    }
+
+    function insertYear() {
+        var inputYear = $("#newYearInput").val();
+        var selectEl = $("#pdfSelect");
+        var fileLink = selectEl[0].value;
+        var publish = $("#publishResultsCbx").is(":checked");
+        var empty = $("#newYearDontAddRes").is(":checked");
+
+        if (empty) {
+            $.ajax({
+                type: "POST",
+                url: "/Rezultati/InsertEmptyYear",
+                dataType: "text",
+                contentType: "application/json; charset=utf-8",
+                data: JSON.stringify({ year: inputYear, publicet: false })
+            })
+            .fail(function (error) {
+                alert(error.responseText);
+            })
+            .done(function () {
+                $('#example').DataTable().ajax.reload();
+                hideNewYear();
+            })
+        }
+        else {
+            $.ajax({
+                type: "POST",
+                url: "/Rezultati/InsertYear",
+                dataType: "text",
+                contentType: "application/json; charset=utf-8",
+                data: JSON.stringify({ year: inputYear, link: fileLink, publicet: publish })
+            })
+            .fail(function (error) {
+                alert(error.responseText);
+            })
+            .done(function () {
+                $('#example').DataTable().ajax.reload();
+                hideNewYear();
+            })
+        }
+    }
+
+    function deleteYear(id) {
+        if (confirm("Dzēst?")) {
+            $.post("/Rezultati/DeleteYear", { ID: id })
+            .done(function (data) {
+                $('#example').DataTable().ajax.reload();
+            });
+        }
+    }
+
+    $.ajax({
+        type: "GET",
+        url: "/Rezultati/GetFiles",
+        dataType: "json",
+        cache: false
+    })
+    .done(function (data) {
+        var options = "";
+        $.each(data, function (i, fails) {
+            options += "<option value='" + fails.FileName + "'>" + fails.FileName + "</option>";
+        });
+        $("#pdfSelect").html(options);
+    })
+
+    $(document).ready(function () {
+        $('#example').DataTable({
+            "ajax": {
+                "url": "/Rezultati/GetYears",
+            },
+            "columnDefs": [
+                {
+                    "targets": 1,
+                    "data": "Publicets",
+                    "render": function (data, type, full, meta) {
+                        if (data) {
+                            return '<input type="checkbox" value="' + data + '" checked/>';
+                        } else
+                            return '<input type="checkbox" value="' + data + '"/>';
+                    }
+                },
+                {
+                    "targets": 2,
+                    "data": "Arhivets",
+                    "render": function (data, type, full, meta) {
+                        if (data) {
+                            return '<input type="checkbox" value="' + data + '" checked/>';
+                        }
+                        return '<input type="checkbox" value="' + data + '"/>';
+                    }
+                },
+                {
+                    "targets": 4,
+                    "width": 250,
+                    "render": function (data, type, full, meta) {
+                        return "<div class='row'><div class='col-md-4'><a class='btn btn-danger' onclick='deleteYear(&quot;" + full.ID + "&quot;)'>Dzēst</a></div><div class='col-md-4'><a class='btn btn-info' href='/Archive?year=" + full.Gads + "'>Labot Uzdevumus</a></div></div>";
+                    }
+                }
+            ],
+            "bSort": false,
+            "serverSide": true,
+            "processing": true,
+            "paging": true,
+            "pageLength": 10,
+            "language": {
+                "paginate": {
+                    "previous": "Iepriekšējā",
+                    "next": "Nākamā"
+                },
+                "sSearch": "Meklēt",
+                "lengthMenu": "Radit _MENU_ ierakstus lapā",
+                "zeroRecords": "Nekas nav atrasts - piedodiet",
+                "info": "Tiek radita  _PAGE_ lapa no _PAGES_",
+            },
+            "aoColumns": [
+                { "data": "Gads" },
+                { "data": "Publicets" },
+                { "data": "Arhivets" },
+                { "data": "RezultatiLink" },
+                { "data": "ID" },
+            ],
+            "lengthChange": true
+
+        });
+    });
 
 </script>

@@ -72,7 +72,7 @@ namespace PaskalaRitenis.Controllers
         [Authorize(Roles = "Administrator")]
         public ActionResult Create()
         {
-            List<RezultatiModel> years =_repository.GetYears().Distinct().ToList();
+            List<RezultatiModel> years =_repository.GetAllYears().Distinct().ToList();
             TaskViewModel model = new TaskViewModel(years);
             return View(model);
         }
@@ -98,7 +98,7 @@ namespace PaskalaRitenis.Controllers
                 model.TaskFile.SaveAs(path);
                 return RedirectToAction("Index");
             }
-            List<RezultatiModel> years = _repository.GetYears().Distinct().ToList();
+            List<RezultatiModel> years = _repository.GetAllYears().Distinct().ToList();
             model.SetYears(years);
             return View(model);
         }

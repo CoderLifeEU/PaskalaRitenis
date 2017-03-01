@@ -41,7 +41,7 @@ namespace PaskalaRitenis.Models
         {
             switch ((FileType)task.Type)
             {
-                case FileType.Access: return String.Format("Access uzdevumi un atrisinājumi {0}.rar",task.Year);
+                case FileType.Access: return String.Format("Access uzdevumi un atrisinājumi {0}.rar", task.Year);
                 case FileType.Datnes: return String.Format("Datnes uzdevumiem {0}.rar", task.Year);
                 case FileType.Excel: return String.Format("Excel uzdevumi un atrisinājumi {0}.rar", task.Year);
                 case FileType.PDF: return String.Format("PDF uzdevumi un atrisinājumi {0}.rar", task.Year);
@@ -74,26 +74,8 @@ namespace PaskalaRitenis.Models
             }
         }
 
-        public Archive GetTask(int id)
-        {
-            Archive archive = _dataContext.Archives.Where(x => x.ID == id).FirstOrDefault();
-            return archive;
-        }
-        public string DeleteTask(Archive archive)
-        {
-            try
-            {
-                    _dataContext.Archives.DeleteOnSubmit(archive);
-                    _dataContext.SubmitChanges();
-                    return "Uzdevums nodzēsts";
-            }
-            catch
-            {
-                return "Kļūda DB apstrādē";
-            }
-        }
 
-        public IEnumerable<RezultatiModel> GetYears()
+        public IEnumerable<RezultatiModel> GetAllYears()
         {
             IList<RezultatiModel> yearList = new List<RezultatiModel>();
             var query = from f in _dataContext.Rezultatis
@@ -111,6 +93,28 @@ namespace PaskalaRitenis.Models
                 });
             }
             return yearList;
+        }
+
+        public List<Rezultati> GetYears(int start, int pageSize, string search)
+        {
+            List<Rezultati> yearList = new List<Rezultati>();
+            using (var datacontext = new RezultatiDataContext())
+            {
+                yearList = datacontext.Rezultatis.Where(x => x.Gads.ToString() == search || x.RezultatiLink.Contains(search)).Skip(start).Take(pageSize).OrderByDescending(x => x.Gads).ToList(); 
+            }
+
+            return yearList;
+        }
+
+        public int CountYears(string search)
+        {
+            int count = 0;
+            using (var datacontext = new RezultatiDataContext())
+            {
+                count = datacontext.Rezultatis.Where(x => x.Gads.ToString() == search || x.RezultatiLink.Contains(search)).Count();
+            }
+
+            return count;
         }
 
         public string UpdateYear(RezultatiModel gads)
@@ -187,18 +191,17 @@ namespace PaskalaRitenis.Models
                                 where f.Year == year
                                 select f;
                     var gadi = query.ToList();
-                    
                     return gadi;
                 }
             }
-            catch(Exception ex) { }
+            catch { }
             return null;
         }
 
         public IEnumerable<ArchiveModel> GetArchive()
         {
             List<ArchiveModel> result = new List<ArchiveModel>();
-            List<RezultatiModel> arhivetieGadi = GetYears().Where(x => x.Arhivets).Distinct().ToList();
+            List<RezultatiModel> arhivetieGadi = GetAllYears().Where(x => x.Arhivets).Distinct().ToList();
             foreach (RezultatiModel gads in arhivetieGadi)
             {
                 if (YearExistsByYear(gads.Gads))
@@ -246,7 +249,9 @@ namespace PaskalaRitenis.Models
     public interface IRezultatiRepository
     {
         string InsertYear(RezultatiModel gads);
-        IEnumerable<RezultatiModel> GetYears();
+        List<Rezultati> GetYears(int start, int pageSize, string search);
+        IEnumerable<RezultatiModel> GetAllYears();
+        int CountYears(string search);
         string UpdateYear(RezultatiModel gads);
         IEnumerable<ArchiveModel> GetArchive();
         string DeleteYear(int year);
@@ -254,8 +259,5 @@ namespace PaskalaRitenis.Models
         RezultatiModel GetResultById(int id);
         string InsertTask(TaskViewModel task);
         string GetFilename(TaskViewModel task);
-        Archive GetTask(int id);
-        string DeleteTask(Archive archive);
-
     }
 }

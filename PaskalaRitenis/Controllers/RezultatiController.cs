@@ -65,12 +65,26 @@ namespace PaskalaRitenis.Controllers
             return View();
         }
 
-        public JsonResult GetYears()
+        public JsonResult GetAllYears()
         {
-            var result = _repository.GetYears();
+            var result = _repository.GetAllYears();
             return Json(result, JsonRequestBehavior.AllowGet);
         }
-        
+
+        public JsonResult GetYears(DataTablesParams model)
+        {
+            
+
+            DataTablesContext<PaskalaRitenis.Models.Rezultati> result = new DataTablesContext<PaskalaRitenis.Models.Rezultati>();
+
+            model.Search = Request.QueryString["Search[value]"].ToString();
+
+            result.data = _repository.GetYears(model.Start, model.Length, model.Search);
+            result.recordsTotal = _repository.CountYears(model.Search);
+            result.recordsFiltered = result.recordsTotal;
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
         [HttpPost]
         public string InsertYear(string year, string link, string publicet)
         {
@@ -93,13 +107,14 @@ namespace PaskalaRitenis.Controllers
             });
             else return "Gads nav derīgs";
         }
-
+        
         [HttpPost]
         public string DeleteYear(string id)
         {
             return _repository.DeleteYear(int.Parse(id));
         }
 
+        /*
         [HttpPost]
         public string UpdateYear(int ID, bool publicet, bool arhivet)
         {
