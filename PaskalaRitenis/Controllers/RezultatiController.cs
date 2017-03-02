@@ -75,7 +75,7 @@ namespace PaskalaRitenis.Controllers
         {
             
 
-            DataTablesContext<PaskalaRitenis.Models.Rezultati> result = new DataTablesContext<PaskalaRitenis.Models.Rezultati>();
+            DataTablesContext<Rezultati> result = new DataTablesContext<Rezultati>();
 
             model.Search = Request.QueryString["Search[value]"].ToString();
 
@@ -114,13 +114,13 @@ namespace PaskalaRitenis.Controllers
             return _repository.DeleteYear(int.Parse(id));
         }
 
-        /*
+        
         [HttpPost]
         public string UpdateYear(int ID, bool publicet, bool arhivet)
         {
             return _repository.UpdateYear(new RezultatiModel() { RezultatsID = ID, Publicets = publicet, Arhivets = arhivet });
         }
-
+        
         /*[HttpPost]
         public string UpdateYearLink(int ID, string link)
         {

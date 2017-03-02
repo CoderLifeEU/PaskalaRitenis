@@ -437,6 +437,24 @@
         }
     }
 
+    function UpdateYear(id) {
+        var publish = $("#publishResultsCbx2_" + id).is(":checked");
+        var archive = $("#archiveResultsCbx2_" + id).is(":checked");
+        console.log(publish);
+        console.log(archive);
+        console.log("invoked");
+        $.ajax({
+            type: "POST",
+            url: "/Rezultati/UpdateYear",
+            dataType: "text",
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify({ ID: id, publicet: publish, arhivet: archive })
+        })
+        .done(function () {
+            hideNewYear();
+        })
+    }
+
     function deleteYear(id) {
         if (confirm("Dzēst?")) {
             $.post("/Rezultati/DeleteYear", { ID: id })
@@ -471,9 +489,9 @@
                     "data": "Publicets",
                     "render": function (data, type, full, meta) {
                         if (data) {
-                            return '<input type="checkbox" value="' + data + '" checked/>';
+                            return "<input id='publishResultsCbx2_" + full.ID + "'onchange='UpdateYear(&quot;" + full.ID + "&quot;)' type='checkbox' value='" + data + "'checked/>";
                         } else
-                            return '<input type="checkbox" value="' + data + '"/>';
+                            return "<input id='publishResultsCbx2_" + full.ID + "'onchange='UpdateYear(&quot;" + full.ID + "&quot;)' type='checkbox' value='" + data + "'/>";
                     }
                 },
                 {
@@ -481,9 +499,9 @@
                     "data": "Arhivets",
                     "render": function (data, type, full, meta) {
                         if (data) {
-                            return '<input type="checkbox" value="' + data + '" checked/>';
-                        }
-                        return '<input type="checkbox" value="' + data + '"/>';
+                            return "<input id='archiveResultsCbx2_" + full.ID + "'onchange='UpdateYear(&quot;" + full.ID + "&quot;)' type='checkbox' value='" + data + "'checked/>";
+                        } else
+                            return "<input id='archiveResultsCbx2_" + full.ID + "'onchange='UpdateYear(&quot;" + full.ID + "&quot;)' type='checkbox' value='" + data + "'/>";
                     }
                 },
                 {
