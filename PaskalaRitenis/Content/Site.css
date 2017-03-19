@@ -38,9 +38,9 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 h1, h2, h3 { 
-  font: normal 140% arial, sans-serif;
-  margin: 0 0 15px 0;
-  padding: 15px 0 5px 0;
+  font: normal 140% arial, sans-serif !important;
+  margin: 0 0 15px 0 !important;
+  padding: 15px 0 5px 0 !important;
   color: #222;
 }
 
@@ -50,8 +50,8 @@ h2 {
 }
 
 h3 { 
-  padding: 5px 0 0 0;
-  font: italic 120% arial, sans-serif;
+  padding: 5px 0 0 0 !important;
+  font: italic 120% arial, sans-serif !important;
 }
 
 h4, h6 { 
@@ -648,7 +648,7 @@ ul#nav li a:hover,ul#nav li a:focus {
 	list-style: none;
 	border-bottom: 2px solid rgba(0, 161, 210, 0.66);
 	padding: 10px;
-    height: 170px;
+    height: auto;
     overflow: auto;
 }
 .et-run{
