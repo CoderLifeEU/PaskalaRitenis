@@ -120,12 +120,12 @@ namespace PaskalaRitenis.Controllers
         {
             return _repository.UpdateYear(new RezultatiModel() { RezultatsID = ID, Publicets = publicet, Arhivets = arhivet });
         }
-        
-        /*[HttpPost]
+
+        [HttpPost]
         public string UpdateYearLink(int ID, string link)
         {
             return _repository.UpdateYearLink(new RezultatiModel() { RezultatsID = ID, RezultatiLink = link });
-        }*/
+        }
 
         private bool validateYear(string year)
         {

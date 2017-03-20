@@ -3,6 +3,8 @@
 <link rel="stylesheet" type="text/css" href="~/Content/Rezultati.css">
 <script src="~/Content/js/dataTables/datatables.min.js"></script>
 <link rel="stylesheet" type="text/css" href="~/Content/css/dataTables/datatables.min.css">
+@*<script src="~/Content/js/dataTables/dataTables.editor.min.js"></script>
+<link href="~/Content/css/dataTables/editor.dataTables.min.css" rel="stylesheet" />*@
 
 <hgroup class="title">
     <h1>Olimpiāžu Rezultāti</h1>
@@ -53,7 +55,7 @@
                 <tr>
                     <th>Gads</th>
                     <th>Publicēts</th>
-                    <th>Rādīt Arhīvā</th>
+                    <th>Rezultātu pievienošana</th>
                     <th>Fails</th>
                     <th>Darbības</th>
                 </tr>
@@ -90,6 +92,8 @@
         </table>
     </div>
 </div>
+
+<div id="alert-area"></div>
 
 <table id="example" class="table table-bordered table-hover display" cellspacing="0">
     <thead>
@@ -362,6 +366,11 @@
     //    return data;
     //};
 
+    function newAlert(type, message) {
+        $("#alert-area").append($("<div class='alert alert-dismissable alert-message alert-" + type + " fade in' data-alert><a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a><center><h4> " + message + " </h4></center></div>"));
+        $(".alert-message").delay(15000).fadeOut("slow", function () { $(this).remove(); });
+    }
+
     var newYearVisibe = false;
 
     function toggleNewYear() {
@@ -396,6 +405,87 @@
         }
     }
 
+    function addResultFile(id) {
+        $("#addResBtn_" + id).fadeOut();
+
+        var select = "<select id='pdfSelect_" + id + "'></select> ";
+        var accept = "<input type='button' id='acceptAddResFile_" + id + "' value='&#10003;' onclick='acceptAddResFile(&quot;" + id + "&quot;)' class='button' />";
+        var cancel = "<input type='button' id='cancelAddResFile_" + id + "' value='&#10005;' onclick='cancelAddResFile(&quot;" + id + "&quot;)' class='button' />";
+        $("#addResDiv_" + id).append(select);
+        $("#addResDiv_" + id).append(accept);
+        $("#addResDiv_" + id).append(cancel);
+
+        $.ajax({
+            type: "GET",
+            url: "/Rezultati/GetFiles",
+            dataType: "json",
+            cache: false
+        })
+        .done(function (data) {
+            var options = "";
+            $.each(data, function (i, fails) {
+                options += "<option value='" + fails.FileName + "'>" + fails.FileName + "</option>";
+            });
+            $("#pdfSelect_" + id).html(options);
+        })
+    }
+
+    function addResultFile2(id) {
+        $("#ResLink_" + id).fadeOut();
+
+        var select = "<select id='pdfSelect_" + id + "'></select> ";
+        var accept = "<input type='button' id='acceptAddResFile_" + id + "' value='&#10003;' onclick='acceptAddResFile(&quot;" + id + "&quot;)' class='button' />";
+        var cancel = "<input type='button' id='cancelAddResFile_" + id + "' value='&#10005;' onclick='cancelAddResFile2(&quot;" + id + "&quot;)' class='button' />";
+        $("#addResDiv_" + id).append(select);
+        $("#addResDiv_" + id).append(accept);
+        $("#addResDiv_" + id).append(cancel);
+
+        $.ajax({
+            type: "GET",
+            url: "/Rezultati/GetFiles",
+            dataType: "json",
+            cache: false
+        })
+        .done(function (data) {
+            var options = "";
+            $.each(data, function (i, fails) {
+                options += "<option value='" + fails.FileName + "'>" + fails.FileName + "</option>";
+            });
+            $("#pdfSelect_" + id).html(options);
+        })
+    }
+
+    function acceptAddResFile(id) {
+        var selectedLinkVal = $("#pdfSelect_" + id)[0].value;
+        if (id != null && selectedLinkVal != null) {
+            $.ajax({
+                type: "POST",
+                url: "/Rezultati/UpdateYearLink",
+                dataType: "text",
+                contentType: "application/json; charset=utf-8",
+                data: JSON.stringify({ ID: id, link: selectedLinkVal })
+            })
+            .done(function () {
+                hideNewYear();
+                $('#example').DataTable().ajax.reload();
+            })
+        }
+    }
+
+    function cancelAddResFile(id) {
+        $("#acceptAddResFile_" + id).remove();
+        $("#cancelAddResFile_" + id).remove();
+        $("#pdfSelect_" + id).remove();
+        $("#addResBtn_" + id).fadeIn(250, "swing");
+    }
+
+    function cancelAddResFile2(id) {
+        $("#acceptAddResFile_" + id).remove();
+        $("#cancelAddResFile_" + id).remove();
+        $("#pdfSelect_" + id).remove();
+        $("#ResLink_" + id).fadeIn(250, "swing");
+    }
+
     function insertYear() {
         var inputYear = $("#newYearInput").val();
         var selectEl = $("#pdfSelect");
@@ -417,6 +507,7 @@
             .done(function () {
                 $('#example').DataTable().ajax.reload();
                 hideNewYear();
+                newAlert('success', '<b>' + inputYear + '</b> gads tika <b>ievietots</b>!');
             })
         }
         else {
@@ -433,6 +524,7 @@
             .done(function () {
                 $('#example').DataTable().ajax.reload();
                 hideNewYear();
+                newAlert('success', '<b>' + inputYear + '</b> gads tika <b>ievietots</b>!');
             })
         }
     }
@@ -452,6 +544,10 @@
         })
         .done(function () {
             hideNewYear();
+            var year = $("#publishResultsCbx2_" + id).parent().prev().html();
+            var publishStatus = (publish) ? "ieslēgta" : "izslēgta";
+            var archiveStatus = (archive) ? "ieslēgta" : "izslēgta";
+            newAlert('warning', 'Atjaunota informācija par <b>' + year + '</b> gadu! Publicēšana būs <b>' + publishStatus + '</b> Arhivēšana būs <b>' + archiveStatus + '</b>');
         })
     }
 
@@ -459,6 +555,8 @@
         if (confirm("Dzēst?")) {
             $.post("/Rezultati/DeleteYear", { ID: id })
             .done(function (data) {
+                var year = $("#publishResultsCbx2_" + id).parent().prev().html();
+                newAlert('danger', '<b>' + year + '</b> gads tika <b>dzēsts</b>!');
                 $('#example').DataTable().ajax.reload();
             });
         }
@@ -502,6 +600,15 @@
                             return "<input id='archiveResultsCbx2_" + full.ID + "'onchange='UpdateYear(&quot;" + full.ID + "&quot;)' type='checkbox' value='" + data + "'checked/>";
                         } else
                             return "<input id='archiveResultsCbx2_" + full.ID + "'onchange='UpdateYear(&quot;" + full.ID + "&quot;)' type='checkbox' value='" + data + "'/>";
+                    }
+                },
+                {
+                    "targets": 3,
+                    "render": function (data, type, full, meta) {
+                        if (!data) {
+                            return "<div id='addResDiv_" + full.ID + "'><input type='button' id='addResBtn_" + full.ID + "' value='Norādīt rezultātu failu' onclick='addResultFile(&quot;" + full.ID + "&quot;)' class='btn btn-default' /></div>";
+                        } else
+                            return "<div id='addResDiv_" + full.ID + "'><div id='ResLink_" + full.ID + "'>" + data + '<span style="cursor:pointer; cursor:hand;" onclick="addResultFile2(&quot;' + full.ID + '&quot;)" class="glyphicon glyphicon-pencil"></span></div></div>';
                     }
                 },
                 {

@@ -118,7 +118,7 @@ namespace PaskalaRitenis.Models
             List<Rezultati> yearList = new List<Rezultati>();
             using (var datacontext = new RezultatiDataContext())
             {
-                yearList = datacontext.Rezultatis.Where(x => x.Gads.ToString() == search || x.RezultatiLink.Contains(search)).Skip(start).Take(pageSize).OrderByDescending(x => x.Gads).ToList(); 
+                yearList = datacontext.Rezultatis.Where(x => x.Gads.ToString() == search || x.RezultatiLink.Contains(search) || x.RezultatiLink == null).Skip(start).Take(pageSize).ToList(); 
             }
 
             return yearList;
@@ -129,7 +129,7 @@ namespace PaskalaRitenis.Models
             int count = 0;
             using (var datacontext = new RezultatiDataContext())
             {
-                count = datacontext.Rezultatis.Where(x => x.Gads.ToString() == search || x.RezultatiLink.Contains(search)).Count();
+                count = datacontext.Rezultatis.Where(x => x.Gads.ToString() == search || x.RezultatiLink.Contains(search) || x.RezultatiLink == null).Count();
             }
 
             return count;
@@ -166,6 +166,26 @@ namespace PaskalaRitenis.Models
                     _dataContext.Rezultatis.DeleteOnSubmit(gads);
                     _dataContext.SubmitChanges();
                     return "Gads nodzēsts";
+                }
+                else return "Šāds gads neeksistē";
+            }
+            catch
+            {
+                return "Kļūda DB apstrādē";
+            }
+        }
+
+        public string UpdateYearLink(RezultatiModel gads)
+        {
+            try
+            {
+                if (IDExists(gads.RezultatsID))
+                {
+                    Rezultati existingYear = _dataContext.Rezultatis.Where(f => f.ID == gads.RezultatsID).SingleOrDefault();
+                    existingYear.RezultatiLink = gads.RezultatiLink;
+                    _dataContext.SubmitChanges();
+
+                    return "Dati atjaunoti";
                 }
                 else return "Šāds gads neeksistē";
             }
@@ -271,6 +291,7 @@ namespace PaskalaRitenis.Models
         IEnumerable<RezultatiModel> GetAllYears();
         int CountYears(string search);
         string UpdateYear(RezultatiModel gads);
+        string UpdateYearLink(RezultatiModel gads);
         IEnumerable<ArchiveModel> GetArchive();
         string DeleteYear(int year);
         FileModel GetArchiveFileById(int id);
