@@ -27,6 +27,7 @@
             <th>Skolotājs</th>
             <th>Kopnite</th>
             <th>KopnitesTips</th>
+            <th>Pieprasīts</th>
         </tr>
     </thead>
     <tfoot>
@@ -44,6 +45,7 @@
             <th>Skolotājs</th>
             <th>Kopnite</th>
             <th>KopnitesTips</th>
+            <th>Pieprasīts</th>
         </tr>
     </tfoot>
 </table>
@@ -61,7 +63,13 @@
                 }
             },
             "columnDefs": [
-
+                {
+                    "targets": 13,
+                    "data": "Created",
+                    "render": function (data, type, full, meta) {
+                        return new Date(parseInt(data.substr(6))).toDateString();
+                    }
+                }
             ],
             "bSort" : false,
             "serverSide": true,
@@ -92,6 +100,7 @@
                 { "data": "Skolotajs" },
                 { "data": "Kopnite" },
                 { "data": "KopnitesTips" },
+                { "data": "Created" },
             ],
             "lengthChange": true
 

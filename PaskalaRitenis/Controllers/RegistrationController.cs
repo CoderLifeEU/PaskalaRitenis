@@ -89,6 +89,7 @@ namespace PaskalaRitenis.Controllers
                 "Klase",
                 "Kopnite",
                 "KopnitesTips",
+                "Pieprasījuma laiks"
             };
 
 
@@ -128,6 +129,7 @@ namespace PaskalaRitenis.Controllers
                 "Klase",
                 "Kopnite",
                 "KopnitesTips",
+                "Pieprasījuma laiks"
             };
 
 

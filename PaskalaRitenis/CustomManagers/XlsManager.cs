@@ -104,6 +104,10 @@ namespace PaskalaRitenis.CustomManagers
                 cell.SetCellValue(data.ElementAt(i).KopnitesTips);
                 cellIndex++;
 
+                cell = row.CreateCell(cellIndex);
+                cell.SetCellValue(data.ElementAt(i).Created.ToShortDateString());
+                cellIndex++;
+
                 rowIndex++;
             }
         }
