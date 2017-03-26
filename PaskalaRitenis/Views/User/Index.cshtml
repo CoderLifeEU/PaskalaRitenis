@@ -53,7 +53,7 @@
                     "targets": 4,
                     "data": "ID", 
                     "render": function (data, type, full, meta) {
-                        return "<div class='row'><div class='col-md-4'><a class='btn btn-default' href='/User/Edit/" + data + "'>Labot Paroli</a></div>" + /*"<div class='col-md-4'><a class='btn btn-danger' href='/User/Delete/" + data + "'>Dzēst</a></div>*/"</div>";
+                        return "<div class='row'><div class='col-md-4'><a class='btn btn-default' href='/User/Edit/" + data + "'>Labot Paroli</a></div>" + "<div class='col-md-4'><a class='btn btn-danger' onclick='DeleteUser(" + data + ")'>Dzēst</a></div></div>";
                     }
                 }
             ],
@@ -84,5 +84,13 @@
         });
     });
 
+    function DeleteUser(id) {
+        if (confirm("Dzēst?")) {
+            $.post("/User/Delete", { ID: id })
+            .done(function (data) {
+                $('#example').DataTable().ajax.reload();
+            });
+        }
+    }
 
 </script>

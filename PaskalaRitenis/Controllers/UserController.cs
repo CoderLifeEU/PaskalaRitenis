@@ -1,6 +1,7 @@
 ﻿using PaskalaRitenis.Models;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -89,9 +90,17 @@ namespace PaskalaRitenis.Controllers
             return View(model);
         }
 
+        [HttpPost, ActionName("Delete")]
         public ActionResult Delete(int id)
         {
-            _repository.Delete(id);
+            try
+            {
+                _repository.Delete(id);
+            }
+            catch(DataException)
+            {
+                ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists, see your system administrator.");
+            }
             return RedirectToAction("Index");
         }
 

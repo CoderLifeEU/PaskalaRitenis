@@ -70,7 +70,8 @@ namespace PaskalaRitenis.Models
             try
             {
                 var user = GetUser(id);
-                
+
+                _datacontext.Users.Attach(user);
                 _datacontext.Users.DeleteOnSubmit(user);
                 _datacontext.SubmitChanges();
                 return true;
